@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/preferences.dart';
 import '../widgets/home.dart';
+import '../widgets/notes.dart';
 import '../widgets/reports.dart';
 import '../widgets/settings.dart';
 
@@ -36,7 +37,8 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.periodTrack, style: const TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context)!.periodTrack,
+            style: const TextStyle(color: Colors.white)),
         elevation: 0,
         actions: <Widget>[
           PopupMenuButton<Popup>(
@@ -80,8 +82,10 @@ class _HomePageState extends State<HomePage> {
         child: _selectedIndex == 0
             ? const Home()
             : _selectedIndex == 1
-                ? const Reports()
-                : const Settings(),
+                ? const Notes()
+                : _selectedIndex == 2
+                    ? const Reports()
+                    : const Settings(),
       ),
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(

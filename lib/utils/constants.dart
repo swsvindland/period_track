@@ -7,3 +7,7 @@ const int sm = 600;
 const int md = 900;
 const int lg = 1200;
 const int xl = 1536;
+
+const primaryColor = Color(0xffac6d7e);
+const primaryDarkColor = Color(0xff63465A);
+const textColor = Color(0xffFFF3E8);

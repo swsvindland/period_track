@@ -36,7 +36,7 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 0,
             title: Text(AppLocalizations.of(context)!.calendar),
-            leading: const Icon(Icons.home),
+            leading: const Icon(Icons.calendar_today),
             onTap: () {
               // Update the state of the app
               // ...
@@ -48,7 +48,7 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 1,
             title: Text(AppLocalizations.of(context)!.notes),
-            leading: const Icon(Icons.insights),
+            leading: const Icon(Icons.note_add),
             onTap: () {
               // Update the state of the app
               // ...
