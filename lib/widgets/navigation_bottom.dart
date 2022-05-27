@@ -14,14 +14,19 @@ class NavigationBottom extends StatelessWidget {
     }
 
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(Icons.home),
-          label: AppLocalizations.of(context)!.home,
+          icon: const Icon(Icons.calendar_today),
+          label: AppLocalizations.of(context)!.calendar,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.note_add),
+          label: AppLocalizations.of(context)!.notes,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.insights),
-          label: AppLocalizations.of(context)!.reports,
+          label: AppLocalizations.of(context)!.statistics,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.settings),

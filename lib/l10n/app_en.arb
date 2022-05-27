@@ -1,8 +1,9 @@
 {
     "periodTrack": "PeriodTrack",
 
-    "home": "Home",
-    "reports": "Reports",
+    "calendar": "Calendar",
+    "notes": "Notes",
+    "statistics": "Statistics",
     "settings": "Settings",
 
     "reminderNotification": "Reminder Notification",

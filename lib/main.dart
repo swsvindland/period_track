@@ -51,16 +51,23 @@ class App extends StatelessWidget {
           // Locale('hi', ''), // Hindi
         ],
         theme: ThemeData(
-            colorSchemeSeed: Colors.pink,
+            colorSchemeSeed: const Color(0xffac6d7e),
             brightness: Brightness.light,
             useMaterial3: true,
-            backgroundColor: Colors.pink,
-            scaffoldBackgroundColor: Colors.pink,
+            backgroundColor: const Color(0xffac6d7e),
+            scaffoldBackgroundColor: const Color(0xffac6d7e),
             appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.pink,
-                foregroundColor: Colors.white)),
+                backgroundColor: Color(0xffac6d7e),
+                foregroundColor: Color(0xffFFBB7C)
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: Color(0xff63465A),
+              unselectedItemColor: Color(0xffFFBB7C),
+              selectedItemColor: Color(0xffE3E3A7),
+            )
+        ),
         darkTheme: ThemeData(
-            colorSchemeSeed: Colors.pink,
+            colorSchemeSeed: const Color(0xffac6d7e),
             brightness: Brightness.dark,
             useMaterial3: true,
             backgroundColor: Colors.black,
