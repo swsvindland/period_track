@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8878044441",
+    "project_id": "periodtrack-955f2",
+    "storage_bucket": "periodtrack-955f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8878044441:android:2b8d6eec46dda33bec4188",
+        "android_client_info": {
+          "package_name": "com.example.period_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8878044441-qn106e9j3375hhcpolhva1p6gnnrcljl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnlYC8QrP6BS20CbWE-hSVD3N9t2kBazE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8878044441-qn106e9j3375hhcpolhva1p6gnnrcljl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
