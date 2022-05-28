@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                     ? const Reports()
                     : const Settings(),
       ),
-      floatingActionButton: FloatingActionButton.extended(onPressed: () {}, icon: Icon(Icons.note_add), label: const Text('New Note')),
+      floatingActionButton: FloatingActionButton.extended(onPressed: () {}, icon: const Icon(Icons.note_add), label: const Text('New Note')),
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)

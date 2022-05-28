@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

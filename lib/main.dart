@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:period_track/layouts/layouts.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'firebase_options.dart';
 
@@ -14,6 +15,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  MobileAds.instance.initialize();
+
   runApp(const App());
 }
 
