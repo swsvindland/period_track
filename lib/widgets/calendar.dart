@@ -9,11 +9,22 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: 600,
+    DateTime periodStartDate = DateTime.now().add(const Duration(days: -14));
+    DateTime periodEndDate = periodStartDate.add(const Duration(days: 7));
+    DateTime ovulationDate = periodStartDate.add(const Duration(days: 14));
+    DateTime fertilePeriodDateStart =
+        periodStartDate.add(const Duration(days: 9));
+    // int menstrualCycleLength = 28;
+
+    return SizedBox(
+      width: 600,
       child: TableCalendar(
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
-        focusedDay: DateTime.now(),
+        daysOfWeekVisible: false,
+        firstDay: DateTime.utc(2000, 01, 01),
+        lastDay: DateTime.utc(2100, 01, 01),
+        focusedDay: DateTime.now().add(const Duration(days: -7)),
+        rangeStartDay: periodStartDate,
+        rangeEndDay: ovulationDate,
         calendarBuilders: CalendarBuilders(headerTitleBuilder: (context, day) {
           var text = DateFormat.MMMM().format(day);
           return Center(
@@ -22,8 +33,6 @@ class Calendar extends StatelessWidget {
               style: const TextStyle(fontSize: 48, color: textColor),
             ),
           );
-        }, dowBuilder: (context, day) {
-          return const Center();
         }, todayBuilder: (context, day, day2) {
           return Center(
             child: Text(
@@ -41,6 +50,66 @@ class Calendar extends StatelessWidget {
           );
         }, disabledBuilder: (context, day, day2) {
           return const Center();
+        }, rangeHighlightBuilder: (context, day, isWithinRange) {
+          if (!isWithinRange) {
+            return Center(
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: textColor),
+              ),
+            );
+          }
+
+          if (day.isBefore(periodEndDate)) {
+            return Center(
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: const Color(0xffFFBB7C))),
+                child: Text(
+                  day.day.toString(),
+                  style: const TextStyle(color: textColor),
+                ),
+              ),
+            );
+          } else if (day.isAfter(fertilePeriodDateStart)) {
+            return Center(
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: const Color(0xffE3E3A7))),
+                child: Text(
+                  day.day.toString(),
+                  style: const TextStyle(color: textColor),
+                ),
+              ),
+            );
+          } else {
+            return Center(
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: textColor),
+              ),
+            );
+          }
+        }, rangeStartBuilder: (context, day, day2) {
+          return Center(
+            child: CircleAvatar(
+              backgroundColor: primaryDarkColor,
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: textColor),
+              ),
+            ),
+          );
+        }, rangeEndBuilder: (context, day, day2) {
+          return Center(
+            child: CircleAvatar(
+              backgroundColor: const Color(0xff989859),
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: textColor),
+              ),
+            ),
+          );
         }),
       ),
     );
