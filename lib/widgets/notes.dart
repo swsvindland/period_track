@@ -8,14 +8,21 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var db = DatabaseService();
-    var user = Provider.of<User?>(context);
+    var notes = ['a', 'b', 'c', 'd'];
 
-    return const Center(
-      child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Text('TODO: Notes')
-      ),
+    return ListView.builder(
+      itemBuilder: (BuildContext, index){
+        return const Card(
+          child: ListTile(
+            title: Text("This is title"),
+            subtitle: Text("This is subtitle"),
+          ),
+        );
+      },
+      itemCount: notes.length,
+      shrinkWrap: true,
+      padding: const EdgeInsets.all(4),
+      scrollDirection: Axis.vertical,
     );
   }
 }

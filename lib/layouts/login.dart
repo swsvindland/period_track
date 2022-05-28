@@ -8,7 +8,6 @@ import "package:os_detect/os_detect.dart" as platform;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:period_track/utils/helper.dart';
-import 'package:period_track/widgets/button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Button(
+                          ElevatedButton(
                             onPressed: () {
                               setState(() {
                                 loggingIn = true;
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 16),
                           platform.isIOS || platform.isMacOS
-                              ? Button(
+                              ? ElevatedButton(
                                   onPressed: () {
                                     setState(() {
                                       loggingIn = true;
@@ -110,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const Icon(Icons.apple),
+                                      const Icon(Icons.apple, color: Colors.black,),
                                       const SizedBox(width: 8),
                                       Text(AppLocalizations.of(context)!.appleSignIn,
                                           style: const TextStyle(

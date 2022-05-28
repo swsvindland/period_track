@@ -36,13 +36,17 @@ class AboutPage extends StatelessWidget {
                   'Sam Svindland',
                   style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
+                const Text(
+                  'Charlena Kea',
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
                 const SizedBox(height: 36),
                 Text(
                   AppLocalizations.of(context)!.aboutPageVersion,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 const Text(
-                  '2.1.1',
+                  '1.0.0',
                   style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ],

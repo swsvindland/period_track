@@ -51,20 +51,36 @@ class App extends StatelessWidget {
           // Locale('hi', ''), // Hindi
         ],
         theme: ThemeData(
-            colorSchemeSeed: const Color(0xffac6d7e),
-            brightness: Brightness.light,
-            useMaterial3: true,
-            backgroundColor: const Color(0xffac6d7e),
-            scaffoldBackgroundColor: const Color(0xffac6d7e),
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xffac6d7e),
-                foregroundColor: Color(0xffFFBB7C)
+          colorSchemeSeed: const Color(0xffac6d7e),
+          brightness: Brightness.light,
+          useMaterial3: true,
+          backgroundColor: const Color(0xffac6d7e),
+          scaffoldBackgroundColor: const Color(0xffac6d7e),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xffac6d7e),
+            foregroundColor: Color(0xffFFBB7C),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xff63465A),
+            unselectedItemColor: Color(0xffFFBB7C),
+            selectedItemColor: Color(0xffE3E3A7),
+          ),
+          cardTheme: const CardTheme(color: Color(0xffFFF3E8)),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: Color(0xffFFF3E8),
+              foregroundColor: Color(0xff323232)),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 35)),
+              foregroundColor: MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
             ),
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Color(0xff63465A),
-              unselectedItemColor: Color(0xffFFBB7C),
-              selectedItemColor: Color(0xffE3E3A7),
-            )
+          ),
         ),
         darkTheme: ThemeData(
             colorSchemeSeed: const Color(0xffac6d7e),
