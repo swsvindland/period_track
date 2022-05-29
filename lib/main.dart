@@ -76,8 +76,10 @@ class App extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 35)),
-              foregroundColor: MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
-              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+              foregroundColor:
+                  MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
@@ -87,14 +89,17 @@ class App extends StatelessWidget {
           ),
         ),
         darkTheme: ThemeData(
-            colorSchemeSeed: const Color(0xffac6d7e),
-            brightness: Brightness.dark,
-            useMaterial3: true,
+          colorSchemeSeed: const Color(0xffac6d7e),
+          brightness: Brightness.dark,
+          useMaterial3: true,
+          backgroundColor: Colors.black,
+          scaffoldBackgroundColor: Colors.black,
+          appBarTheme: const AppBarTheme(
             backgroundColor: Colors.black,
-            scaffoldBackgroundColor: Colors.black,
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.black, foregroundColor: Colors.white)),
-        themeMode: ThemeMode.system,
+            foregroundColor: Colors.white,
+          ),
+        ),
+        themeMode: ThemeMode.dark,
         initialRoute: '/',
         navigatorKey: navigatorKey,
         routes: {

@@ -23,16 +23,6 @@ class Home extends StatelessWidget {
         child: Column(
           children: const [
             SizedBox(height: 48),
-            Text(
-              '2022',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xffFFBB7C),
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 24),
-            Divider(color: Color(0xffFFBB7C)),
             Calendar(),
             SizedBox(height: 24),
             Divider(color: Color(0xffFFBB7C)),
