@@ -91,20 +91,14 @@ class _CalendarState extends State<Calendar> {
               disabledBuilder: (context, day, day2) {
                 return const Center();
               },
+              withinRangeBuilder: (context, day, day2) {
+                return const Center();
+              },
               rangeHighlightBuilder: (context, day, isWithinRange) {
-                if (!isWithinRange) {
-                  return Center(
-                    child: Text(
-                      day.day.toString(),
-                      style: const TextStyle(color: textColor),
-                    ),
-                  );
-                }
-
-                if (day.isBefore(periodEndDate)) {
+                if (isWithinRange && day.isBefore(periodEndDate)) {
                   return Center(
                     child: Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: const Color(0xffFFBB7C))),
@@ -114,10 +108,10 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   );
-                } else if (day.isAfter(fertilePeriodDateStart) && day.isBefore(ovulationDate)) {
+                } else if (day.isAfter(fertilePeriodDateStart) && day.isBefore(ovulationDate.add(const Duration(days: 1)))) {
                   return Center(
                     child: Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: const Color(0xffE3E3A7))),
@@ -127,14 +121,14 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   );
-                } else {
-                  return Center(
-                    child: Text(
-                      day.day.toString(),
-                      style: const TextStyle(color: textColor),
-                    ),
-                  );
                 }
+
+                return Center(
+                  child: Text(
+                    day.day.toString(),
+                    style: const TextStyle(color: textColor),
+                  ),
+                );
               },
               rangeStartBuilder: (context, day, day2) {
                 return Center(
