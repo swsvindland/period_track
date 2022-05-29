@@ -18,7 +18,7 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     DateTime periodStartDate = DateTime.now().add(const Duration(days: -14));
-    DateTime periodEndDate = periodStartDate.add(const Duration(days: 7));
+    DateTime periodEndDate = periodStartDate.add(const Duration(days: 5));
     DateTime ovulationDate = periodStartDate.add(const Duration(days: 14));
     DateTime fertilePeriodDateStart =
         periodStartDate.add(const Duration(days: 9));
@@ -28,10 +28,10 @@ class _CalendarState extends State<Calendar> {
       width: 600,
       child: Column(
         children: [
-          const Text(
-            '2022',
+          Text(
+            periodStartDate.year.toString(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xffFFBB7C),
               fontSize: 18,
             ),
@@ -58,7 +58,7 @@ class _CalendarState extends State<Calendar> {
             headerVisible: false,
             firstDay: DateTime.utc(2000, 01, 01),
             lastDay: DateTime.utc(2100, 01, 01),
-            focusedDay: DateTime.now().add(const Duration(days: -7)),
+            focusedDay: periodStartDate,
             rangeStartDay: periodStartDate,
             rangeEndDay: ovulationDate,
             calendarBuilders: CalendarBuilders(
@@ -104,7 +104,9 @@ class _CalendarState extends State<Calendar> {
                 if (day.isBefore(periodEndDate)) {
                   return Center(
                     child: Container(
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           border: Border.all(color: const Color(0xffFFBB7C))),
                       child: Text(
                         day.day.toString(),
@@ -112,10 +114,12 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   );
-                } else if (day.isAfter(fertilePeriodDateStart)) {
+                } else if (day.isAfter(fertilePeriodDateStart) && day.isBefore(ovulationDate)) {
                   return Center(
                     child: Container(
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           border: Border.all(color: const Color(0xffE3E3A7))),
                       child: Text(
                         day.day.toString(),
