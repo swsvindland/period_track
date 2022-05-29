@@ -1,11 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
+import '../models/note.dart';
 import '../models/preferences.dart';
 
 class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   var date = DateTime.now();
+
+  Stream<Iterable<NoteModel>> streamNotes(String id) {
+    try {
+      return _db
+          .collection('notes')
+          .where('uid', isEqualTo: id)
+          .snapshots()
+          .map((event) => event.docs.map((e) => NoteModel.fromMap(e.data())));
+    } catch (err) {
+      return Stream.error(err);
+    }
+  }
+
+  Future<void> addNote(String id, NoteModel note) {
+    try {
+      return _db
+          .collection('notes')
+          .add(NoteModel.toMap(note));
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
 
   Stream<Preferences> streamPreferences(String id) {
     try {

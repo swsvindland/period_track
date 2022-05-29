@@ -9,6 +9,7 @@ import 'package:period_track/widgets/navigation_bottom.dart';
 import 'package:period_track/widgets/navigation_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../models/note.dart';
 import '../models/preferences.dart';
 import '../widgets/home.dart';
 import '../widgets/notes.dart';
@@ -46,7 +47,9 @@ class _HomePageState extends State<HomePage> {
     var db = DatabaseService();
     var user = Provider.of<User?>(context);
 
-
+    if (user == null) {
+      return const CircularProgressIndicator();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -89,10 +92,19 @@ class _HomePageState extends State<HomePage> {
           ? NavigationDrawer(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
           : null,
-      body: StreamProvider<Preferences>.value(
-        initialData: Preferences.empty(),
-        value: db.streamPreferences(user!.uid),
-        child: _selectedIndex == 0
+      body: MultiProvider(
+          providers: [
+            StreamProvider<Preferences>.value(
+                initialData: Preferences.empty(),
+                value: db.streamPreferences(user.uid),
+                catchError: (_, err) => Preferences.empty()),
+            StreamProvider<Iterable<NoteModel>>.value(
+              initialData: const [],
+              value: db.streamNotes(user.uid),
+              catchError: (_, err) => [],
+            ),
+          ],
+          child: _selectedIndex == 0
             ? const Home()
             : _selectedIndex == 1
                 ? const Notes()

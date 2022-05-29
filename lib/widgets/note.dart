@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Note extends StatelessWidget {
-  const Note({Key? key}) : super(key: key);
+  const Note({Key? key, required this.title, required this.body}) : super(key: key);
+  final String title;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
+    return Card(
       child: ListTile(
-        title: Text("This is title"),
-        subtitle: Text("This is subtitle"),
+        title: Text(title),
+        subtitle: Text(body),
       ),
     );
   }
