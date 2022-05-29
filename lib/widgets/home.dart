@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:period_track/widgets/calendar_key.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 
@@ -26,6 +27,8 @@ class Home extends StatelessWidget {
             Calendar(),
             SizedBox(height: 24),
             Divider(color: Color(0xffFFBB7C)),
+            SizedBox(height: 24),
+            CalendarKey()
           ],
         ),
       ),
