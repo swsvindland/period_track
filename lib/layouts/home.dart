@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:period_track/widgets/add_note_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/services/sign_in.dart';
@@ -30,10 +31,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  showNotesDialog(BuildContext context) {
+    Widget dialog = const AddNoteDialog();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return dialog;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var db = DatabaseService();
     var user = Provider.of<User?>(context);
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -87,7 +100,12 @@ class _HomePageState extends State<HomePage> {
                     ? const Reports()
                     : const Settings(),
       ),
-      floatingActionButton: FloatingActionButton.extended(onPressed: () {}, icon: const Icon(Icons.note_add), label: const Text('New Note')),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            showNotesDialog(context);
+          },
+          icon: const Icon(Icons.note_add),
+          label: const Text('New Note')),
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)

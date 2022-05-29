@@ -87,6 +87,10 @@ class App extends StatelessWidget {
               ),
             ),
           ),
+          dialogBackgroundColor: const Color(0xffFFF3E8),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(),
+          )
         ),
         darkTheme: ThemeData(
           colorSchemeSeed: const Color(0xffac6d7e),
