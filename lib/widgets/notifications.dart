@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:period_track/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/preferences.dart';
-import 'button.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
@@ -22,7 +22,6 @@ class _NotificationsState extends State<Notifications> {
 
   void update(User? user, Preferences preferences) {
     preferences.setStartTime(start);
-    preferences.setEndTime(end);
     set = false;
 
     db.updatePreferences(user!.uid, preferences);
@@ -36,7 +35,6 @@ class _NotificationsState extends State<Notifications> {
     setState(() {
       if (!set) {
         start = preferences.start;
-        end = preferences.end;
       }
     });
 
@@ -58,7 +56,7 @@ class _NotificationsState extends State<Notifications> {
                 Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.start,
+                      AppLocalizations.of(context)!.time,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 24),
                     ),
@@ -85,45 +83,16 @@ class _NotificationsState extends State<Notifications> {
                     ),
                   ],
                 ),
-                const SizedBox(width: 20),
-                Column(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.end,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 24),
-                    ),
-                    OutlinedButton(
-                      onPressed: () async {
-                        TimeOfDay? picked = await showTimePicker(
-                          context: context,
-                          initialTime: const TimeOfDay(hour: 12, minute: 00),
-                          builder: (BuildContext context, Widget? child) {
-                            return MediaQuery(
-                              data: MediaQuery.of(context)
-                                  .copyWith(alwaysUse24HourFormat: true),
-                              child: child ?? const Text('error'),
-                            );
-                          },
-                        );
-
-                        setState(() {
-                          end = picked!.hour;
-                          set = true;
-                        });
-                      },
-                      child: Text('$end:00'),
-                    )
-                  ],
-                )
               ],
             ),
             const SizedBox(height: 16),
-            Button(
+            ElevatedButton(
               onPressed: () {
                 update(user, preferences);
               },
-              variant: "secondary",
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(primaryDarkColor),
+              ),
               child: Text(
                 AppLocalizations.of(context)!.update,
                 style: const TextStyle(
