@@ -40,7 +40,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
           user.uid,
           NoteModel(
               uid: user.uid,
-              date: _selectedDate,
+              date: DateUtils.dateOnly(_selectedDate),
               title: _titleController.text,
               body: _bodyController.text,
               periodStart: _periodStart,

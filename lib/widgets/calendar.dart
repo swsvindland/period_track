@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:period_track/models/note.dart';
 import 'package:period_track/widgets/calendar_header.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/constants.dart';
@@ -17,12 +19,27 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    var notes = { for (var e in Provider.of<Iterable<NoteModel>>(context).toList()) e.date : e };
     DateTime periodStartDate = DateTime.now().add(const Duration(days: -14));
     DateTime periodEndDate = periodStartDate.add(const Duration(days: 5));
     DateTime ovulationDate = periodStartDate.add(const Duration(days: 14));
     DateTime fertilePeriodDateStart =
         periodStartDate.add(const Duration(days: 9));
     // int menstrualCycleLength = 28;
+
+    List<Event> _getEventsFromNotes(DateTime day) {
+      var key = DateUtils.dateOnly(day);
+
+      if (notes.containsKey(key) == false) {
+        return [];
+      }
+
+      if (notes[key]?.intimacy ?? false) {
+        return [const Event('Note'), const Event('Intimacy')];
+      }
+
+      return [const Event('Note')];
+    }
 
     return SizedBox(
       width: 600,
@@ -61,6 +78,7 @@ class _CalendarState extends State<Calendar> {
             focusedDay: periodStartDate,
             rangeStartDay: periodStartDate,
             rangeEndDay: ovulationDate,
+            eventLoader: _getEventsFromNotes,
             calendarBuilders: CalendarBuilders(
               headerTitleBuilder: (context, day) {
                 var text = DateFormat.MMMM().format(day);
@@ -158,4 +176,13 @@ class _CalendarState extends State<Calendar> {
       ),
     );
   }
+}
+
+class Event {
+  final String title;
+
+  const Event(this.title);
+
+  @override
+  String toString() => title;
 }
