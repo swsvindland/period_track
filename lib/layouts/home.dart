@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:period_track/widgets/add_note_dialog.dart';
+import 'package:period_track/widgets/app_bar_ad.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/services/sign_in.dart';
@@ -53,8 +54,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.periodTrack,
-            style: const TextStyle(color: Colors.white)),
+        title: const AppBarAd(),
         elevation: 0,
         actions: <Widget>[
           PopupMenuButton<Popup>(
