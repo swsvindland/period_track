@@ -86,13 +86,7 @@ class _CalendarState extends State<Calendar> {
             eventLoader: _getEventsFromNotes,
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
-                return Center(
-                  child: Text(
-                    day.day.toString(),
-                    style: const TextStyle(
-                        color: textColor, backgroundColor: primaryDarkColor),
-                  ),
-                );
+                return const Center();
               },
               defaultBuilder: (context, day, day2) {
                 return Center(
@@ -106,6 +100,9 @@ class _CalendarState extends State<Calendar> {
                 return const Center();
               },
               withinRangeBuilder: (context, day, day2) {
+                return const Center();
+              },
+              outsideBuilder: (context, day, day2) {
                 return const Center();
               },
               rangeHighlightBuilder: (context, day, isWithinRange) {
@@ -136,14 +133,16 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   );
+                } else if (isWithinRange) {
+                  return Center(
+                    child: Text(
+                      day.day.toString(),
+                      style: GoogleFonts.josefinSans(color: textColor, fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 0.05),
+                    ),
+                  );
                 }
 
-                return Center(
-                  child: Text(
-                    day.day.toString(),
-                    style: calendarTextStyle,
-                  ),
-                );
+                return const Center();
               },
               rangeStartBuilder: (context, day, day2) {
                 return Center(
