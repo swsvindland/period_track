@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
 import 'package:period_track/widgets/calendar_header.dart';
@@ -16,6 +17,8 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   late final PageController _pageController;
+
+  final calendarTextStyle = GoogleFonts.josefinSans(color: textColor, fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 0.05);
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +54,7 @@ class _CalendarState extends State<Calendar> {
           Text(
             periodStartDate.year.toString(),
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xffFFBB7C),
-              fontSize: 18,
-            ),
+            style: GoogleFonts.josefinSans(color: const Color(0xffFFBB7C), fontWeight: FontWeight.w700, letterSpacing: 0.12)
           ),
           const SizedBox(height: 24),
           const Divider(color: Color(0xffFFBB7C)),
@@ -85,15 +85,6 @@ class _CalendarState extends State<Calendar> {
             rangeEndDay: ovulationDate,
             eventLoader: _getEventsFromNotes,
             calendarBuilders: CalendarBuilders(
-              headerTitleBuilder: (context, day) {
-                var text = DateFormat.MMMM().format(day);
-                return Center(
-                  child: Text(
-                    text,
-                    style: const TextStyle(fontSize: 48, color: textColor),
-                  ),
-                );
-              },
               todayBuilder: (context, day, day2) {
                 return Center(
                   child: Text(
@@ -107,7 +98,7 @@ class _CalendarState extends State<Calendar> {
                 return Center(
                   child: Text(
                     day.day.toString(),
-                    style: const TextStyle(color: textColor),
+                    style: GoogleFonts.josefinSans(color: textColor, fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 0.05),
                   ),
                 );
               },
@@ -127,7 +118,7 @@ class _CalendarState extends State<Calendar> {
                           border: Border.all(color: const Color(0xffFFBB7C))),
                       child: Text(
                         day.day.toString(),
-                        style: const TextStyle(color: textColor),
+                        style: calendarTextStyle,
                       ),
                     ),
                   );
@@ -141,7 +132,7 @@ class _CalendarState extends State<Calendar> {
                           border: Border.all(color: const Color(0xffE3E3A7))),
                       child: Text(
                         day.day.toString(),
-                        style: const TextStyle(color: textColor),
+                        style: calendarTextStyle,
                       ),
                     ),
                   );
@@ -150,7 +141,7 @@ class _CalendarState extends State<Calendar> {
                 return Center(
                   child: Text(
                     day.day.toString(),
-                    style: const TextStyle(color: textColor),
+                    style: calendarTextStyle,
                   ),
                 );
               },
@@ -160,7 +151,7 @@ class _CalendarState extends State<Calendar> {
                     backgroundColor: primaryDarkColor,
                     child: Text(
                       day.day.toString(),
-                      style: const TextStyle(color: textColor),
+                      style: calendarTextStyle,
                     ),
                   ),
                 );
@@ -171,7 +162,7 @@ class _CalendarState extends State<Calendar> {
                     backgroundColor: const Color(0xff989859),
                     child: Text(
                       day.day.toString(),
-                      style: const TextStyle(color: textColor),
+                      style: calendarTextStyle,
                     ),
                   ),
                 );

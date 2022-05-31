@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:period_track/utils/constants.dart';
 
 class CalendarKey extends StatelessWidget {
@@ -84,7 +85,7 @@ class CalendarKeyItem extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(color: Color(0xffFFF3E8)),
+            style: GoogleFonts.josefinSans(color: const Color(0xffFFF3E8), fontSize: 12, letterSpacing: 0.12),
           )
         ],
       ),

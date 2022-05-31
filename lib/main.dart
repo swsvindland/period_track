@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/layouts/layouts.dart';
 import 'package:period_track/utils/constants.dart';
@@ -58,6 +59,7 @@ class App extends StatelessWidget {
           colorSchemeSeed: const Color(0xffac6d7e),
           brightness: Brightness.light,
           useMaterial3: true,
+          textTheme: GoogleFonts.josefinSansTextTheme(),
           backgroundColor: const Color(0xffac6d7e),
           scaffoldBackgroundColor: const Color(0xffac6d7e),
           appBarTheme: const AppBarTheme(
@@ -71,7 +73,7 @@ class App extends StatelessWidget {
           ),
           cardTheme: const CardTheme(color: Color(0xffFFF3E8)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: Color(0xffFFF3E8),
+              backgroundColor: Color(0xffECCDD6),
               foregroundColor: Color(0xff323232)),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(

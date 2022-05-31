@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/utils/constants.dart';
 
@@ -29,8 +30,8 @@ class CalendarHeader extends StatelessWidget {
             onPressed: onLeftArrowTap,
           ),
           Text(
-              headerText,
-              style: const TextStyle(fontSize: 32.0, color: textColor),
+              headerText.toLowerCase(),
+              style: GoogleFonts.josefinSlab(fontWeight: FontWeight.w600, fontSize: 36, letterSpacing: 0.15, color: textColor),
             ),
           IconButton(
             icon: const Icon(Icons.chevron_right, color: textColor,),
