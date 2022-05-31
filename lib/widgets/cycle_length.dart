@@ -53,7 +53,7 @@ class CycleLength extends StatelessWidget {
     return [
       Series<TimeSeriesWeight, DateTime>(
         id: 'WeighIns',
-        colorFn: (_, __) => MaterialPalette.pink.makeShades(10)[7],
+        colorFn: (_, __) => MaterialPalette.purple.shadeDefault,
         domainFn: (TimeSeriesWeight sales, _) => sales.time,
         measureFn: (TimeSeriesWeight sales, _) => sales.length,
         data: data,

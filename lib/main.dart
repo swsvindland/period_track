@@ -71,7 +71,7 @@ class App extends StatelessWidget {
             unselectedItemColor: Color(0xffFFBB7C),
             selectedItemColor: Color(0xffE3E3A7),
           ),
-          cardTheme: const CardTheme(color: Color(0xffFFF3E8)),
+          cardTheme: const CardTheme(color: Color(0xffECCDD6)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Color(0xffECCDD6),
               foregroundColor: Color(0xff323232)),
