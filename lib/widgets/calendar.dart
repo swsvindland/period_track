@@ -19,7 +19,10 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
-    var notes = { for (var e in Provider.of<Iterable<NoteModel>>(context).toList()) e.date : e };
+    var notes = {
+      for (var e in Provider.of<Iterable<NoteModel>>(context).toList())
+        e.date: e
+    };
     DateTime periodStartDate = DateTime.now().add(const Duration(days: -14));
     DateTime periodEndDate = periodStartDate.add(const Duration(days: 5));
     DateTime ovulationDate = periodStartDate.add(const Duration(days: 14));
@@ -55,6 +58,7 @@ class _CalendarState extends State<Calendar> {
           ),
           const SizedBox(height: 24),
           const Divider(color: Color(0xffFFBB7C)),
+          const SizedBox(height: 8),
           CalendarHeader(
             focusedDay: periodStartDate,
             onLeftArrowTap: () {
@@ -70,6 +74,7 @@ class _CalendarState extends State<Calendar> {
               );
             },
           ),
+          const SizedBox(height: 8),
           TableCalendar(
             daysOfWeekVisible: false,
             headerVisible: false,
@@ -126,7 +131,8 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   );
-                } else if (day.isAfter(fertilePeriodDateStart) && day.isBefore(ovulationDate.add(const Duration(days: 1)))) {
+                } else if (day.isAfter(fertilePeriodDateStart) &&
+                    day.isBefore(ovulationDate.add(const Duration(days: 1)))) {
                   return Center(
                     child: Container(
                       padding: const EdgeInsets.all(12),
@@ -168,6 +174,27 @@ class _CalendarState extends State<Calendar> {
                       style: const TextStyle(color: textColor),
                     ),
                   ),
+                );
+              },
+              markerBuilder: (context, day, list) {
+                List<Widget> dots = [];
+                for (var element in list) {
+                  dots.add(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 2),
+                      child: CircleAvatar(
+                          backgroundColor: element == const Event('Note')
+                              ? const Color(0xffFFBB7C)
+                              : const Color(0xffECCDD6),
+                          maxRadius: 4),
+                    ),
+                  );
+                }
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: dots,
                 );
               },
             ),
