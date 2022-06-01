@@ -79,14 +79,19 @@ class App extends StatelessWidget {
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 35)),
               foregroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+                  MaterialStateProperty.all<Color>(const Color(0xff63465A)),
               backgroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xffFFF3E8)),
+                  MaterialStateProperty.all<Color>(const Color(0xffECCDD6)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
+            ),
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: const Color(0xffFFF3E8),
             ),
           ),
           dialogBackgroundColor: const Color(0xffECCDD6),

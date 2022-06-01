@@ -19,7 +19,7 @@ class NoteModel {
       note: data['note'],
       periodStart: data['periodStart'],
       intimacy: data['intimacy'],
-      flow: data['flow']
+      flow: data['flow'] == "0" ? FlowRate.light : data['flow'] == "1" ? FlowRate.normal : FlowRate.heavy
     );
   }
 
@@ -31,7 +31,7 @@ class NoteModel {
       'note': data.note,
       'periodStart': data.periodStart,
       'intimacy': data.intimacy,
-      'flow': data.flow
+      'flow': data.flow.toString()
     };
   }
 }
