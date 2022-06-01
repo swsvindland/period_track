@@ -89,7 +89,7 @@ class App extends StatelessWidget {
               ),
             ),
           ),
-          dialogBackgroundColor: const Color(0xffFFF3E8),
+          dialogBackgroundColor: const Color(0xffECCDD6),
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
           )
