@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:period_track/widgets/note.dart';
 import 'package:period_track/widgets/note_ad.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class Notes extends StatelessWidget {
 
     return ListView.builder(
       itemBuilder: (buildContext, index){
-        return index % 5 == 0 && index != 0 ? const NoteAd() : Note(title: notes[index].title, body: notes[index].body,);
+        return index % 5 == 0 && index != 0 ? const NoteAd() : Note(title: DateFormat.MMMMd(Localizations.localeOf(context).languageCode).format(notes[index].date) , body: notes[index].note,);
       },
       itemCount: notes.length,
       shrinkWrap: true,

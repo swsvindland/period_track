@@ -14,19 +14,29 @@ class AddNoteDialog extends StatefulWidget {
 class _AddNoteDialogState extends State<AddNoteDialog> {
   final _db = DatabaseService();
   final _formKey = GlobalKey<FormState>();
-  DateTime _selectedDate = DateTime.now();
-  final _titleController = TextEditingController();
-  final _bodyController = TextEditingController();
-  bool _periodStart = false;
-  bool _intimacy = false;
+  late DateTime _selectedDate;
+  late TextEditingController _noteController;
+  late bool _periodStart;
+  late bool _intimacy;
+  FlowRate? _flow;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selectedDate = DateTime.now();
+    _noteController = TextEditingController();
+    _periodStart = false;
+    _intimacy = false;
+    _flow = null;
+  }
 
   @override
   void dispose() {
     super.dispose();
 
     // Clean up the controllers when the widget is disposed.
-    _titleController.dispose();
-    _bodyController.dispose();
+    _noteController.dispose();
   }
 
   @override
@@ -37,14 +47,16 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
       if (user == null) return;
 
       await _db.addNote(
-          user.uid,
-          NoteModel(
-              uid: user.uid,
-              date: DateUtils.dateOnly(_selectedDate),
-              title: _titleController.text,
-              body: _bodyController.text,
-              periodStart: _periodStart,
-              intimacy: _intimacy));
+        user.uid,
+        NoteModel(
+          uid: user.uid,
+          date: DateUtils.dateOnly(_selectedDate),
+          note: _noteController.text,
+          periodStart: _periodStart,
+          intimacy: _intimacy,
+          flow: _flow
+        ),
+      );
     }
 
     Widget cancelButton = TextButton(
@@ -63,12 +75,12 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
 
     return AlertDialog(
       title: const Text("New Note"),
-      content: SingleChildScrollView(
-        child: SizedBox(
-          width: 600,
-          height: 400,
-          child: Form(
-            key: _formKey,
+      content: SizedBox(
+        width: 600,
+        height: 480,
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,38 +98,81 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(
-                    labelText: 'Title',
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
                   minLines: 4,
                   maxLines: 6,
-                  controller: _bodyController,
+                  controller: _noteController,
                   decoration: const InputDecoration(
                     labelText: 'Note',
                   ),
                 ),
-                CheckboxListTile(
-                    title: const Text('Period Start'),
+                Row(children: [
+                  Checkbox(
                     value: _periodStart,
                     onChanged: (val) {
                       setState(() {
                         _periodStart = val ?? false;
                       });
                     },
-                    controlAffinity: ListTileControlAffinity.leading),
-                CheckboxListTile(
-                    title: const Text('Intimacy'),
+                  ),
+                  const Text("Period Start"),
+                ]),
+                Row(children: [
+                  Checkbox(
                     value: _intimacy,
                     onChanged: (val) {
                       setState(() {
                         _intimacy = val ?? false;
                       });
                     },
-                    controlAffinity: ListTileControlAffinity.leading),
+                  ),
+                  const Text("Intimacy"),
+                ]),
+                Text('Flow', style: Theme.of(context).textTheme.headlineSmall),
+                ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  horizontalTitleGap: 4,
+                  visualDensity: VisualDensity.compact,
+                  title: const Text('Light'),
+                  leading: Radio<FlowRate>(
+                    value: FlowRate.light,
+                    groupValue: _flow,
+                    onChanged: (FlowRate? value) {
+                      setState(() {
+                        _flow = value;
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  horizontalTitleGap: 4,
+                  visualDensity: VisualDensity.compact,
+                  title: const Text('Normal'),
+                  leading: Radio<FlowRate>(
+                    value: FlowRate.normal,
+                    groupValue: _flow,
+                    onChanged: (FlowRate? value) {
+                      setState(() {
+                        _flow = value;
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  horizontalTitleGap: 4,
+                  visualDensity: VisualDensity.compact,
+                  title: const Text('Heavy'),
+                  leading: Radio<FlowRate>(
+                    value: FlowRate.heavy,
+                    groupValue: _flow,
+                    onChanged: (FlowRate? value) {
+                      setState(() {
+                        _flow = value;
+                      });
+                    },
+                  ),
+                ),
               ],
             ),
           ),

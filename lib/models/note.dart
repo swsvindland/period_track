@@ -1,12 +1,14 @@
+enum FlowRate { light, normal, heavy }
+
 class NoteModel {
   String uid;
   DateTime date;
-  String title;
-  String body;
+  String note;
   bool periodStart;
   bool intimacy;
+  FlowRate? flow;
 
-  NoteModel({required this.uid, required this.date, required this.title, required this.body, required this.periodStart, required this.intimacy});
+  NoteModel({required this.uid, required this.date, required this.note, required this.periodStart, required this.intimacy, this.flow});
 
   factory NoteModel.fromMap(Map data) {
     data = data;
@@ -14,10 +16,10 @@ class NoteModel {
     return NoteModel(
       uid: data['uid'],
       date: data['date'].toDate(),
-      title: data['title'],
-      body: data['body'],
+      note: data['note'],
       periodStart: data['periodStart'],
-      intimacy: data['intimacy']
+      intimacy: data['intimacy'],
+      flow: data['flow']
     );
   }
 
@@ -26,10 +28,10 @@ class NoteModel {
     return {
       'uid': data.uid,
       'date': data.date,
-      'title': data.title,
-      'body': data.body,
+      'note': data.note,
       'periodStart': data.periodStart,
-      'intimacy': data.intimacy
+      'intimacy': data.intimacy,
+      'flow': data.flow
     };
   }
 }
