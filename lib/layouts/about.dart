@@ -28,26 +28,31 @@ class AboutPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  AppLocalizations.of(context)!.aboutPageCredits,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                ),
                 const Text(
-                  'Sam Svindland',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  'Designed By',
+                  style: TextStyle(color: textColor, fontSize: 16),
                 ),
                 const Text(
                   'Charlena Kea',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: TextStyle(color: textColor, fontSize: 12),
+                ),
+                const SizedBox(height: 36),
+                const Text(
+                  'Built By',
+                  style: TextStyle(color: textColor, fontSize: 16),
+                ),
+                const Text(
+                  'Samuel Svindland',
+                  style: TextStyle(color: textColor, fontSize: 12),
                 ),
                 const SizedBox(height: 36),
                 Text(
                   AppLocalizations.of(context)!.aboutPageVersion,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(color: textColor, fontSize: 16),
                 ),
                 const Text(
                   '1.0.0',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: TextStyle(color: textColor, fontSize: 12),
                 ),
               ],
             ),

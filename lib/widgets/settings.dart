@@ -24,13 +24,16 @@ class Settings extends StatelessWidget {
         child: Center(
           child: SizedBox(
             width: sm.toDouble(),
-            child: Column(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const <Widget>[
                 Notifications(),
                 DeleteAccount()
               ],
+            ),
             ),
           ),
         ),

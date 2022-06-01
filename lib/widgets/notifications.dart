@@ -39,10 +39,6 @@ class _NotificationsState extends State<Notifications> {
     });
 
     return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -97,7 +93,7 @@ class _NotificationsState extends State<Notifications> {
                 AppLocalizations.of(context)!.update,
                 style: const TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: textColor,
                 ),
               ),
             ),

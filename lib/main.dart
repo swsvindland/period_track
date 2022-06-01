@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'firebase_options.dart';
+import 'layouts/add_note.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,11 +90,6 @@ class App extends StatelessWidget {
               ),
             ),
           ),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              primary: const Color(0xffFFF3E8),
-            ),
-          ),
           dialogBackgroundColor: const Color(0xffECCDD6),
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
@@ -119,6 +115,7 @@ class App extends StatelessWidget {
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
           '/about': (context) => const AboutPage(),
+          '/add-note': (context) => const AddNotePage()
         },
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:period_track/widgets/add_note_dialog.dart';
+import 'package:period_track/widgets/add_note_form.dart';
 import 'package:period_track/widgets/app_bar_ad.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
@@ -31,16 +31,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  showNotesDialog(BuildContext context) {
-    Widget dialog = const AddNoteDialog();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialog;
-      },
-    );
   }
 
   @override
@@ -114,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            showNotesDialog(context);
+            navigatorKey.currentState!.pushNamed('/add-note');
           },
           icon: const Icon(Icons.note_add),
           label: const Text('New Note')),

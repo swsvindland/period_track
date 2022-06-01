@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Text(AppLocalizations.of(context)!.anonSignIn,
                                   style: const TextStyle(
-                                      fontSize: 16.0, color: Colors.white))),
+                                      fontSize: 16.0, color: textColor))),
                         ],
                       ),
               ],
