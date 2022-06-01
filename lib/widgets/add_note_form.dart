@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:period_track/models/note.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
+import 'package:period_track/widgets/date_field.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteForm extends StatefulWidget {
@@ -15,7 +16,7 @@ class AddNoteForm extends StatefulWidget {
 class _AddNoteFormState extends State<AddNoteForm> {
   final _db = DatabaseService();
   final _formKey = GlobalKey<FormState>();
-  late DateTime _selectedDate;
+  late TextEditingController _dateController;
   late TextEditingController _noteController;
   late bool _periodStart;
   late bool _intimacy;
@@ -25,7 +26,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
   void initState() {
     super.initState();
 
-    _selectedDate = DateTime.now();
+    _dateController = TextEditingController();
     _noteController = TextEditingController();
     _periodStart = false;
     _intimacy = false;
@@ -47,13 +48,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
     submit() async {
       if (user == null) return;
 
-      print(_selectedDate.toIso8601String());
 
       await _db.addNote(
         user.uid,
         NoteModel(
             uid: user.uid,
-            date: DateUtils.dateOnly(_selectedDate),
+            date: DateUtils.dateOnly(DateTime.parse(_dateController.text)),
             note: _noteController.text,
             periodStart: _periodStart,
             intimacy: _intimacy,
@@ -73,22 +73,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InputDatePickerFormField(
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                    fieldLabelText: 'Date',
-                    initialDate: _selectedDate,
-                    onDateSaved: (date) {
-                      setState(() {
-                        _selectedDate = date;
-                      });
-                    },
-                    onDateSubmitted: (date) {
-                      setState(() {
-                        _selectedDate = date;
-                      });
-                    },
-                  ),
+                  DateField(controller: _dateController),
                   const SizedBox(height: 8),
                   TextFormField(
                     minLines: 4,

@@ -10,11 +10,11 @@ class AddNotePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.about,
-            style: const TextStyle(color: Colors.white)),
+        title: const Text('New Note',
+            style: TextStyle(color: textColor)),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: textColor,),
           color: Colors.white,
           onPressed: () {
             navigatorKey.currentState!.pop();
