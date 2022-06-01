@@ -16,6 +16,7 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   late final PageController _pageController;
+  final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
 
   final calendarTextStyle = GoogleFonts.josefinSans(
     color: textColor,
@@ -23,6 +24,12 @@ class _CalendarState extends State<Calendar> {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.05,
   );
+
+  @override
+  void dispose() {
+    _focusedDay.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,30 +70,40 @@ class _CalendarState extends State<Calendar> {
       width: 600,
       child: Column(
         children: [
-          Text(
-            DateTime.now().year.toString(),
-            textAlign: TextAlign.center,
-            style: GoogleFonts.josefinSans(
-              color: const Color(0xffFFBB7C),
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.12,
-            ),
+          ValueListenableBuilder<DateTime>(
+            valueListenable: _focusedDay,
+            builder: (context, value, _) {
+              return Text(
+                _focusedDay.value.year.toString(),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.josefinSans(
+                  color: const Color(0xffFFBB7C),
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.12,
+                ),
+              );
+            },
           ),
           const SizedBox(height: 24),
           const Divider(color: Color(0xffFFBB7C)),
           const SizedBox(height: 8),
-          CalendarHeader(
-            focusedDay: DateTime.now(),
-            onLeftArrowTap: () {
-              _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            },
-            onRightArrowTap: () {
-              _pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
+          ValueListenableBuilder<DateTime>(
+            valueListenable: _focusedDay,
+            builder: (context, value, _) {
+              return CalendarHeader(
+                focusedDay: _focusedDay.value,
+                onLeftArrowTap: () {
+                  _pageController.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
+                onRightArrowTap: () {
+                  _pageController.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
               );
             },
           ),
@@ -96,8 +113,10 @@ class _CalendarState extends State<Calendar> {
             headerVisible: false,
             firstDay: DateTime.utc(2000, 01, 01),
             lastDay: DateTime.utc(2100, 01, 01),
-            focusedDay: DateTime.now(),
+            focusedDay: _focusedDay.value,
             eventLoader: _getEventsFromNotes,
+            onCalendarCreated: (controller) => _pageController = controller,
+            onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
                 return Center(
