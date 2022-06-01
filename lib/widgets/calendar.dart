@@ -42,15 +42,23 @@ class _CalendarState extends State<Calendar> {
         element.date.year == DateTime.now().year &&
         element.date.month == DateTime.now().month);
 
+    // TODO: Compute this
+    int menstrualCycleLength = 28;
+    int periodLength = (menstrualCycleLength / 5).ceil();
+    int ovulationLength = (menstrualCycleLength / 2).ceil();
+    int fertileLength = (menstrualCycleLength / 3).ceil();
+
     List<DateTime> periodStartDate =
         periodsThisMonth.map((e) => e.date).toList();
-    List<DateTime> periodEndDate =
-        periodStartDate.map((e) => e.add(const Duration(days: 5))).toList();
-    List<DateTime> ovulationDate =
-        periodStartDate.map((e) => e.add(const Duration(days: 14))).toList();
-    List<DateTime> fertilePeriodDateStart =
-        periodStartDate.map((e) => e.add(const Duration(days: 9))).toList();
-    // int menstrualCycleLength = 28;
+    List<DateTime> periodEndDate = periodStartDate
+        .map((e) => e.add(Duration(days: periodLength)))
+        .toList();
+    List<DateTime> ovulationDate = periodStartDate
+        .map((e) => e.add(Duration(days: ovulationLength)))
+        .toList();
+    List<DateTime> fertilePeriodDateStart = periodStartDate
+        .map((e) => e.add(Duration(days: fertileLength)))
+        .toList();
 
     List<Event> _getEventsFromNotes(DateTime day) {
       var key = DateUtils.dateOnly(day);
