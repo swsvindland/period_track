@@ -127,6 +127,44 @@ class _CalendarState extends State<Calendar> {
             onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
+                var dateOnly = DateUtils.dateOnly(day);
+
+                if (periodStartDate.contains(dateOnly)) {
+                  return Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: const Color(0xffFFBB7C))),
+                      child: CircleAvatar(
+                        backgroundColor: primaryDarkColor,
+                        child: Text(
+                          day.day.toString(),
+                          style: calendarTextStyle,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                if (ovulationDate.contains(dateOnly)) {
+                  return Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: const Color(0xffE3E3A7))),
+                      child: CircleAvatar(
+                        backgroundColor: const Color(0xff989859),
+                        child: Text(
+                          day.day.toString(),
+                          style: calendarTextStyle,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
                 return Center(
                     child: Text(day.day.toString(), style: calendarTextStyle));
               },
