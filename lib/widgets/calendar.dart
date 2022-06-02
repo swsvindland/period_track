@@ -168,7 +168,7 @@ class CalendarDay extends StatelessWidget {
 
     var periodStartNotes = notes.where((element) => element.periodStart);
     var periodsThisMonth = periodStartNotes.where((element) =>
-    element.date.year == DateTime.now().year &&
+        element.date.year == DateTime.now().year &&
         element.date.month == DateTime.now().month);
 
     // TODO: Compute this
@@ -178,7 +178,7 @@ class CalendarDay extends StatelessWidget {
     int fertileLength = (menstrualCycleLength / 3).ceil();
 
     List<DateTime> periodStartDate =
-    periodsThisMonth.map((e) => e.date).toList();
+        periodsThisMonth.map((e) => e.date).toList();
     List<DateTime> periodEndDate = periodStartDate
         .map((e) => e.add(Duration(days: periodLength)))
         .toList();
@@ -192,15 +192,21 @@ class CalendarDay extends StatelessWidget {
     if (periodStartDate.contains(dateOnly)) {
       return Center(
         child: Container(
-          padding: const EdgeInsets.all(1),
+          padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xffFFBB7C))),
           child: CircleAvatar(
             backgroundColor: primaryDarkColor,
-            child: Text(
-              day.day.toString(),
-              style: calendarTextStyle,
+            child: SizedBox(
+              height: 24,
+              width: 16,
+              child: Center(
+                child: Text(
+                  day.day.toString(),
+                  style: calendarTextStyle,
+                ),
+              ),
             ),
           ),
         ),
@@ -210,15 +216,21 @@ class CalendarDay extends StatelessWidget {
     if (ovulationDate.contains(dateOnly)) {
       return Center(
         child: Container(
-          padding: const EdgeInsets.all(1),
+          padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xffE3E3A7))),
           child: CircleAvatar(
             backgroundColor: const Color(0xff989859),
-            child: Text(
-              day.day.toString(),
-              style: calendarTextStyle,
+            child: SizedBox(
+              height: 24,
+              width: 16,
+              child: Center(
+                child: Text(
+                  day.day.toString(),
+                  style: calendarTextStyle,
+                ),
+              ),
             ),
           ),
         ),
@@ -226,8 +238,7 @@ class CalendarDay extends StatelessWidget {
     }
 
     for (var i = 0; i < periodStartDate.length; ++i) {
-      if (dateOnly.isAfter(
-          periodStartDate[i].add(const Duration(days: -1))) &&
+      if (dateOnly.isAfter(periodStartDate[i].add(const Duration(days: -1))) &&
           dateOnly.isBefore(periodEndDate[i])) {
         return Center(
           child: Container(
@@ -235,9 +246,15 @@ class CalendarDay extends StatelessWidget {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffFFBB7C))),
-            child: Text(
-              day.day.toString(),
-              style: calendarTextStyle,
+            child: SizedBox(
+              height: 24,
+              width: 16,
+              child: Center(
+                child: Text(
+                  day.day.toString(),
+                  style: calendarTextStyle,
+                ),
+              ),
             ),
           ),
         );
@@ -246,28 +263,31 @@ class CalendarDay extends StatelessWidget {
 
     for (var i = 0; i < ovulationDate.length; ++i) {
       if (dateOnly.isAfter(fertilePeriodDateStart[i]) &&
-          dateOnly.isBefore(
-              ovulationDate[i].add(const Duration(days: 2)))) {
+          dateOnly.isBefore(ovulationDate[i].add(const Duration(days: 2)))) {
         return Center(
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffE3E3A7))),
-            child: Text(
-              day.day.toString(),
-              style: calendarTextStyle,
+            child: SizedBox(
+              height: 24,
+              width: 16,
+              child: Center(
+                child: Text(
+                  day.day.toString(),
+                  style: calendarTextStyle,
+                ),
+              ),
             ),
           ),
         );
       }
     }
 
-    return Center(
-        child: Text(day.day.toString(), style: calendarTextStyle));
+    return Center(child: Text(day.day.toString(), style: calendarTextStyle));
   }
 }
-
 
 class Event {
   final String title;
