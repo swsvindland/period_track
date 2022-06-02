@@ -18,13 +18,6 @@ class _CalendarState extends State<Calendar> {
   late final PageController _pageController;
   final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
 
-  final calendarTextStyle = GoogleFonts.josefinSans(
-    color: textColor,
-    fontSize: 18,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.05,
-  );
-
   @override
   void dispose() {
     _focusedDay.dispose();
@@ -36,29 +29,6 @@ class _CalendarState extends State<Calendar> {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
 
     var keyedNotes = {for (var e in notes) e.date: e};
-
-    var periodStartNotes = notes.where((element) => element.periodStart);
-    var periodsThisMonth = periodStartNotes.where((element) =>
-        element.date.year == DateTime.now().year &&
-        element.date.month == DateTime.now().month);
-
-    // TODO: Compute this
-    int menstrualCycleLength = 28;
-    int periodLength = (menstrualCycleLength / 5).ceil();
-    int ovulationLength = (menstrualCycleLength / 2).ceil();
-    int fertileLength = (menstrualCycleLength / 3).ceil();
-
-    List<DateTime> periodStartDate =
-        periodsThisMonth.map((e) => e.date).toList();
-    List<DateTime> periodEndDate = periodStartDate
-        .map((e) => e.add(Duration(days: periodLength)))
-        .toList();
-    List<DateTime> ovulationDate = periodStartDate
-        .map((e) => e.add(Duration(days: ovulationLength)))
-        .toList();
-    List<DateTime> fertilePeriodDateStart = periodStartDate
-        .map((e) => e.add(Duration(days: fertileLength)))
-        .toList();
 
     List<Event> _getEventsFromNotes(DateTime day) {
       var key = DateUtils.dateOnly(day);
@@ -127,126 +97,10 @@ class _CalendarState extends State<Calendar> {
             onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
-                var dateOnly = DateUtils.dateOnly(day);
-
-                if (periodStartDate.contains(dateOnly)) {
-                  return Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xffFFBB7C))),
-                      child: CircleAvatar(
-                        backgroundColor: primaryDarkColor,
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                if (ovulationDate.contains(dateOnly)) {
-                  return Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xffE3E3A7))),
-                      child: CircleAvatar(
-                        backgroundColor: const Color(0xff989859),
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                return Center(
-                    child: Text(day.day.toString(), style: calendarTextStyle));
+                return CalendarDay(day: day);
               },
               defaultBuilder: (context, day, day2) {
-                var dateOnly = DateUtils.dateOnly(day);
-
-                if (periodStartDate.contains(dateOnly)) {
-                  return Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xffFFBB7C))),
-                      child: CircleAvatar(
-                        backgroundColor: primaryDarkColor,
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                if (ovulationDate.contains(dateOnly)) {
-                  return Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xffE3E3A7))),
-                      child: CircleAvatar(
-                        backgroundColor: const Color(0xff989859),
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                for (var i = 0; i < periodStartDate.length; ++i) {
-                  if (dateOnly.isAfter(
-                          periodStartDate[i].add(const Duration(days: -1))) &&
-                      dateOnly.isBefore(periodEndDate[i])) {
-                    return Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: const Color(0xffFFBB7C))),
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    );
-                  }
-                }
-
-                for (var i = 0; i < ovulationDate.length; ++i) {
-                  if (dateOnly.isAfter(fertilePeriodDateStart[i]) &&
-                      dateOnly.isBefore(
-                          ovulationDate[i].add(const Duration(days: 2)))) {
-                    return Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: const Color(0xffE3E3A7))),
-                        child: Text(
-                          day.day.toString(),
-                          style: calendarTextStyle,
-                        ),
-                      ),
-                    );
-                  }
-                }
-
-                return Center(
-                    child: Text(day.day.toString(), style: calendarTextStyle));
+                return CalendarDay(day: day);
               },
               disabledBuilder: (context, day, day2) {
                 return const Center();
@@ -295,6 +149,125 @@ class _CalendarState extends State<Calendar> {
     );
   }
 }
+
+class CalendarDay extends StatelessWidget {
+  CalendarDay({Key? key, required this.day}) : super(key: key);
+  final DateTime day;
+
+  final calendarTextStyle = GoogleFonts.josefinSans(
+    color: textColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.05,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    var dateOnly = DateUtils.dateOnly(day);
+    var notes = Provider.of<Iterable<NoteModel>>(context).toList();
+
+    var periodStartNotes = notes.where((element) => element.periodStart);
+    var periodsThisMonth = periodStartNotes.where((element) =>
+    element.date.year == DateTime.now().year &&
+        element.date.month == DateTime.now().month);
+
+    // TODO: Compute this
+    int menstrualCycleLength = 28;
+    int periodLength = (menstrualCycleLength / 5).ceil();
+    int ovulationLength = (menstrualCycleLength / 2).ceil();
+    int fertileLength = (menstrualCycleLength / 3).ceil();
+
+    List<DateTime> periodStartDate =
+    periodsThisMonth.map((e) => e.date).toList();
+    List<DateTime> periodEndDate = periodStartDate
+        .map((e) => e.add(Duration(days: periodLength)))
+        .toList();
+    List<DateTime> ovulationDate = periodStartDate
+        .map((e) => e.add(Duration(days: ovulationLength)))
+        .toList();
+    List<DateTime> fertilePeriodDateStart = periodStartDate
+        .map((e) => e.add(Duration(days: fertileLength)))
+        .toList();
+
+    if (periodStartDate.contains(dateOnly)) {
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(1),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xffFFBB7C))),
+          child: CircleAvatar(
+            backgroundColor: primaryDarkColor,
+            child: Text(
+              day.day.toString(),
+              style: calendarTextStyle,
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (ovulationDate.contains(dateOnly)) {
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(1),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xffE3E3A7))),
+          child: CircleAvatar(
+            backgroundColor: const Color(0xff989859),
+            child: Text(
+              day.day.toString(),
+              style: calendarTextStyle,
+            ),
+          ),
+        ),
+      );
+    }
+
+    for (var i = 0; i < periodStartDate.length; ++i) {
+      if (dateOnly.isAfter(
+          periodStartDate[i].add(const Duration(days: -1))) &&
+          dateOnly.isBefore(periodEndDate[i])) {
+        return Center(
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: const Color(0xffFFBB7C))),
+            child: Text(
+              day.day.toString(),
+              style: calendarTextStyle,
+            ),
+          ),
+        );
+      }
+    }
+
+    for (var i = 0; i < ovulationDate.length; ++i) {
+      if (dateOnly.isAfter(fertilePeriodDateStart[i]) &&
+          dateOnly.isBefore(
+              ovulationDate[i].add(const Duration(days: 2)))) {
+        return Center(
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: const Color(0xffE3E3A7))),
+            child: Text(
+              day.day.toString(),
+              style: calendarTextStyle,
+            ),
+          ),
+        );
+      }
+    }
+
+    return Center(
+        child: Text(day.day.toString(), style: calendarTextStyle));
+  }
+}
+
 
 class Event {
   final String title;
