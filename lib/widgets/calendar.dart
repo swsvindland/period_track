@@ -209,8 +209,8 @@ class CalendarDay extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: primaryDarkColor,
             child: SizedBox(
-              height: 18,
-              width: 18,
+              height: 20,
+              width: 20,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -233,8 +233,8 @@ class CalendarDay extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: const Color(0xff989859),
             child: SizedBox(
-              height: 18,
-              width: 18,
+              height: 20,
+              width: 20,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -252,13 +252,13 @@ class CalendarDay extends StatelessWidget {
           dateOnly.isBefore(periodEndDate[i])) {
         return Center(
           child: Container(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffFFBB7C))),
             child: SizedBox(
-              height: 18,
-              width: 18,
+              height: 20,
+              width: 20,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -276,13 +276,13 @@ class CalendarDay extends StatelessWidget {
           dateOnly.isBefore(ovulationDate[i].add(const Duration(days: 2)))) {
         return Center(
           child: Container(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffE3E3A7))),
             child: SizedBox(
-              height: 18,
-              width: 18,
+              height: 20,
+              width: 20,
               child: Center(
                 child: Text(
                   day.day.toString(),
