@@ -49,9 +49,20 @@ void updateUserData(FirebaseFirestore db, User user) async {
   });
 }
 
-// TODO: compute this, get more accurate the more dates
 int computeMenstrualLength(List<DateTime> periodStarts) {
-  return 28;
+  periodStarts.sort((a, b) {
+    return a.compareTo(b);
+  });
+  var temp = periodStarts[0];
+  var sum = 0;
+
+  for (int i = 1; i < periodStarts.length; ++i) {
+    sum += periodStarts[i].difference(temp).inDays;
+    temp = periodStarts[i];
+  }
+
+
+  return (sum / periodStarts.length).ceil();
 }
 
 class Cycle {
