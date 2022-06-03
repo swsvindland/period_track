@@ -48,3 +48,8 @@ void updateUserData(FirebaseFirestore db, User user) async {
     'lastSeen': DateTime.now()
   });
 }
+
+// TODO: compute this, get more accurate the more dates
+int computeMenstrualLength(List<DateTime> periodStarts) {
+  return 28;
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:period_track/models/note.dart';
+import 'package:period_track/utils/helper.dart';
 import 'package:period_track/widgets/calendar_header.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -97,10 +98,10 @@ class _CalendarState extends State<Calendar> {
             onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
-                return CalendarDay(day: day);
+                return CalendarDay(day: day, day2: day2);
               },
               defaultBuilder: (context, day, day2) {
-                return CalendarDay(day: day);
+                return CalendarDay(day: day, day2: day2);
               },
               disabledBuilder: (context, day, day2) {
                 return const Center();
@@ -122,6 +123,11 @@ class _CalendarState extends State<Calendar> {
               },
               markerBuilder: (context, day, list) {
                 List<Widget> dots = [];
+
+                // Not sure why the logic is this way but don't show event on non-current month
+                if (day.month == _focusedDay.value.month) {
+                  return const Center();
+                }
 
                 for (var element in list) {
                   dots.add(
@@ -151,12 +157,15 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarDay extends StatelessWidget {
-  CalendarDay({Key? key, required this.day}) : super(key: key);
+  CalendarDay({Key? key, required this.day, required this.day2}) : super(key: key);
   final DateTime day;
+  final DateTime day2;
+
+
 
   final calendarTextStyle = GoogleFonts.josefinSans(
     color: textColor,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.05,
   );
@@ -164,21 +173,18 @@ class CalendarDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dateOnly = DateUtils.dateOnly(day);
+
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
 
-    var periodStartNotes = notes.where((element) => element.periodStart);
-    var periodsThisMonth = periodStartNotes.where((element) =>
-        element.date.year == DateTime.now().year &&
-        element.date.month == DateTime.now().month);
+    var periodStartNotes = notes.where((element) => element.periodStart).toList();
 
-    // TODO: Compute this
-    int menstrualCycleLength = 28;
+    int menstrualCycleLength = computeMenstrualLength(periodStartNotes.map((e) => e.date).toList());
     int periodLength = (menstrualCycleLength / 5).ceil();
     int ovulationLength = (menstrualCycleLength / 2).ceil();
     int fertileLength = (menstrualCycleLength / 3).ceil();
 
     List<DateTime> periodStartDate =
-        periodsThisMonth.map((e) => e.date).toList();
+      periodStartNotes.map((e) => e.date).toList();
     List<DateTime> periodEndDate = periodStartDate
         .map((e) => e.add(Duration(days: periodLength)))
         .toList();
@@ -188,6 +194,10 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> fertilePeriodDateStart = periodStartDate
         .map((e) => e.add(Duration(days: fertileLength)))
         .toList();
+
+    if (day.month != day2.month) {
+      return const Center();
+    }
 
     if (periodStartDate.contains(dateOnly)) {
       return Center(
@@ -199,8 +209,8 @@ class CalendarDay extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: primaryDarkColor,
             child: SizedBox(
-              height: 24,
-              width: 16,
+              height: 18,
+              width: 18,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -223,8 +233,8 @@ class CalendarDay extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: const Color(0xff989859),
             child: SizedBox(
-              height: 24,
-              width: 16,
+              height: 18,
+              width: 18,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -247,8 +257,8 @@ class CalendarDay extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffFFBB7C))),
             child: SizedBox(
-              height: 24,
-              width: 16,
+              height: 18,
+              width: 18,
               child: Center(
                 child: Text(
                   day.day.toString(),
@@ -271,8 +281,8 @@ class CalendarDay extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: const Color(0xffE3E3A7))),
             child: SizedBox(
-              height: 24,
-              width: 16,
+              height: 18,
+              width: 18,
               child: Center(
                 child: Text(
                   day.day.toString(),
