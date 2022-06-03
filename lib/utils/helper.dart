@@ -53,3 +53,15 @@ void updateUserData(FirebaseFirestore db, User user) async {
 int computeMenstrualLength(List<DateTime> periodStarts) {
   return 28;
 }
+
+class Cycle {
+  final DateTime date;
+  final int length;
+
+  Cycle({ required this.date, required this.length});
+}
+
+// TODO: compute this, get more accurate the more dates
+List<Cycle> computeMenstrualLengthsForGraph(List<DateTime> periodStarts) {
+  return periodStarts.map((e) => Cycle(date: e, length: 28)).toList();
+}
