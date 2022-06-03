@@ -56,7 +56,7 @@ int computeMenstrualLength(List<DateTime> periodStarts) {
   var temp = periodStarts[0];
   var sum = 0;
 
-  for (int i = 1; i < periodStarts.length; ++i) {
+  for (int i = 1; i < periodStarts.length - 1; ++i) {
     sum += periodStarts[i].difference(temp).inDays;
     temp = periodStarts[i];
   }
@@ -72,7 +72,20 @@ class Cycle {
   Cycle({ required this.date, required this.length});
 }
 
-// TODO: compute this, get more accurate the more dates
 List<Cycle> computeMenstrualLengthsForGraph(List<DateTime> periodStarts) {
-  return periodStarts.map((e) => Cycle(date: e, length: 28)).toList();
+  periodStarts.sort((a, b) {
+    return a.compareTo(b);
+  });
+
+  var temp = periodStarts[0];
+  List<Cycle> output = [];
+
+  for (int i = 1; i < periodStarts.length - 1; ++i) {
+    output.add(Cycle(date: periodStarts[i], length: periodStarts[i].difference(temp).inDays));
+
+    temp = periodStarts[i];
+  }
+
+
+  return output;
 }
