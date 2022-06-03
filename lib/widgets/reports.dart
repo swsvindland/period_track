@@ -7,22 +7,24 @@ class Reports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        SizedBox(
-          height: 300,
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Card(
-              elevation: 1,
-              child: Padding(
-                padding: EdgeInsets.all(4),
-                child: CycleLength(),
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          SizedBox(
+            height: 300,
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Card(
+                elevation: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(4),
+                  child: CycleLength(),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
