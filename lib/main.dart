@@ -72,6 +72,14 @@ class App extends StatelessWidget {
             unselectedItemColor: Color(0xffFFBB7C),
             selectedItemColor: Color(0xffE3E3A7),
           ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xff63465A),
+          ),
+          listTileTheme: const ListTileThemeData(
+            selectedColor: Color(0xffE3E3A7),
+            iconColor: Color(0xffFFBB7C),
+            textColor: Color(0xffFFBB7C),
+          ),
           cardTheme: const CardTheme(color: Color(0xffECCDD6)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Color(0xffECCDD6),

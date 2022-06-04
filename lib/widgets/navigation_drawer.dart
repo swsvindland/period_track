@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:period_track/utils/constants.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key, required this.selectedIndex, required this.onItemTapped}) : super(key: key);
@@ -19,16 +20,12 @@ class NavigationDrawer extends StatelessWidget {
           SizedBox(
             height: 100,
             child: DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
               padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  const Icon(Icons.local_drink, color: Colors.white, size: 36),
-                  const SizedBox(width: 8),
+                  Image.asset('images/logo.png', width: 48, height: 48),
                   Text(AppLocalizations.of(context)!.periodTrack,
-                      style: const TextStyle(fontSize: 24, color: Colors.white)),
+                      style: const TextStyle(fontSize: 24, color: textColor)),
                 ],
               ),
             ),

@@ -2,10 +2,10 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
+import 'package:period_track/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/helper.dart';
-
 
 class CycleLength extends StatelessWidget {
   const CycleLength({Key? key}) : super(key: key);
@@ -22,13 +22,17 @@ class CycleLength extends StatelessWidget {
           padding: EdgeInsets.all(12),
           child: Center(
             child: Text(
-                'Looks like you have not recorded a period yet. Add a new note to get started.'),
+                'Looks like you have not recorded a period yet. Add a new note to get started.',
+            ),
           ),
         ),
       );
     }
 
-    var cycles = computeMenstrualLengthsForGraph(notes.where((element) => element.periodStart).map((e) => e.date).toList());
+    var cycles = computeMenstrualLengthsForGraph(notes
+        .where((element) => element.periodStart)
+        .map((e) => e.date)
+        .toList());
 
     return BarChart(
       _createSampleData(cycles, context),
@@ -39,7 +43,8 @@ class CycleLength extends StatelessWidget {
     );
   }
 
-  static List<Series<Cycle, String>> _createSampleData(List<Cycle> cycles, BuildContext context) {
+  static List<Series<Cycle, String>> _createSampleData(
+      List<Cycle> cycles, BuildContext context) {
     final List<Cycle> data = [];
     for (var cycle in cycles) {
       data.add(Cycle(date: cycle.date, length: cycle.length));
@@ -53,7 +58,9 @@ class CycleLength extends StatelessWidget {
       Series<Cycle, String>(
         id: 'WeighIns',
         colorFn: (_, __) => MaterialPalette.purple.shadeDefault,
-        domainFn: (Cycle sales, _) => DateFormat.MMM(Localizations.localeOf(context).languageCode).format(sales.date),
+        domainFn: (Cycle sales, _) =>
+            DateFormat.MMM(Localizations.localeOf(context).languageCode)
+                .format(sales.date),
         measureFn: (Cycle sales, _) => sales.length,
         data: data,
       ),
