@@ -30,6 +30,22 @@ class DatabaseService {
     }
   }
 
+  Future<void> deleteNote(String id, DateTime date) {
+    try {
+      var docs = _db
+          .collection('notes')
+          .where('uid', isEqualTo: id)
+          .where('date', isEqualTo: date)
+          .get();
+
+      return docs.then((value) => value.docs.map((element) {
+        element.reference.delete();
+      }));
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Stream<Preferences> streamPreferences(String id) {
     try {
       return _db
