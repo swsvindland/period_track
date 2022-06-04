@@ -11,14 +11,17 @@ class Reports extends StatelessWidget {
       child: Column(
         children: const [
           SizedBox(
-            height: 300,
+            height: 350,
             child: Padding(
               padding: EdgeInsets.all(8),
               child: Card(
                 elevation: 1,
                 child: Padding(
                   padding: EdgeInsets.all(4),
-                  child: CycleLength(),
+                  child: ListTile(
+                    title: Text('Period Length'),
+                    subtitle: SizedBox(height: 275, child: CycleLength()),
+                  ),
                 ),
               ),
             ),

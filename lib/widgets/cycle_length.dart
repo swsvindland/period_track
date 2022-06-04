@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class CycleLength extends StatelessWidget {
       );
     }
 
-    return TimeSeriesChart(
+    return BarChart(
       _createSampleData(cycles, context),
       animate: true,
       primaryMeasureAxis: const NumericAxisSpec(
@@ -37,7 +38,7 @@ class CycleLength extends StatelessWidget {
     );
   }
 
-  static List<Series<Cycle, DateTime>> _createSampleData(List<Cycle> cycles, BuildContext context) {
+  static List<Series<Cycle, String>> _createSampleData(List<Cycle> cycles, BuildContext context) {
     final List<Cycle> data = [];
     for (var cycle in cycles) {
       data.add(Cycle(date: cycle.date, length: cycle.length));
@@ -47,25 +48,13 @@ class CycleLength extends StatelessWidget {
       return a.date.compareTo(b.date);
     });
 
-    final regression = [
-      Cycle(date: data.first.date, length: data.first.length),
-      Cycle(date: data.last.date, length: data.last.length)
-    ];
-
     return [
-      Series<Cycle, DateTime>(
+      Series<Cycle, String>(
         id: 'WeighIns',
         colorFn: (_, __) => MaterialPalette.purple.shadeDefault,
-        domainFn: (Cycle sales, _) => sales.date,
+        domainFn: (Cycle sales, _) => DateFormat.MMM(Localizations.localeOf(context).languageCode).format(sales.date),
         measureFn: (Cycle sales, _) => sales.length,
         data: data,
-      ),
-      Series<Cycle, DateTime>(
-        id: 'Average',
-        colorFn: (_, __) => MaterialPalette.pink.shadeDefault,
-        domainFn: (Cycle sales, _) => sales.date,
-        measureFn: (Cycle sales, _) => sales.length,
-        data: regression,
       ),
     ];
   }
