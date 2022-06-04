@@ -64,6 +64,11 @@ class _CalendarState extends State<Calendar> {
             },
           ),
           const SizedBox(height: 24),
+          notes.isEmpty
+              ? const Text(
+                  'Looks like you have not recorded a period yet. Add a new note or click on a day to get started.',
+                  style: TextStyle(color: textColor))
+              : const SizedBox(),
           const Divider(color: Color(0xffFFBB7C)),
           const SizedBox(height: 8),
           ValueListenableBuilder<DateTime>(
@@ -157,11 +162,10 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarDay extends StatelessWidget {
-  CalendarDay({Key? key, required this.day, required this.day2}) : super(key: key);
+  CalendarDay({Key? key, required this.day, required this.day2})
+      : super(key: key);
   final DateTime day;
   final DateTime day2;
-
-
 
   final calendarTextStyle = GoogleFonts.josefinSans(
     color: textColor,
@@ -176,15 +180,25 @@ class CalendarDay extends StatelessWidget {
 
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
 
-    var periodStartNotes = notes.where((element) => element.periodStart).toList();
+    if (day.month != day2.month) {
+      return const Center();
+    }
 
-    int menstrualCycleLength = computeMenstrualLength(periodStartNotes.map((e) => e.date).toList());
+    if (notes.isEmpty) {
+      return Center(child: Text(day.day.toString(), style: calendarTextStyle));
+    }
+
+    var periodStartNotes =
+        notes.where((element) => element.periodStart).toList();
+
+    int menstrualCycleLength =
+        computeMenstrualLength(periodStartNotes.map((e) => e.date).toList());
     int periodLength = (menstrualCycleLength / 5).ceil();
     int ovulationLength = (menstrualCycleLength / 2).ceil();
     int fertileLength = (menstrualCycleLength / 3).ceil();
 
     List<DateTime> periodStartDate =
-      periodStartNotes.map((e) => e.date).toList();
+        periodStartNotes.map((e) => e.date).toList();
     List<DateTime> periodEndDate = periodStartDate
         .map((e) => e.add(Duration(days: periodLength)))
         .toList();
@@ -194,10 +208,6 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> fertilePeriodDateStart = periodStartDate
         .map((e) => e.add(Duration(days: fertileLength)))
         .toList();
-
-    if (day.month != day2.month) {
-      return const Center();
-    }
 
     if (periodStartDate.contains(dateOnly)) {
       return Center(

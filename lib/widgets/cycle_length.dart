@@ -13,9 +13,8 @@ class CycleLength extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
-    var cycles = computeMenstrualLengthsForGraph(notes.where((element) => element.periodStart).map((e) => e.date).toList());
 
-    if (cycles.isEmpty) {
+    if (notes.isEmpty) {
       return const SizedBox(
         height: 300,
         width: 600,
@@ -23,11 +22,13 @@ class CycleLength extends StatelessWidget {
           padding: EdgeInsets.all(12),
           child: Center(
             child: Text(
-                'Looks like you have no weigh ins. Click the scale icon to get started.'),
+                'Looks like you have not recorded a period yet. Add a new note to get started.'),
           ),
         ),
       );
     }
+
+    var cycles = computeMenstrualLengthsForGraph(notes.where((element) => element.periodStart).map((e) => e.date).toList());
 
     return BarChart(
       _createSampleData(cycles, context),
