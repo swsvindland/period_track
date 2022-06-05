@@ -7,20 +7,31 @@ class AddNotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Note',
-            style: TextStyle(color: textColor)),
+        title: const Text('New Note', style: TextStyle(color: textColor)),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: textColor,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: textColor,
+          ),
           color: Colors.white,
           onPressed: () {
             navigatorKey.currentState!.pop();
           },
         ),
       ),
-      body: const Padding(padding: EdgeInsets.all(8), child: AddNoteForm()),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: AddNoteForm(
+          date: DateTime.parse(
+            arguments["id"].toString(),
+          ),
+        ),
+      ),
     );
   }
 }

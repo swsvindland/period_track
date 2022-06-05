@@ -101,12 +101,12 @@ class _HomePageState extends State<HomePage> {
                     ? const Reports()
                     : const Settings(),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: _selectedIndex == 1 ? FloatingActionButton.extended(
           onPressed: () {
-            navigatorKey.currentState!.pushNamed('/add-note');
+            navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()});
           },
           icon: const Icon(Icons.note_add),
-          label: const Text('New Note')),
+          label: const Text('New Note')) : null,
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)

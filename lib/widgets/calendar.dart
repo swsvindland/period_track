@@ -99,6 +99,9 @@ class _CalendarState extends State<Calendar> {
             lastDay: DateTime.utc(2100, 01, 01),
             focusedDay: _focusedDay.value,
             eventLoader: _getEventsFromNotes,
+            onDaySelected: (day, day2) {
+              navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(day).toIso8601String() });
+            },
             onCalendarCreated: (controller) => _pageController = controller,
             onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
             calendarBuilders: CalendarBuilders(

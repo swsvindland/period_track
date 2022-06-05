@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
@@ -7,7 +8,8 @@ import 'package:period_track/widgets/date_field.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({Key? key}) : super(key: key);
+  const AddNoteForm({Key? key, required this.date}) : super(key: key);
+  final DateTime? date;
 
   @override
   State<AddNoteForm> createState() => _AddNoteFormState();
@@ -27,6 +29,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
     super.initState();
 
     _dateController = TextEditingController();
+    _dateController.text = DateFormat.yMd().format(widget.date ?? DateTime.now());
     _noteController = TextEditingController();
     _periodStart = false;
     _intimacy = false;
@@ -48,7 +51,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
     submit() async {
       if (user == null) return;
 
-
       await _db.addNote(
         user.uid,
         NoteModel(
@@ -61,117 +63,105 @@ class _AddNoteFormState extends State<AddNoteForm> {
       );
     }
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: SizedBox(
-          width: 600,
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DateField(controller: _dateController),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    minLines: 4,
-                    maxLines: 6,
-                    controller: _noteController,
-                    decoration: const InputDecoration(
-                      labelText: 'Note',
-                    ),
-                  ),
-                  Row(children: [
-                    Checkbox(
-                      value: _periodStart,
-                      onChanged: (val) {
-                        setState(() {
-                          _periodStart = val ?? false;
-                        });
-                      },
-                    ),
-                    const Text("Period Start"),
-                  ]),
-                  Row(children: [
-                    Checkbox(
-                      value: _intimacy,
-                      onChanged: (val) {
-                        setState(() {
-                          _intimacy = val ?? false;
-                        });
-                      },
-                    ),
-                    const Text("Intimacy"),
-                  ]),
-                  Text('Flow',
-                      style: Theme.of(context).textTheme.headlineSmall),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(0),
-                    horizontalTitleGap: 4,
-                    visualDensity: VisualDensity.compact,
-                    title: const Text('Light'),
-                    leading: Radio<FlowRate>(
-                      value: FlowRate.light,
-                      groupValue: _flow,
-                      onChanged: (FlowRate? value) {
-                        setState(() {
-                          _flow = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(0),
-                    horizontalTitleGap: 4,
-                    visualDensity: VisualDensity.compact,
-                    title: const Text('Normal'),
-                    leading: Radio<FlowRate>(
-                      value: FlowRate.normal,
-                      groupValue: _flow,
-                      onChanged: (FlowRate? value) {
-                        setState(() {
-                          _flow = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(0),
-                    horizontalTitleGap: 4,
-                    visualDensity: VisualDensity.compact,
-                    title: const Text('Heavy'),
-                    leading: Radio<FlowRate>(
-                      value: FlowRate.heavy,
-                      groupValue: _flow,
-                      onChanged: (FlowRate? value) {
-                        setState(() {
-                          _flow = value;
-                        });
-                      },
-                    ),
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        submit();
-                        navigatorKey.currentState!.pop();
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(primaryDarkColor),
+    return ListTileTheme(
+      data: const ListTileThemeData(
+        iconColor: Colors.black,
+        textColor: Colors.black,
+      ),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: SizedBox(
+            width: 600,
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DateField(controller: _dateController),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      minLines: 4,
+                      maxLines: 6,
+                      controller: _noteController,
+                      decoration: const InputDecoration(
+                        labelText: 'Note',
                       ),
-                      child: const Text(
-                        'Submit',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: textColor,
+                    ),
+                    Row(children: [
+                      Checkbox(
+                        value: _periodStart,
+                        onChanged: (val) {
+                          setState(() {
+                            _periodStart = val ?? false;
+                          });
+                        },
+                      ),
+                      const Text("Period Start"),
+                    ]),
+                    Row(children: [
+                      Checkbox(
+                        value: _intimacy,
+                        onChanged: (val) {
+                          setState(() {
+                            _intimacy = val ?? false;
+                          });
+                        },
+                      ),
+                      const Text("Intimacy"),
+                    ]),
+                    const Text('Flow'),
+                    ToggleButtons(
+                      onPressed: (int index) {
+                        setState(() {
+                          switch (index) {
+                            case 0:
+                              _flow = FlowRate.light;
+                              break;
+                            case 1:
+                              _flow = FlowRate.normal;
+                              break;
+                            case 2:
+                              _flow = FlowRate.heavy;
+                              break;
+                          }
+                        });
+                      },
+                      isSelected: [
+                        _flow == FlowRate.light,
+                        _flow == FlowRate.normal,
+                        _flow == FlowRate.heavy
+                      ],
+                      children: const [
+                        Icon(Icons.dry),
+                        Icon(Icons.water_drop),
+                        Icon(Icons.water_outlined),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          submit();
+                          navigatorKey.currentState!.pop();
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              primaryDarkColor),
+                        ),
+                        child: const Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: textColor,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

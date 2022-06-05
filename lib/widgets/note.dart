@@ -13,6 +13,9 @@ class Note extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
         child: ListTile(
+          onTap: () {
+            navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()});
+          },
           title: Text(title),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.start,
