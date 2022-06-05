@@ -96,7 +96,23 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DateField(controller: _dateController),
+                    DateField(
+                      controller: _dateController,
+                      onChanged: (day) {
+                        var newNote = notes.isNotEmpty
+                            ? notes.where((element) => element.date == day)
+                            : null;
+
+                        setState(() {
+                          if (newNote != null && newNote.isNotEmpty) {
+                            _noteController.text = newNote.first.note;
+                            _periodStart = newNote.first.periodStart;
+                            _intimacy = newNote.first.intimacy;
+                            _flow = newNote.first.flow;
+                          }
+                        });
+                      },
+                    ),
                     const SizedBox(height: 8),
                     TextFormField(
                       minLines: 4,

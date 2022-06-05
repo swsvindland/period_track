@@ -3,8 +3,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
 class DateField extends StatelessWidget {
-  DateField({Key? key, required this.controller}) : super(key: key);
+  DateField({Key? key, required this.controller, required this.onChanged}) : super(key: key);
   final TextEditingController controller;
+  final Function(DateTime?)? onChanged;
 
   final format = DateFormat("yyyy-MM-dd");
 
@@ -24,6 +25,7 @@ class DateField extends StatelessWidget {
               initialDate: currentValue ?? DateTime.now(),
               lastDate: DateTime(2100));
         },
+        onChanged: onChanged,
       ),
     ]);
   }
