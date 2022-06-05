@@ -16,19 +16,22 @@ class Reports extends StatelessWidget {
               iconColor: primaryDarkColor,
               textColor: primaryDarkColor,
             ),
-            child: SizedBox(
-              height: 350,
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Card(
-                  elevation: 1,
-                  child: Padding(
-                    padding: EdgeInsets.all(4),
-                    child: ListTile(
-                      title: Text(
-                        'Period Length',
+            child: Center(
+              child: SizedBox(
+                height: 350,
+                width: 600,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Card(
+                    elevation: 1,
+                    child: Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ListTile(
+                        title: Text(
+                          'Period Length',
+                        ),
+                        subtitle: SizedBox(height: 275, child: CycleLength()),
                       ),
-                      subtitle: SizedBox(height: 275, child: CycleLength()),
                     ),
                   ),
                 ),

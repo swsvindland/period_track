@@ -39,65 +39,69 @@ class _NotificationsState extends State<Notifications> {
     });
 
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Text(AppLocalizations.of(context)!.reminderNotification),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.time,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 24),
-                    ),
-                    OutlinedButton(
-                      onPressed: () async {
-                        TimeOfDay? picked = await showTimePicker(
-                          context: context,
-                          initialTime: const TimeOfDay(hour: 12, minute: 00),
-                          builder: (BuildContext context, Widget? child) {
-                            return MediaQuery(
-                              data: MediaQuery.of(context)
-                                  .copyWith(alwaysUse24HourFormat: true),
-                              child: child ?? const Text('error'),
-                            );
-                          },
-                        );
+      child: SizedBox(
+        width: 600,
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Text(AppLocalizations.of(context)!.reminderNotification),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.time,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          TimeOfDay? picked = await showTimePicker(
+                            context: context,
+                            initialTime: const TimeOfDay(hour: 12, minute: 00),
+                            builder: (BuildContext context, Widget? child) {
+                              return MediaQuery(
+                                data: MediaQuery.of(context)
+                                    .copyWith(alwaysUse24HourFormat: true),
+                                child: child ?? const Text('error'),
+                              );
+                            },
+                          );
 
-                        setState(() {
-                          start = picked!.hour;
-                          set = true;
-                        });
-                      },
-                      child: Text('$start:00'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                update(user, preferences);
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(primaryDarkColor),
+                          setState(() {
+                            start = picked!.hour;
+                            set = true;
+                          });
+                        },
+                        child: Text('$start:00'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              child: Text(
-                AppLocalizations.of(context)!.update,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: textColor,
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  update(user, preferences);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(primaryDarkColor),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.update,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: textColor,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
