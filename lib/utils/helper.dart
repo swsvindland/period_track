@@ -50,6 +50,10 @@ void updateUserData(FirebaseFirestore db, User user) async {
 }
 
 int computeMenstrualLength(List<DateTime> periodStarts) {
+  if (periodStarts.length < 2) {
+    return 28;
+  }
+
   periodStarts.sort((a, b) {
     return a.compareTo(b);
   });
