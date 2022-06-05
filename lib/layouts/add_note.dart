@@ -1,13 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/add_note_form.dart';
+import 'package:provider/provider.dart';
+
+import '../models/note.dart';
+import '../services/database_service.dart';
 
 class AddNotePage extends StatelessWidget {
-  const AddNotePage({Key? key}) : super(key: key);
+  AddNotePage({Key? key}) : super(key: key);
+  var db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
     Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    var user = Provider.of<User?>(context);
+
+    if (user == null) {
+      return const Scaffold(
+        body: CircularProgressIndicator(),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -24,11 +37,20 @@ class AddNotePage extends StatelessWidget {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: AddNoteForm(
-          date: DateTime.parse(
-            arguments["id"].toString(),
+      body: MultiProvider(
+        providers: [
+          StreamProvider<Iterable<NoteModel>>.value(
+            initialData: const [],
+            value: db.streamNotes(user.uid),
+            catchError: (_, err) => [],
+          ),
+        ],
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: AddNoteForm(
+            date: DateTime.parse(
+              arguments["id"].toString(),
+            ),
           ),
         ),
       ),

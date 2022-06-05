@@ -75,11 +75,6 @@ class App extends StatelessWidget {
           drawerTheme: const DrawerThemeData(
             backgroundColor: Color(0xff63465A),
           ),
-          listTileTheme: const ListTileThemeData(
-            selectedColor: Color(0xffE3E3A7),
-            iconColor: Color(0xffFFBB7C),
-            textColor: Color(0xffFFBB7C),
-          ),
           cardTheme: const CardTheme(color: Color(0xffECCDD6)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Color(0xffECCDD6),
@@ -123,7 +118,7 @@ class App extends StatelessWidget {
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
           '/about': (context) => const AboutPage(),
-          '/add-note': (context) => const AddNotePage()
+          '/add-note': (context) => AddNotePage()
         },
       ),
     );

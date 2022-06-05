@@ -26,10 +26,10 @@ class Notes extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (buildContext, index) {
         return Note(
-            title:
-                DateFormat.MMMMd(Localizations.localeOf(context).languageCode)
-                    .format(notes[index].date),
-            body: notes[index].note);
+            title: notes[index].date,
+            body: notes[index].note,
+            flow: notes[index].flow,
+        );
       },
       itemCount: notes.length,
       shrinkWrap: true,

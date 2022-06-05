@@ -11,27 +11,21 @@ class Reports extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: const [
-          ListTileTheme(
-            data: ListTileThemeData(
-              iconColor: primaryDarkColor,
-              textColor: primaryDarkColor,
-            ),
-            child: Center(
-              child: SizedBox(
-                height: 350,
-                width: 600,
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Card(
-                    elevation: 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(4),
-                      child: ListTile(
-                        title: Text(
-                          'Period Length',
-                        ),
-                        subtitle: SizedBox(height: 275, child: CycleLength()),
+          Center(
+            child: SizedBox(
+              height: 350,
+              width: 600,
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Card(
+                  elevation: 1,
+                  child: Padding(
+                    padding: EdgeInsets.all(4),
+                    child: ListTile(
+                      title: Text(
+                        'Period Length',
                       ),
+                      subtitle: SizedBox(height: 275, child: CycleLength()),
                     ),
                   ),
                 ),

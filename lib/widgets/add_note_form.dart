@@ -27,9 +27,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
   @override
   void initState() {
     super.initState();
+    var date = widget.date ?? DateUtils.dateOnly(DateTime.now());
 
     _dateController = TextEditingController();
-    _dateController.text = DateFormat.yMd().format(widget.date ?? DateTime.now());
+    _dateController.text = DateFormat.yMd().format(date);
     _noteController = TextEditingController();
     _periodStart = false;
     _intimacy = false;
@@ -41,25 +42,40 @@ class _AddNoteFormState extends State<AddNoteForm> {
     super.dispose();
 
     // Clean up the controllers when the widget is disposed.
+    _dateController.dispose();
     _noteController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User?>(context);
+    var date = widget.date ?? DateUtils.dateOnly(DateTime.now());
+    var notes = Provider.of<Iterable<NoteModel>>(context).toList();
+    var note = notes.isNotEmpty
+        ? notes.where((element) => element.date == date)
+        : null;
+
+    if (note != null && note.isNotEmpty) {
+      _noteController.text = note.first.note;
+      _periodStart = note.first.periodStart;
+      _intimacy = note.first.intimacy;
+      _flow = note.first.flow;
+    }
 
     submit() async {
       if (user == null) return;
 
+      DateFormat inputFormat = DateFormat.yMd();
       await _db.addNote(
         user.uid,
         NoteModel(
-            uid: user.uid,
-            date: DateUtils.dateOnly(DateTime.parse(_dateController.text)),
-            note: _noteController.text,
-            periodStart: _periodStart,
-            intimacy: _intimacy,
-            flow: _flow),
+          uid: user.uid,
+          date: DateUtils.dateOnly(inputFormat.parse(_dateController.text)),
+          note: _noteController.text,
+          periodStart: _periodStart,
+          intimacy: _intimacy,
+          flow: _flow,
+        ),
       );
     }
 
