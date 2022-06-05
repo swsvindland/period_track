@@ -30,17 +30,18 @@ class DatabaseService {
     }
   }
 
-  Future<void> deleteNote(String id, DateTime date) {
+  Future<void> deleteNote(String id, DateTime date) async {
     try {
-      var docs = _db
+      var querySnapshot = await _db
           .collection('notes')
           .where('uid', isEqualTo: id)
-          .where('date', isEqualTo: date)
+          .where('date', isGreaterThanOrEqualTo: date)
+          .where('date', isLessThan: date.add(const Duration(days: 1)))
           .get();
 
-      return docs.then((value) => value.docs.map((element) {
-        element.reference.delete();
-      }));
+      for(int i = 0; i < querySnapshot.docs.length; ++i) {
+        querySnapshot.docs[i].reference.delete();
+      }
     } catch (err) {
       return Future.error(err);
     }
