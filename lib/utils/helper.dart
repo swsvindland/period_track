@@ -45,7 +45,7 @@ void updateUserData(FirebaseFirestore db, User user) async {
 }
 
 int computeMenstrualLength(int defaultCycleLength, List<DateTime> periodStarts) {
-  if (periodStarts.length < 2) {
+  if (periodStarts.length < 3) {
     return defaultCycleLength;
   }
 

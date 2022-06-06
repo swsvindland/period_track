@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/note.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +11,9 @@ class Notes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
+    notes.sort((a, b) {
+      return b.date.compareTo(a.date);
+    });
 
     if (notes.isEmpty) {
       return const Padding(

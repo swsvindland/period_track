@@ -79,155 +79,149 @@ class _AddNoteFormState extends State<AddNoteForm> {
       );
     }
 
-    return ListTileTheme(
-      data: const ListTileThemeData(
-        iconColor: Colors.black,
-        textColor: Colors.black,
-      ),
-      child: Column(
-        children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: SizedBox(
-                width: 600,
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        DateField(
-                          controller: _dateController,
-                          onChanged: (day) {
-                            var newNote = notes.isNotEmpty
-                                ? notes.where((element) => element.date == day)
-                                : null;
+    return Column(
+      children: [
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: SizedBox(
+              width: 600,
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      DateField(
+                        controller: _dateController,
+                        onChanged: (day) {
+                          var newNote = notes.isNotEmpty
+                              ? notes.where((element) => element.date == day)
+                              : null;
 
-                            setState(() {
-                              if (newNote != null && newNote.isNotEmpty) {
-                                _noteController.text = newNote.first.note;
-                                _periodStart = newNote.first.periodStart;
-                                _intimacy = newNote.first.intimacy;
-                                _flow = newNote.first.flow;
-                              }
-                            });
-                          },
+                          setState(() {
+                            if (newNote != null && newNote.isNotEmpty) {
+                              _noteController.text = newNote.first.note;
+                              _periodStart = newNote.first.periodStart;
+                              _intimacy = newNote.first.intimacy;
+                              _flow = newNote.first.flow;
+                            }
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Row(children: [
+                            Checkbox(
+                              value: _periodStart,
+                              onChanged: (val) {
+                                setState(() {
+                                  _periodStart = val ?? false;
+                                });
+                              },
+                            ),
+                            const Text("Period Start"),
+                          ]),
+                          Row(children: [
+                            Checkbox(
+                              value: _intimacy,
+                              onChanged: (val) {
+                                setState(() {
+                                  _intimacy = val ?? false;
+                                });
+                              },
+                            ),
+                            const Text("Intimacy"),
+                          ]),
+                        ],
+                      ),
+                      const Text('Flow'),
+                      ToggleButtons(
+                        onPressed: (int index) {
+                          setState(() {
+                            switch (index) {
+                              case 0:
+                                _flow = FlowRate.light;
+                                break;
+                              case 1:
+                                _flow = FlowRate.normal;
+                                break;
+                              case 2:
+                                _flow = FlowRate.heavy;
+                                break;
+                            }
+                          });
+                        },
+                        isSelected: [
+                          _flow == FlowRate.light,
+                          _flow == FlowRate.normal,
+                          _flow == FlowRate.heavy
+                        ],
+                        children: [
+                          Image.asset('images/flow-light.png', height: 24),
+                          Image.asset('images/flow-normal.png', height: 24),
+                          Image.asset('images/flow-heavy.png', height: 24),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        minLines: 4,
+                        maxLines: 6,
+                        controller: _noteController,
+                        decoration: const InputDecoration(
+                          labelText: 'Note',
                         ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Row(children: [
-                              Checkbox(
-                                value: _periodStart,
-                                onChanged: (val) {
-                                  setState(() {
-                                    _periodStart = val ?? false;
-                                  });
-                                },
-                              ),
-                              const Text("Period Start"),
-                            ]),
-                            Row(children: [
-                              Checkbox(
-                                value: _intimacy,
-                                onChanged: (val) {
-                                  setState(() {
-                                    _intimacy = val ?? false;
-                                  });
-                                },
-                              ),
-                              const Text("Intimacy"),
-                            ]),
-                          ],
-                        ),
-                        const Text('Flow'),
-                        ToggleButtons(
-                          onPressed: (int index) {
-                            setState(() {
-                              switch (index) {
-                                case 0:
-                                  _flow = FlowRate.light;
-                                  break;
-                                case 1:
-                                  _flow = FlowRate.normal;
-                                  break;
-                                case 2:
-                                  _flow = FlowRate.heavy;
-                                  break;
-                              }
-                            });
-                          },
-                          isSelected: [
-                            _flow == FlowRate.light,
-                            _flow == FlowRate.normal,
-                            _flow == FlowRate.heavy
-                          ],
-                          children: [
-                            Image.asset('images/flow-light.png', height: 24),
-                            Image.asset('images/flow-normal.png', height: 24),
-                            Image.asset('images/flow-heavy.png', height: 24),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                          minLines: 4,
-                          maxLines: 6,
-                          controller: _noteController,
-                          decoration: const InputDecoration(
-                            labelText: 'Note',
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                submit();
-                navigatorKey.currentState!.pop();
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(primaryDarkColor),
-              ),
-              child: const Text(
-                'Submit',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: textColor,
-                ),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: ElevatedButton(
+            onPressed: () {
+              submit();
+              navigatorKey.currentState!.pop();
+            },
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(primaryDarkColor),
+            ),
+            child: const Text(
+              'Submit',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: textColor,
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                await _db.deleteNote(user!.uid, date);
-                navigatorKey.currentState!.pop();
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(primaryDarkColor),
-              ),
-              child: const Text(
-                'Delete Note',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.red,
-                ),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              await _db.deleteNote(user!.uid, date);
+              navigatorKey.currentState!.pop();
+            },
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(primaryDarkColor),
+            ),
+            child: const Text(
+              'Delete Note',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.red,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

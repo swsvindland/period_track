@@ -96,18 +96,35 @@ class App extends StatelessWidget {
           dialogBackgroundColor: const Color(0xffECCDD6),
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
-          )
+          ),
         ),
         darkTheme: ThemeData(
           colorSchemeSeed: const Color(0xffac6d7e),
           brightness: Brightness.dark,
           useMaterial3: true,
-          textTheme: GoogleFonts.josefinSansTextTheme(),
+          textTheme: GoogleFonts.josefinSansTextTheme(ThemeData(brightness: Brightness.dark).textTheme),
           backgroundColor: Colors.black,
           scaffoldBackgroundColor: Colors.black,
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            unselectedItemColor: Color(0xffFFBB7C),
+            selectedItemColor: Color(0xffE3E3A7),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(),
           ),
         ),
         themeMode: ThemeMode.system,
