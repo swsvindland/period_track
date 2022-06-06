@@ -26,14 +26,9 @@ void createDefaultPreferences(FirebaseFirestore db, User user) async {
 
   if (!snapshot.exists) {
     snapshot.reference.set({
-      'unit': 'imperial',
-      'waterGoal': 96,
-      'totalGoal': 128,
-      'drinkSize': 8,
+      'defaultCycleLength': 28,
       'start':
           DateTime.parse('2000-01-01 ${7.toString().padLeft(2, '0')}:00:00'),
-      'end':
-          DateTime.parse('2000-01-01 ${20.toString().padLeft(2, '0')}:00:00'),
     });
   }
 }
@@ -49,9 +44,9 @@ void updateUserData(FirebaseFirestore db, User user) async {
   });
 }
 
-int computeMenstrualLength(List<DateTime> periodStarts) {
+int computeMenstrualLength(int defaultCycleLength, List<DateTime> periodStarts) {
   if (periodStarts.length < 2) {
-    return 28;
+    return defaultCycleLength;
   }
 
   periodStarts.sort((a, b) {

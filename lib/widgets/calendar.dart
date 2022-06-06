@@ -6,6 +6,7 @@ import 'package:period_track/widgets/calendar_header.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../models/preferences.dart';
 import '../utils/constants.dart';
 
 class Calendar extends StatefulWidget {
@@ -182,6 +183,7 @@ class CalendarDay extends StatelessWidget {
     var dateOnly = DateUtils.dateOnly(day);
 
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
+    var preferences = Provider.of<Preferences>(context);
 
     if (day.month != day2.month) {
       return const Center();
@@ -195,7 +197,7 @@ class CalendarDay extends StatelessWidget {
         notes.where((element) => element.periodStart).toList();
 
     int menstrualCycleLength =
-        computeMenstrualLength(periodStartNotes.map((e) => e.date).toList());
+        computeMenstrualLength(preferences.defaultCycleLength, periodStartNotes.map((e) => e.date).toList());
     int periodLength = (menstrualCycleLength / 5).ceil();
     int ovulationLength = (menstrualCycleLength / 2).ceil();
     int fertileLength = (menstrualCycleLength / 3).ceil();

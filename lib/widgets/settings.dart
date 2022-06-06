@@ -6,6 +6,7 @@ import 'package:period_track/widgets/delete_account.dart';
 
 import '../models/preferences.dart';
 import '../utils/constants.dart';
+import 'default_cycle.dart';
 import 'notifications.dart';
 
 class Settings extends StatelessWidget {
@@ -30,6 +31,8 @@ class Settings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const <Widget>[
+                DefaultCycle(),
+                SizedBox(height: 16),
                 Notifications(),
                 SizedBox(height: 16),
                 DeleteAccount()
