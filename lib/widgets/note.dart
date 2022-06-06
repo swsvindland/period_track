@@ -4,7 +4,8 @@ import 'package:period_track/models/note.dart';
 import 'package:period_track/utils/constants.dart';
 
 class Note extends StatelessWidget {
-  const Note({Key? key, required this.title, required this.body, required this.flow})
+  const Note(
+      {Key? key, required this.title, required this.body, required this.flow})
       : super(key: key);
   final DateTime title;
   final String body;
@@ -17,9 +18,12 @@ class Note extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
         child: ListTile(
           onTap: () {
-            navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(title).toIso8601String()});
+            navigatorKey.currentState!.pushNamed('/add-note',
+                arguments: {"id": DateUtils.dateOnly(title).toIso8601String()});
           },
-          title: Text(DateFormat.MMMMd(Localizations.localeOf(context).languageCode).format(title)),
+          title: Text(
+              DateFormat.MMMMd(Localizations.localeOf(context).languageCode)
+                  .format(title)),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +32,8 @@ class Note extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const CircleAvatar(backgroundColor: primaryDarkColor, maxRadius: 4),
+                  const CircleAvatar(
+                      backgroundColor: primaryDarkColor, maxRadius: 4),
                   const SizedBox(width: 8),
                   const CircleAvatar(
                       backgroundColor: Color(0xffECCDD6), maxRadius: 4),
@@ -55,15 +60,15 @@ class FlowIndicator extends StatelessWidget {
     }
 
     if (flow == FlowRate.light) {
-      return const Icon(Icons.dry);
+      return Image.asset('images/flow-light.png', width: 24, height: 24);
     }
 
     if (flow == FlowRate.normal) {
-      return const Icon(Icons.water_drop);
+      return Image.asset('images/flow-normal.png', width: 24, height: 24);
     }
 
     if (flow == FlowRate.heavy) {
-      return const Icon(Icons.water);
+      return Image.asset('images/flow-heavy.png', width: 24, height: 24);
     }
 
     return const SizedBox();

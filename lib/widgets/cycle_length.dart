@@ -37,9 +37,6 @@ class CycleLength extends StatelessWidget {
     return BarChart(
       _createSampleData(cycles, context),
       animate: true,
-      primaryMeasureAxis: const NumericAxisSpec(
-        tickProviderSpec: BasicNumericTickProviderSpec(zeroBound: false),
-      ),
     );
   }
 

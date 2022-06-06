@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               icon: const Icon(Icons.note_add),
-              label: const Text('New Note'))
+              label: const Text('New Entry'))
           : null,
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(

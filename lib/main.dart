@@ -81,7 +81,7 @@ class App extends StatelessWidget {
               foregroundColor: Color(0xff323232)),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 35)),
+              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               foregroundColor:
                   MaterialStateProperty.all<Color>(const Color(0xff63465A)),
               backgroundColor:

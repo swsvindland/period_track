@@ -31,6 +31,7 @@ class Settings extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const <Widget>[
                 Notifications(),
+                SizedBox(height: 16),
                 DeleteAccount()
               ],
             ),

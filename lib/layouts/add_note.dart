@@ -24,7 +24,7 @@ class AddNotePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Note', style: TextStyle(color: textColor)),
+        title: const Text('Entry', style: TextStyle(color: textColor)),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(
