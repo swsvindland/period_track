@@ -208,15 +208,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
               await _db.deleteNote(user!.uid, date);
               navigatorKey.currentState!.pop();
             },
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(primaryDarkColor),
-            ),
-            child: const Text(
+            child: Text(
               'Delete Note',
               style: TextStyle(
                 fontSize: 16.0,
-                color: Colors.red,
+                color: Theme.of(context).errorColor,
               ),
             ),
           ),

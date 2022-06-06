@@ -115,6 +115,8 @@ class App extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Color(0xff7c2946)),
+              foregroundColor: MaterialStateProperty.all<Color>(Color(0xffffd9e2)),
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -127,7 +129,7 @@ class App extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
         ),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.dark,
         initialRoute: '/',
         navigatorKey: navigatorKey,
         routes: {
