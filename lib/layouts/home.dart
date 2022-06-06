@@ -82,18 +82,18 @@ class _HomePageState extends State<HomePage> {
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
           : null,
       body: MultiProvider(
-          providers: [
-            StreamProvider<Preferences>.value(
-                initialData: Preferences.empty(),
-                value: db.streamPreferences(user.uid),
-                catchError: (_, err) => Preferences.empty()),
-            StreamProvider<Iterable<NoteModel>>.value(
-              initialData: const [],
-              value: db.streamNotes(user.uid),
-              catchError: (_, err) => [],
-            ),
-          ],
-          child: _selectedIndex == 0
+        providers: [
+          StreamProvider<Preferences>.value(
+              initialData: Preferences.empty(),
+              value: db.streamPreferences(user.uid),
+              catchError: (_, err) => Preferences.empty()),
+          StreamProvider<Iterable<NoteModel>>.value(
+            initialData: const [],
+            value: db.streamNotes(user.uid),
+            catchError: (_, err) => [],
+          ),
+        ],
+        child: _selectedIndex == 0
             ? const Home()
             : _selectedIndex == 1
                 ? const Notes()
@@ -101,12 +101,16 @@ class _HomePageState extends State<HomePage> {
                     ? const Reports()
                     : const Settings(),
       ),
-      floatingActionButton: _selectedIndex == 1 ? FloatingActionButton.extended(
-          onPressed: () {
-            navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()});
-          },
-          icon: const Icon(Icons.note_add),
-          label: const Text('New Note')) : null,
+      floatingActionButton: _selectedIndex == 1
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                navigatorKey.currentState!.pushNamed('/add-note', arguments: {
+                  "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
+                });
+              },
+              icon: const Icon(Icons.note_add),
+              label: const Text('New Note'))
+          : null,
       bottomNavigationBar: MediaQuery.of(context).size.width < sm
           ? NavigationBottom(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)

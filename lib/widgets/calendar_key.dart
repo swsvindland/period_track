@@ -50,11 +50,25 @@ class CalendarKey extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconDot(color: Color(0xffECCDD6)),
-                  text: 'intimacy'),
+                  icon: CalendarKeyItemIconOutlinedCircle(
+                      color: Color(0xffECCDD6)),
+                  text: 'est. cycle start'),
               CalendarKeyItem(
                   icon: CalendarKeyItemIconDot(color: Color(0xffFFBB7C)),
                   text: 'notes'),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              SizedBox(width: 150),
+              CalendarKeyItem(
+                  icon: CalendarKeyItemIconDot(color: Color(0xffECCDD6)),
+                  text: 'intimacy'),
             ],
           ),
         )
@@ -85,7 +99,10 @@ class CalendarKeyItem extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: GoogleFonts.josefinSans(color: const Color(0xffFFF3E8), fontSize: 12, letterSpacing: 0.12),
+            style: GoogleFonts.josefinSans(
+                color: const Color(0xffFFF3E8),
+                fontSize: 12,
+                letterSpacing: 0.12),
           )
         ],
       ),
