@@ -60,15 +60,15 @@ class FlowIndicator extends StatelessWidget {
     }
 
     if (flow == FlowRate.light) {
-      return Image.asset('images/flow-light.png', width: 24, height: 24);
+      return Image.asset('images/flow-light.png', height: 24);
     }
 
     if (flow == FlowRate.normal) {
-      return Image.asset('images/flow-normal.png', width: 24, height: 24);
+      return Image.asset('images/flow-normal.png', height: 24);
     }
 
     if (flow == FlowRate.heavy) {
-      return Image.asset('images/flow-heavy.png', width: 24, height: 24);
+      return Image.asset('images/flow-heavy.png', height: 24);
     }
 
     return const SizedBox();

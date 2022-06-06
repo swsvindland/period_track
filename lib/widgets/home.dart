@@ -20,9 +20,9 @@ class _HomeState extends State<Home> {
         color: const Color(0xffD6A5B3),
         borderRadius: const BorderRadius.vertical(
             top: Radius.circular(8), bottom: Radius.zero),
-        minHeight: 48,
+        minHeight: 36,
         maxHeight: 200,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(8),
         onPanelOpened: () {
           setState(() {
             drawerOpen = true;
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
           });
         },
         header: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.90,
+            width: MediaQuery.of(context).size.width * 0.95,
             child: Center(
               child: drawerOpen
                   ? const Icon(Icons.keyboard_arrow_down)
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                 const Calendar(),
                 const SizedBox(height: 24),
                 const Divider(color: Color(0xffFFBB7C)),
-                const SizedBox(height: 48),
+                const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
                     navigatorKey.currentState!

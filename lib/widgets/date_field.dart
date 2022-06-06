@@ -7,7 +7,7 @@ class DateField extends StatelessWidget {
   final TextEditingController controller;
   final Function(DateTime?)? onChanged;
 
-  final format = DateFormat("yyyy-MM-dd");
+  final format = DateFormat.yMd();
 
   @override
   Widget build(BuildContext context) {

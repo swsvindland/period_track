@@ -31,7 +31,7 @@ class NoteModel {
       'note': data.note,
       'periodStart': data.periodStart,
       'intimacy': data.intimacy,
-      'flow': data.flow.toString()
+      'flow': data.flow?.index.toString()
     };
   }
 }

@@ -165,9 +165,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
                             _flow == FlowRate.heavy
                           ],
                           children: [
-                            Image.asset('images/flow-light.png', width: 24, height: 24),
-                            Image.asset('images/flow-normal.png', width: 24, height: 24),
-                            Image.asset('images/flow-heavy.png', width: 24, height: 24),
+                            Image.asset('images/flow-light.png', height: 24),
+                            Image.asset('images/flow-normal.png', height: 24),
+                            Image.asset('images/flow-heavy.png', height: 24),
                           ],
                         ),
                         const SizedBox(height: 8),
