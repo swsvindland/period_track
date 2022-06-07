@@ -52,7 +52,7 @@ class CalendarKey extends StatelessWidget {
               CalendarKeyItem(
                   icon: CalendarKeyItemIconOutlinedCircle(
                       color: Color(0xffECCDD6)),
-                  text: 'est. cycle start'),
+                  text: 'est. cycle'),
               CalendarKeyItem(
                   icon: CalendarKeyItemIconDot(color: Color(0xffFFBB7C)),
                   text: 'notes'),

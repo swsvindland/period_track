@@ -188,15 +188,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
               submit();
               navigatorKey.currentState!.pop();
             },
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(primaryDarkColor),
-            ),
             child: const Text(
               'Submit',
               style: TextStyle(
                 fontSize: 16.0,
-                color: textColor,
               ),
             ),
           ),

@@ -64,6 +64,25 @@ int computeMenstrualLength(int defaultCycleLength, List<DateTime> periodStarts) 
   return (sum / periodStarts.length).ceil();
 }
 
+int computePeriodLength(int cycleLength) {
+  return (cycleLength / 5).ceil();
+}
+
+Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, DateTime lastPeriodStartDate) {
+  int periodLength = computePeriodLength(cycleLength);
+  DateTime temp = lastPeriodStartDate;
+  List<DateTime> output = [];
+
+  for (int i = 0; i < 48; ++i) {
+    temp = temp.add(Duration(days: cycleLength));
+    for (int j = 0; j < periodLength; ++j) {
+      output.add(temp.add(Duration(days: j)));
+    }
+  }
+
+  return {for (var e in output) e: e};
+}
+
 class Cycle {
   final DateTime date;
   final int length;

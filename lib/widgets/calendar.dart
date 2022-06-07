@@ -198,7 +198,7 @@ class CalendarDay extends StatelessWidget {
 
     int menstrualCycleLength =
         computeMenstrualLength(preferences.defaultCycleLength, periodStartNotes.map((e) => e.date).toList());
-    int periodLength = (menstrualCycleLength / 5).ceil();
+    int periodLength = computePeriodLength(menstrualCycleLength);
     int ovulationLength = (menstrualCycleLength / 2).ceil();
     int fertileLength = (menstrualCycleLength / 3).ceil();
 
@@ -213,6 +213,7 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> fertilePeriodDateStart = periodStartDate
         .map((e) => e.add(Duration(days: fertileLength)))
         .toList();
+    Map<DateTime, DateTime> predictedPeriodDays = computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate.first);
 
     if (periodStartDate.contains(dateOnly)) {
       return Center(
@@ -308,6 +309,27 @@ class CalendarDay extends StatelessWidget {
           ),
         );
       }
+    }
+
+    if (predictedPeriodDays.containsKey(dateOnly)) {
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xffECCDD6))),
+          child: SizedBox(
+            height: 20,
+            width: 20,
+            child: Center(
+              child: Text(
+                day.day.toString(),
+                style: calendarTextStyle,
+              ),
+            ),
+          ),
+        ),
+      );
     }
 
     return Center(child: Text(day.day.toString(), style: calendarTextStyle));
