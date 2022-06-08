@@ -86,6 +86,30 @@ class NavigationDrawer extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            ListTile(
+              selected: selectedIndex == 4,
+              title: Text(AppLocalizations.of(context)!.about),
+              leading: const Icon(Icons.info),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                onItemTapped(4);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              selected: selectedIndex == 5,
+              title: Text(AppLocalizations.of(context)!.logOut),
+              leading: const Icon(Icons.logout),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                onItemTapped(5);
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),

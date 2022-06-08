@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:period_track/layouts/home_desktop.dart';
+import 'package:period_track/layouts/home_mobile.dart';
+import 'package:period_track/layouts/home_tablet.dart';
 import 'package:period_track/widgets/app_bar_ad.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
@@ -38,84 +41,22 @@ class _HomePageState extends State<HomePage> {
     var user = Provider.of<User?>(context);
 
     if (user == null) {
-      return const CircularProgressIndicator();
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const AppBarAd(),
-        elevation: 0,
-        actions: <Widget>[
-          PopupMenuButton<Popup>(
-            onSelected: (Popup result) {
-              if (result == Popup.about) {
-                navigatorKey.currentState!.pushNamed('/about');
-              }
-              if (result == Popup.logOut) {
-                signOut();
-                navigatorKey.currentState!
-                    .pushNamedAndRemoveUntil('/login', (route) => false);
-              }
-            },
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Popup>>[
-              PopupMenuItem<Popup>(
-                value: Popup.about,
-                child: ListTile(
-                  leading: const Icon(Icons.info),
-                  title: Text(AppLocalizations.of(context)!.about),
-                ),
-              ),
-              PopupMenuItem<Popup>(
-                value: Popup.logOut,
-                child: ListTile(
-                  leading: const Icon(Icons.exit_to_app),
-                  title: Text(AppLocalizations.of(context)!.logOut),
-                ),
-              ),
-            ].toList(),
-          ),
-        ],
-      ),
-      drawer: MediaQuery.of(context).size.width > sm
-          ? NavigationDrawer(
-              selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
-          : null,
-      body: MultiProvider(
-        providers: [
-          StreamProvider<Preferences>.value(
-              initialData: Preferences.empty(),
-              value: db.streamPreferences(user.uid),
-              catchError: (_, err) => Preferences.empty()),
-          StreamProvider<Iterable<NoteModel>>.value(
-            initialData: const [],
-            value: db.streamNotes(user.uid),
-            catchError: (_, err) => [],
-          ),
-        ],
-        child: _selectedIndex == 0
-            ? const Home()
-            : _selectedIndex == 1
-                ? const Notes()
-                : _selectedIndex == 2
-                    ? const Reports()
-                    : const Settings(),
-      ),
-      floatingActionButton: _selectedIndex == 1
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                navigatorKey.currentState!.pushNamed('/add-note', arguments: {
-                  "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
-                });
-              },
-              icon: const Icon(Icons.note_add),
-              label: const Text('New Entry'))
-          : null,
-      bottomNavigationBar: MediaQuery.of(context).size.width < sm
-          ? NavigationBottom(
-              selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
-          : null,
-    );
+    if (MediaQuery.of(context).size.width < sm) {
+      return const HomePageMobile();
+    }
+
+    if (MediaQuery.of(context).size.width < md) {
+      return const HomePageTablet();
+    }
+
+    return const HomePageDesktop();
   }
 }
 
