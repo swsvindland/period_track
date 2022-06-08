@@ -48,8 +48,9 @@ class _HomeDesktopState extends State<HomeDesktop> {
               ),
             ),
             const SizedBox(height: 24),
-            const Card(
-              child: Padding(
+            Card(
+              color: Theme.of(context).brightness == Brightness.light ? const Color(0xffD6A5B3) : Theme.of(context).cardColor,
+              child: const Padding(
                 padding: EdgeInsets.all(12),
                 child: SizedBox(
                   width: 600,
