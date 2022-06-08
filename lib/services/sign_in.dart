@@ -4,11 +4,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
+import "package:os_detect/os_detect.dart" as platform;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = GoogleSignIn();
 
 Future<User?> signInWithGoogle() async {
+  if (platform.isBrowser) {
+    return signInWithGoogleWeb();
+  }
+
+  return signInWithGoogleNative();
+}
+
+Future<User?> signInWithGoogleNative() async {
   final GoogleSignInAccount googleSignInAccount =
       (await _googleSignIn.signIn())!;
   final GoogleSignInAuthentication gsa =
@@ -20,6 +29,25 @@ Future<User?> signInWithGoogle() async {
   );
   final UserCredential authResult =
       await _auth.signInWithCredential(credential);
+  final User? firebaseUser = authResult.user;
+
+  final User? currentUser = _auth.currentUser;
+  assert(firebaseUser?.uid == currentUser?.uid);
+  return firebaseUser;
+}
+
+Future<User?> signInWithGoogleWeb() async {
+  // Create a new provider
+  GoogleAuthProvider googleProvider = GoogleAuthProvider();
+
+  googleProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  googleProvider.setCustomParameters({
+    'login_hint': 'user@example.com'
+  });
+
+  // Once signed in, return the UserCredential
+  final UserCredential authResult = await FirebaseAuth.instance.signInWithPopup(googleProvider);
+
   final User? firebaseUser = authResult.user;
 
   final User? currentUser = _auth.currentUser;
