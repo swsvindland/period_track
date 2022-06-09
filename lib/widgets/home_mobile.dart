@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:period_track/widgets/calendar_key.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../utils/constants.dart';
 import 'calendar.dart';
 
 class HomeMobile extends StatefulWidget {
@@ -22,7 +21,7 @@ class _HomeMobileState extends State<HomeMobile> {
           top: Radius.circular(8), bottom: Radius.zero),
       minHeight: 56,
       maxHeight: 200,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       onPanelOpened: () {
         setState(() {
           drawerOpen = true;
@@ -34,7 +33,7 @@ class _HomeMobileState extends State<HomeMobile> {
         });
       },
       header: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.95,
+          width: MediaQuery.of(context).size.width,
           child: Center(
             child: drawerOpen
                 ? const Icon(Icons.keyboard_arrow_down)
