@@ -175,7 +175,7 @@ class App extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
         ),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         initialRoute: '/',
         navigatorKey: navigatorKey,
         routes: {
