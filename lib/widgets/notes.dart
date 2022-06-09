@@ -19,24 +19,27 @@ class Notes extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.all(8),
         child: Text(
-            'Looks like you have not recorded a period yet. Add a new note to get started.',
-            style: TextStyle(color: textColor),
+          'Looks like you have not recorded a period yet. Add a new note to get started.',
+          style: TextStyle(color: textColor),
         ),
       );
     }
 
-    return ListView.builder(
-      itemBuilder: (buildContext, index) {
-        return Note(
+    return SizedBox(
+      width: 600,
+      child: ListView.builder(
+        itemBuilder: (buildContext, index) {
+          return Note(
             title: notes[index].date,
             body: notes[index].note,
             flow: notes[index].flow,
-        );
-      },
-      itemCount: notes.length,
-      shrinkWrap: true,
-      padding: const EdgeInsets.all(4),
-      scrollDirection: Axis.vertical,
+          );
+        },
+        itemCount: notes.length,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(4),
+        scrollDirection: Axis.vertical,
+      ),
     );
   }
 }

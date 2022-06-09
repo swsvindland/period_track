@@ -59,13 +59,14 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           ),
         ],
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SideNavigation(
                 selectedIndex: _selectedIndex, onItemTapped: _onItemTapped),
-            const VerticalDivider(thickness: 1, width: 1),
-            // This is the main content.
             Expanded(
-              child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
                 child: _selectedIndex == 0
                     ? const Home()
                     : _selectedIndex == 1
@@ -76,7 +77,7 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
                                 ? const Settings()
                                 : const About(),
               ),
-            )
+            ),
           ],
         ),
       ),

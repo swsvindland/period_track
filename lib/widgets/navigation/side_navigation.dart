@@ -19,11 +19,11 @@ class SideNavigation extends StatelessWidget {
       onDestinationSelected: onItemTapped,
       extended: true,
       leading: SizedBox(
-        height: 100,
+        height: 115,
         child: DrawerHeader(
           child: Row(
             children: [
-              Image.asset('images/logo.png', width: 48, height: 48),
+              Image.asset('images/logo.png', height: 56),
               Text(AppLocalizations.of(context)!.periodTrack,
                   style: const TextStyle(fontSize: 24, color: textColor)),
             ],
