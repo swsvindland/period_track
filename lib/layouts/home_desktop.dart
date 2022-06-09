@@ -69,16 +69,15 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           ],
         ),
       ),
-      floatingActionButton: _selectedIndex == 1
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                navigatorKey.currentState!.pushNamed('/add-note', arguments: {
-                  "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
-                });
-              },
-              icon: const Icon(Icons.note_add),
-              label: const Text('New Entry'))
-          : null,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          navigatorKey.currentState!.pushNamed('/add-note', arguments: {
+            "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
+          });
+        },
+        icon: const Icon(Icons.note_add),
+        label: const Text('New Entry'),
+      ),
     );
   }
 }

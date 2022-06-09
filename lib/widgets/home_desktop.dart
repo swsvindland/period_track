@@ -26,28 +26,6 @@ class _HomeDesktopState extends State<HomeDesktop> {
             const SizedBox(height: 24),
             const Divider(color: Color(0xffFFBB7C)),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                navigatorKey.currentState!.pushNamed('/add-note', arguments: {
-                  "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
-                });
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Icon(Icons.note_add),
-                  SizedBox(width: 8),
-                  Text(
-                    'New Entry',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
             Card(
               color: Theme.of(context).brightness == Brightness.light ? const Color(0xffD6A5B3) : Theme.of(context).cardColor,
               child: const Padding(

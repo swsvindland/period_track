@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 import '../models/preferences.dart';
+import '../widgets/about.dart';
 import '../widgets/home.dart';
 import '../widgets/notes.dart';
 import '../widgets/reports.dart';
@@ -41,72 +42,45 @@ class _HomePageTabletState extends State<HomePageTablet> {
     }
 
     return Scaffold(
-        appBar: AppBar(
-          title: const AppBarAd(),
-          elevation: 0,
-          actions: <Widget>[
-            PopupMenuButton<Popup>(
-              onSelected: (Popup result) {
-                if (result == Popup.about) {
-                  navigatorKey.currentState!.pushNamed('/about');
-                }
-                if (result == Popup.logOut) {
-                  signOut();
-                  navigatorKey.currentState!
-                      .pushNamedAndRemoveUntil('/login', (route) => false);
-                }
-              },
-              icon: const Icon(Icons.more_vert),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<Popup>>[
-                PopupMenuItem<Popup>(
-                  value: Popup.about,
-                  child: ListTile(
-                    leading: const Icon(Icons.info),
-                    title: Text(AppLocalizations.of(context)!.about),
-                  ),
-                ),
-                PopupMenuItem<Popup>(
-                  value: Popup.logOut,
-                  child: ListTile(
-                    leading: const Icon(Icons.exit_to_app),
-                    title: Text(AppLocalizations.of(context)!.logOut),
-                  ),
-                ),
-              ].toList(),
-            ),
-          ],
-        ),
-        drawer: NavigationDrawer(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped,),
-        body: MultiProvider(
-          providers: [
-            StreamProvider<Preferences>.value(
-                initialData: Preferences.empty(),
-                value: db.streamPreferences(user.uid),
-                catchError: (_, err) => Preferences.empty()),
-            StreamProvider<Iterable<NoteModel>>.value(
-              initialData: const [],
-              value: db.streamNotes(user.uid),
-              catchError: (_, err) => [],
-            ),
-          ],
-          child: _selectedIndex == 0
-              ? const Home()
-              : _selectedIndex == 1
-              ? const Notes()
-              : _selectedIndex == 2
-              ? const Reports()
-              : const Settings(),
-        ),
-        floatingActionButton: _selectedIndex == 1
-            ? FloatingActionButton.extended(
-            onPressed: () {
-              navigatorKey.currentState!.pushNamed('/add-note', arguments: {
-                "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
-              });
-            },
-            icon: const Icon(Icons.note_add),
-            label: const Text('New Entry'))
-            : null,
+      appBar: AppBar(
+        title: const AppBarAd(),
+        elevation: 0,
+      ),
+      drawer: NavigationDrawer(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
+      body: MultiProvider(
+        providers: [
+          StreamProvider<Preferences>.value(
+              initialData: Preferences.empty(),
+              value: db.streamPreferences(user.uid),
+              catchError: (_, err) => Preferences.empty()),
+          StreamProvider<Iterable<NoteModel>>.value(
+            initialData: const [],
+            value: db.streamNotes(user.uid),
+            catchError: (_, err) => [],
+          ),
+        ],
+        child: _selectedIndex == 0
+            ? const Home()
+            : _selectedIndex == 1
+                ? const Notes()
+                : _selectedIndex == 2
+                    ? const Reports()
+                    : _selectedIndex == 3
+                        ? const Settings()
+                        : const About(),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          navigatorKey.currentState!.pushNamed('/add-note', arguments: {
+            "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
+          });
+        },
+        icon: const Icon(Icons.note_add),
+        label: const Text('New Entry'),
+      ),
     );
   }
 }
