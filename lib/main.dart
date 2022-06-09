@@ -75,6 +75,14 @@ class App extends StatelessWidget {
           drawerTheme: const DrawerThemeData(
             backgroundColor: Color(0xff63465A),
           ),
+          navigationRailTheme: const NavigationRailThemeData(
+            backgroundColor: Color(0xff63465A),
+            selectedLabelTextStyle: TextStyle(color: Color(0xffE3E3A7)),
+            selectedIconTheme: IconThemeData(color: Color(0xffE3E3A7)),
+            unselectedLabelTextStyle: TextStyle(color: Color(0xffFFBB7C)),
+            unselectedIconTheme: IconThemeData(color: Color(0xffFFBB7C)),
+            useIndicator: false,
+          ),
           cardTheme: const CardTheme(color: Color(0xffECCDD6)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Color(0xffECCDD6),

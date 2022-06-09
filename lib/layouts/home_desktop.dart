@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:period_track/widgets/app_bar_ad.dart';
-import 'package:period_track/widgets/navigation_drawer.dart';
+import 'package:period_track/widgets/navigation/side_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
 
 import '../models/note.dart';
 import '../models/preferences.dart';
+import '../services/sign_in.dart';
+import '../widgets/about.dart';
 import '../widgets/home.dart';
 import '../widgets/notes.dart';
 import '../widgets/reports.dart';
@@ -24,6 +25,12 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
+    if (index == 5) {
+      signOut();
+      navigatorKey.currentState!
+          .pushNamedAndRemoveUntil('/login', (route) => false);
+    }
+
     setState(() {
       _selectedIndex = index;
     });
@@ -52,9 +59,11 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           ),
         ],
         child: Row(
-          children: [
-            NavigationDrawer(
+          children: <Widget>[
+            SideNavigation(
                 selectedIndex: _selectedIndex, onItemTapped: _onItemTapped),
+            const VerticalDivider(thickness: 1, width: 1),
+            // This is the main content.
             Expanded(
               child: Center(
                 child: _selectedIndex == 0
@@ -63,9 +72,11 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
                         ? const Notes()
                         : _selectedIndex == 2
                             ? const Reports()
-                            : const Settings(),
+                            : _selectedIndex == 3
+                                ? const Settings()
+                                : const About(),
               ),
-            ),
+            )
           ],
         ),
       ),

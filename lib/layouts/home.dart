@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/services/sign_in.dart';
 import 'package:period_track/utils/constants.dart';
-import 'package:period_track/widgets/navigation_bottom.dart';
-import 'package:period_track/widgets/navigation_drawer.dart';
+import 'package:period_track/widgets/navigation/navigation_bottom.dart';
+import 'package:period_track/widgets/navigation/navigation_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
