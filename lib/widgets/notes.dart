@@ -25,20 +25,23 @@ class Notes extends StatelessWidget {
       );
     }
 
-    return SizedBox(
-      width: 600,
-      child: ListView.builder(
-        itemBuilder: (buildContext, index) {
-          return Note(
-            title: notes[index].date,
-            body: notes[index].note,
-            flow: notes[index].flow,
-          );
-        },
-        itemCount: notes.length,
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(4),
-        scrollDirection: Axis.vertical,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SizedBox(
+        width: 600,
+        child: ListView.builder(
+          itemBuilder: (buildContext, index) {
+            return Note(
+              title: notes[index].date,
+              body: notes[index].note,
+              flow: notes[index].flow,
+            );
+          },
+          itemCount: notes.length,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(4),
+          scrollDirection: Axis.vertical,
+        ),
       ),
     );
   }

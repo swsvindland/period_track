@@ -85,19 +85,32 @@ class App extends StatelessWidget {
           ),
           cardTheme: const CardTheme(color: Color(0xffECCDD6)),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: Color(0xffECCDD6),
-              foregroundColor: Color(0xff323232)),
+              backgroundColor: callToAction, foregroundColor: primaryDarkColor),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               foregroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xff63465A)),
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xffECCDD6)),
+                  MaterialStateProperty.all<Color>(primaryDarkColor),
+              backgroundColor: MaterialStateProperty.all<Color>(callToAction),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
+              ),
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+              foregroundColor:
+                  MaterialStateProperty.all<Color>(primaryDarkColor),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              side: MaterialStateProperty.all(
+                const BorderSide(color: callToAction),
               ),
             ),
           ),
@@ -110,7 +123,8 @@ class App extends StatelessWidget {
           colorSchemeSeed: const Color(0xffac6d7e),
           brightness: Brightness.dark,
           useMaterial3: true,
-          textTheme: GoogleFonts.josefinSansTextTheme(ThemeData(brightness: Brightness.dark).textTheme),
+          textTheme: GoogleFonts.josefinSansTextTheme(
+              ThemeData(brightness: Brightness.dark).textTheme),
           backgroundColor: Colors.black,
           scaffoldBackgroundColor: Colors.black,
           appBarTheme: const AppBarTheme(
@@ -121,10 +135,19 @@ class App extends StatelessWidget {
             unselectedItemColor: Color(0xffFFBB7C),
             selectedItemColor: Color(0xffE3E3A7),
           ),
+          navigationRailTheme: const NavigationRailThemeData(
+            selectedLabelTextStyle: TextStyle(color: Color(0xffE3E3A7)),
+            selectedIconTheme: IconThemeData(color: Color(0xffE3E3A7)),
+            unselectedLabelTextStyle: TextStyle(color: Color(0xffFFBB7C)),
+            unselectedIconTheme: IconThemeData(color: Color(0xffFFBB7C)),
+            useIndicator: false,
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Color(0xff7c2946)),
-              foregroundColor: MaterialStateProperty.all<Color>(Color(0xffffd9e2)),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(const Color(0xff7c2946)),
+              foregroundColor:
+                  MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -133,11 +156,26 @@ class App extends StatelessWidget {
               ),
             ),
           ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+              foregroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              side: MaterialStateProperty.all(
+                const BorderSide(color: Color(0xff7c2946)),
+              ),
+            ),
+          ),
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
           ),
         ),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.dark,
         initialRoute: '/',
         navigatorKey: navigatorKey,
         routes: {

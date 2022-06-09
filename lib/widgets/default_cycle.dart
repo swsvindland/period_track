@@ -71,20 +71,18 @@ class _DefaultCycleState extends State<DefaultCycle> {
                   keyboardType: const TextInputType.numberWithOptions(),
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: () {
                     update(user, preferences);
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(primaryDarkColor),
+                    side: MaterialStateProperty.all(
+                      const BorderSide(color: primaryDarkColor),
+                    ),
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.update,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      color: textColor,
-                    ),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

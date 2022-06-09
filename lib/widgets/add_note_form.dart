@@ -198,7 +198,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ),
         const SizedBox(height: 16),
         Center(
-          child: ElevatedButton(
+          child: OutlinedButton(
             onPressed: () async {
               await _db.deleteNote(user!.uid, date);
               navigatorKey.currentState!.pop();
