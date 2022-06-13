@@ -2,7 +2,6 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
-import 'package:period_track/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/helper.dart';

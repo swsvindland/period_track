@@ -21,21 +21,12 @@ class FABBottomAppBar extends StatefulWidget {
 }
 
 class FABBottomAppBarState extends State<FABBottomAppBar> {
-  int _selectedIndex = 0;
-
-  _updateIndex(int index) {
-    widget.onItemTapped(index);
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
       color: primaryDarkColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +68,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     int index,
     ValueChanged<int> onPressed,
   ) {
-    Color color = _selectedIndex == index
+    Color color = widget.selectedIndex == index
         ? const Color(0xffE3E3A7)
         : const Color(0xffFFBB7C);
     return SizedBox(

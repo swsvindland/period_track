@@ -9,7 +9,7 @@ import '../services/database_service.dart';
 
 class AddNotePage extends StatelessWidget {
   AddNotePage({Key? key}) : super(key: key);
-  var db = DatabaseService();
+  final db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {

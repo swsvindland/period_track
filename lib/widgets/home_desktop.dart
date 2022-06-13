@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:period_track/widgets/calendar_key.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../utils/constants.dart';
 import 'calendar.dart';
 
 class HomeDesktop extends StatefulWidget {

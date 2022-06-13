@@ -59,6 +59,11 @@ class _NotificationsState extends State<Notifications> {
                         style: const TextStyle(fontSize: 24),
                       ),
                       OutlinedButton(
+                        style: ButtonStyle(
+                          side: MaterialStateProperty.all(
+                            const BorderSide(color: primaryDarkColor),
+                          ),
+                        ),
                         onPressed: () async {
                           TimeOfDay? picked = await showTimePicker(
                             context: context,
@@ -71,7 +76,6 @@ class _NotificationsState extends State<Notifications> {
                               );
                             },
                           );
-
                           setState(() {
                             start = picked!.hour;
                             set = true;
