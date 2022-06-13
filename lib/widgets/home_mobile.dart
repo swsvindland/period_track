@@ -19,7 +19,7 @@ class _HomeMobileState extends State<HomeMobile> {
       color: Theme.of(context).brightness == Brightness.light ? const Color(0xffD6A5B3) : Theme.of(context).cardColor,
       borderRadius: const BorderRadius.vertical(
           top: Radius.circular(8), bottom: Radius.zero),
-      minHeight: 56,
+      minHeight: 36,
       maxHeight: 200,
       padding: const EdgeInsets.symmetric(vertical: 8),
       onPanelOpened: () {

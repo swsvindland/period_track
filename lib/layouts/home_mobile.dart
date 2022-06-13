@@ -96,16 +96,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
                       ? const Reports()
                       : const Settings(),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            navigatorKey.currentState!.pushNamed('/add-note', arguments: {
-              "id": DateUtils.dateOnly(DateTime.now()).toIso8601String()
-            });
-          },
-          child: const Icon(Icons.note_add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: NavigationBottom(
+        bottomNavigationBar: FABBottomAppBar(
             selectedIndex: _selectedIndex, onItemTapped: _onItemTapped));
   }
 }
