@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/widgets/calendar_key.dart';
 import 'calendar.dart';
 
@@ -22,10 +23,10 @@ class _HomeDesktopState extends State<HomeDesktop> {
             const SizedBox(height: 24),
             const Calendar(),
             const SizedBox(height: 24),
-            const Divider(color: Color(0xffFFBB7C)),
+            const Divider(color: secondary),
             const SizedBox(height: 24),
             Card(
-              color: Theme.of(context).brightness == Brightness.light ? const Color(0xffD6A5B3) : Theme.of(context).cardColor,
+              color: Theme.of(context).brightness == Brightness.light ? primary : Theme.of(context).cardColor,
               child: const Padding(
                 padding: EdgeInsets.all(12),
                 child: SizedBox(

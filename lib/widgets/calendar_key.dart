@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:period_track/utils/constants.dart';
+import 'package:period_track/utils/colors.dart';
 
 class CalendarKey extends StatelessWidget {
   const CalendarKey({Key? key}) : super(key: key);
@@ -18,10 +18,10 @@ class CalendarKey extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconCircle(color: primaryDarkColor),
+                  icon: CalendarKeyItemIconCircle(color: primaryDark),
                   text: 'cycle begins'),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconCircle(color: Color(0xff989859)),
+                  icon: CalendarKeyItemIconCircle(color: ternary),
                   text: 'est. ovulation'),
             ],
           ),
@@ -34,11 +34,11 @@ class CalendarKey extends StatelessWidget {
             children: const [
               CalendarKeyItem(
                   icon: CalendarKeyItemIconOutlinedCircle(
-                      color: Color(0xffFFBB7C)),
+                      color: secondary),
                   text: 'period'),
               CalendarKeyItem(
                   icon: CalendarKeyItemIconOutlinedCircle(
-                      color: Color(0xffE3E3A7)),
+                      color: secondaryLight),
                   text: 'est. fertile days'),
             ],
           ),
@@ -51,10 +51,10 @@ class CalendarKey extends StatelessWidget {
             children: const [
               CalendarKeyItem(
                   icon: CalendarKeyItemIconOutlinedCircle(
-                      color: Color(0xffECCDD6)),
+                      color: primaryLight),
                   text: 'est. cycle'),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconDot(color: Color(0xffFFBB7C)),
+                  icon: CalendarKeyItemIconDot(color: secondary),
                   text: 'notes'),
             ],
           ),
@@ -67,7 +67,7 @@ class CalendarKey extends StatelessWidget {
             children: const [
               SizedBox(width: 150),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconDot(color: Color(0xffECCDD6)),
+                  icon: CalendarKeyItemIconDot(color: primaryLight),
                   text: 'intimacy'),
             ],
           ),
@@ -100,7 +100,7 @@ class CalendarKeyItem extends StatelessWidget {
           Text(
             text,
             style: GoogleFonts.josefinSans(
-                color: const Color(0xffFFF3E8),
+                color: secondaryLight,
                 fontSize: 12,
                 letterSpacing: 0.12),
           )

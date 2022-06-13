@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/layouts/layouts.dart';
 import 'package:period_track/utils/constants.dart';
@@ -57,40 +58,40 @@ class App extends StatelessWidget {
           // Locale('hi', ''), // Hindi
         ],
         theme: ThemeData(
-          colorSchemeSeed: const Color(0xffac6d7e),
+          colorSchemeSeed: primary,
           brightness: Brightness.light,
           useMaterial3: true,
           textTheme: GoogleFonts.josefinSansTextTheme(),
-          backgroundColor: const Color(0xffac6d7e),
-          scaffoldBackgroundColor: const Color(0xffac6d7e),
+          backgroundColor: primary,
+          scaffoldBackgroundColor: primary,
           appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xffac6d7e),
-            foregroundColor: Color(0xffFFBB7C),
+            backgroundColor: primary,
+            foregroundColor: secondary,
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: Color(0xff63465A),
-            unselectedItemColor: Color(0xffFFBB7C),
-            selectedItemColor: Color(0xffE3E3A7),
+            backgroundColor: primaryDark,
+            unselectedItemColor: secondary,
+            selectedItemColor: secondaryLight,
           ),
           drawerTheme: const DrawerThemeData(
-            backgroundColor: Color(0xff63465A),
+            backgroundColor: primaryDark,
           ),
           navigationRailTheme: const NavigationRailThemeData(
-            backgroundColor: Color(0xff63465A),
-            selectedLabelTextStyle: TextStyle(color: Color(0xffE3E3A7)),
-            selectedIconTheme: IconThemeData(color: Color(0xffE3E3A7)),
-            unselectedLabelTextStyle: TextStyle(color: Color(0xffFFBB7C)),
-            unselectedIconTheme: IconThemeData(color: Color(0xffFFBB7C)),
+            backgroundColor: primaryDark,
+            selectedLabelTextStyle: TextStyle(color: secondaryLight),
+            selectedIconTheme: IconThemeData(color: secondaryLight),
+            unselectedLabelTextStyle: TextStyle(color: secondary),
+            unselectedIconTheme: IconThemeData(color: secondary),
             useIndicator: false,
           ),
-          cardTheme: const CardTheme(color: Color(0xffECCDD6)),
+          cardTheme: const CardTheme(color: primaryLight),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: callToAction, foregroundColor: primaryDarkColor),
+              backgroundColor: callToAction, foregroundColor: primaryDark),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               foregroundColor:
-                  MaterialStateProperty.all<Color>(primaryDarkColor),
+                  MaterialStateProperty.all<Color>(primaryDark),
               backgroundColor: MaterialStateProperty.all<Color>(callToAction),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -103,7 +104,7 @@ class App extends StatelessWidget {
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
               foregroundColor:
-                  MaterialStateProperty.all<Color>(primaryDarkColor),
+                  MaterialStateProperty.all<Color>(primaryDark),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
@@ -114,13 +115,13 @@ class App extends StatelessWidget {
               ),
             ),
           ),
-          dialogBackgroundColor: const Color(0xffECCDD6),
+          dialogBackgroundColor: primaryLight,
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
           ),
         ),
         darkTheme: ThemeData(
-          colorSchemeSeed: const Color(0xffac6d7e),
+          colorSchemeSeed: primary,
           brightness: Brightness.dark,
           useMaterial3: true,
           textTheme: GoogleFonts.josefinSansTextTheme(
@@ -132,14 +133,14 @@ class App extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            unselectedItemColor: Color(0xffFFBB7C),
-            selectedItemColor: Color(0xffE3E3A7),
+            unselectedItemColor: secondary,
+            selectedItemColor: secondaryLight,
           ),
           navigationRailTheme: const NavigationRailThemeData(
-            selectedLabelTextStyle: TextStyle(color: Color(0xffE3E3A7)),
-            selectedIconTheme: IconThemeData(color: Color(0xffE3E3A7)),
-            unselectedLabelTextStyle: TextStyle(color: Color(0xffFFBB7C)),
-            unselectedIconTheme: IconThemeData(color: Color(0xffFFBB7C)),
+            selectedLabelTextStyle: TextStyle(color: secondaryLight),
+            selectedIconTheme: IconThemeData(color: secondaryLight),
+            unselectedLabelTextStyle: TextStyle(color: secondary),
+            unselectedIconTheme: IconThemeData(color: secondary),
             useIndicator: false,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(

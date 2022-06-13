@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/add_note_form.dart';
 import 'package:provider/provider.dart';
@@ -24,12 +25,12 @@ class AddNotePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Entry', style: TextStyle(color: textColor)),
+        title: const Text('Entry', style: TextStyle(color: text)),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: textColor,
+            color: text,
           ),
           color: Colors.white,
           onPressed: () {

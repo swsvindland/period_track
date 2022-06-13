@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:period_track/utils/colors.dart';
 
 import '../../utils/constants.dart';
 
@@ -24,7 +25,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: primaryDarkColor,
+      color: primaryDark,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         child: Row(
@@ -69,8 +70,8 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     ValueChanged<int> onPressed,
   ) {
     Color color = widget.selectedIndex == index
-        ? const Color(0xffE3E3A7)
-        : const Color(0xffFFBB7C);
+        ? secondaryLight
+        : secondary;
     return SizedBox(
       height: 70,
       width: 70,

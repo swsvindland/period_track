@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/utils/constants.dart';
 
 import '../../services/sign_in.dart';
@@ -15,9 +16,9 @@ class NavigationDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTileTheme(
       data: const ListTileThemeData(
-        selectedColor: Color(0xffE3E3A7),
-        iconColor: Color(0xffFFBB7C),
-        textColor: Color(0xffFFBB7C),
+        selectedColor: secondaryLight,
+        iconColor: secondary,
+        textColor: secondary,
       ),
       child: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -35,7 +36,7 @@ class NavigationDrawer extends StatelessWidget {
                   children: [
                     Image.asset('images/logo.png', width: 48, height: 48),
                     Text(AppLocalizations.of(context)!.periodTrack,
-                        style: const TextStyle(fontSize: 24, color: textColor)),
+                        style: const TextStyle(fontSize: 24, color: text)),
                   ],
                 ),
               ),

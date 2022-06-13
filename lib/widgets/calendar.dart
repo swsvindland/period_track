@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:period_track/models/note.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/utils/helper.dart';
 import 'package:period_track/widgets/calendar_header.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,7 @@ class _CalendarState extends State<Calendar> {
                 _focusedDay.value.year.toString(),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.josefinSans(
-                  color: const Color(0xffFFBB7C),
+                  color: textSecondary,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.12,
                 ),
@@ -68,9 +69,9 @@ class _CalendarState extends State<Calendar> {
           notes.isEmpty
               ? const Text(
                   'Looks like you have not recorded a period yet. Add a new note or click on a day to get started.',
-                  style: TextStyle(color: textColor))
+                  style: TextStyle(color: text))
               : const SizedBox(),
-          const Divider(color: Color(0xffFFBB7C)),
+          const Divider(color: secondary),
           const SizedBox(height: 8),
           ValueListenableBuilder<DateTime>(
             valueListenable: _focusedDay,
@@ -145,8 +146,8 @@ class _CalendarState extends State<Calendar> {
                           vertical: 0, horizontal: 2),
                       child: CircleAvatar(
                           backgroundColor: element == const Event('Note')
-                              ? const Color(0xffFFBB7C)
-                              : const Color(0xffECCDD6),
+                              ? secondary
+                              : primaryLight,
                           maxRadius: 4),
                     ),
                   );
@@ -172,7 +173,7 @@ class CalendarDay extends StatelessWidget {
   final DateTime day2;
 
   final calendarTextStyle = GoogleFonts.josefinSans(
-    color: textColor,
+    color: text,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.05,
@@ -221,9 +222,9 @@ class CalendarDay extends StatelessWidget {
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xffFFBB7C))),
+              border: Border.all(color: secondary)),
           child: CircleAvatar(
-            backgroundColor: primaryDarkColor,
+            backgroundColor: primaryDark,
             child: SizedBox(
               height: 20,
               width: 20,
@@ -245,9 +246,9 @@ class CalendarDay extends StatelessWidget {
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xffE3E3A7))),
+              border: Border.all(color: ternaryLight)),
           child: CircleAvatar(
-            backgroundColor: const Color(0xff989859),
+            backgroundColor: ternary,
             child: SizedBox(
               height: 20,
               width: 20,
@@ -271,7 +272,7 @@ class CalendarDay extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xffFFBB7C))),
+                border: Border.all(color: secondary)),
             child: SizedBox(
               height: 20,
               width: 20,
@@ -295,7 +296,7 @@ class CalendarDay extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xffE3E3A7))),
+                border: Border.all(color: ternaryLight)),
             child: SizedBox(
               height: 20,
               width: 20,
@@ -317,7 +318,7 @@ class CalendarDay extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xffECCDD6))),
+              border: Border.all(color: primaryLight)),
           child: SizedBox(
             height: 20,
             width: 20,

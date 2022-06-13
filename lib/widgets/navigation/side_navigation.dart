@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../utils/constants.dart';
+import 'package:period_track/utils/colors.dart';
 
 
 class SideNavigation extends StatelessWidget {
@@ -25,7 +24,7 @@ class SideNavigation extends StatelessWidget {
             children: [
               Image.asset('images/logo.png', height: 56),
               Text(AppLocalizations.of(context)!.periodTrack,
-                  style: const TextStyle(fontSize: 24, color: textColor)),
+                  style: const TextStyle(fontSize: 24, color: text)),
             ],
           ),
         ),

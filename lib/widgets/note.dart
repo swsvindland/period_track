@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/utils/constants.dart';
 
 class Note extends StatelessWidget {
@@ -33,10 +34,10 @@ class Note extends StatelessWidget {
               Row(
                 children: [
                   const CircleAvatar(
-                      backgroundColor: primaryDarkColor, maxRadius: 4),
+                      backgroundColor: primaryDark, maxRadius: 4),
                   const SizedBox(width: 8),
                   const CircleAvatar(
-                      backgroundColor: Color(0xffECCDD6), maxRadius: 4),
+                      backgroundColor: primaryLight, maxRadius: 4),
                   const SizedBox(width: 8),
                   FlowIndicator(flow: flow)
                 ],

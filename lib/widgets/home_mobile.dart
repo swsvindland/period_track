@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/widgets/calendar_key.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'calendar.dart';
@@ -16,7 +17,7 @@ class _HomeMobileState extends State<HomeMobile> {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      color: Theme.of(context).brightness == Brightness.light ? const Color(0xffD6A5B3) : Theme.of(context).cardColor,
+      color: Theme.of(context).brightness == Brightness.light ? primary : Theme.of(context).cardColor,
       borderRadius: const BorderRadius.vertical(
           top: Radius.circular(8), bottom: Radius.zero),
       minHeight: 36,
@@ -50,7 +51,7 @@ class _HomeMobileState extends State<HomeMobile> {
               SizedBox(height: 24),
               Calendar(),
               SizedBox(height: 24),
-              Divider(color: Color(0xffFFBB7C)),
+              Divider(color: secondary),
               SizedBox(height: 24),
             ],
           ),

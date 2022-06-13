@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:period_track/utils/constants.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:period_track/widgets/note.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class Notes extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Text(
           'Looks like you have not recorded a period yet. Add a new note to get started.',
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: text),
         ),
       );
     }

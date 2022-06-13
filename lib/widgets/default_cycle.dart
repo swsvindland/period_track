@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:period_track/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/preferences.dart';
+import '../utils/colors.dart';
 
 class DefaultCycle extends StatefulWidget {
   const DefaultCycle({Key? key}) : super(key: key);
@@ -77,7 +77,7 @@ class _DefaultCycleState extends State<DefaultCycle> {
                   },
                   style: ButtonStyle(
                     side: MaterialStateProperty.all(
-                      const BorderSide(color: primaryDarkColor),
+                      const BorderSide(color: primaryDark),
                     ),
                   ),
                   child: Text(
