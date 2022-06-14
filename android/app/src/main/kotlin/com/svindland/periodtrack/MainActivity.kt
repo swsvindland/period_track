@@ -1,4 +1,4 @@
-package com.example.period_track
+package com.svindland.periodtrack
 
 import io.flutter.embedding.android.FlutterActivity
 
