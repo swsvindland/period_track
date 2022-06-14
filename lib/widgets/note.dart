@@ -6,11 +6,18 @@ import 'package:period_track/utils/constants.dart';
 
 class Note extends StatelessWidget {
   const Note(
-      {Key? key, required this.title, required this.body, required this.flow})
+      {Key? key,
+      required this.title,
+      required this.body,
+      required this.flow,
+      required this.periodStart,
+      required this.intimacy})
       : super(key: key);
   final DateTime title;
   final String body;
   final FlowRate? flow;
+  final bool periodStart;
+  final bool intimacy;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +40,16 @@ class Note extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const CircleAvatar(
-                      backgroundColor: primaryDark, maxRadius: 4),
-                  const SizedBox(width: 8),
-                  const CircleAvatar(
-                      backgroundColor: primaryLight, maxRadius: 4),
-                  const SizedBox(width: 8),
+                  periodStart
+                      ? const CircleAvatar(
+                          backgroundColor: primaryDark, maxRadius: 4)
+                      : const SizedBox(width: 0),
+                  SizedBox(width: periodStart ? 8 : 0),
+                  intimacy
+                      ? const CircleAvatar(
+                          backgroundColor: primaryLight, maxRadius: 4)
+                      : const SizedBox(width: 0),
+                  SizedBox(width: intimacy ? 8 : 0),
                   FlowIndicator(flow: flow)
                 ],
               )

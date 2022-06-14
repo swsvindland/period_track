@@ -35,6 +35,8 @@ class Notes extends StatelessWidget {
               title: notes[index].date,
               body: notes[index].note,
               flow: notes[index].flow,
+              periodStart: notes[index].periodStart,
+              intimacy: notes[index].intimacy
             );
           },
           itemCount: notes.length,
