@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:period_track/widgets/app_bar_ad.dart';
+import 'package:provider/provider.dart';
+import '../../models/preferences.dart';
 import '../../utils/colors.dart';
 
 class SideNavigation extends StatelessWidget {
@@ -13,6 +15,8 @@ class SideNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var preferences = Provider.of<Preferences>(context);
+
     return NavigationRail(
       selectedIndex: selectedIndex,
       onDestinationSelected: onItemTapped,

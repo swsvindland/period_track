@@ -48,10 +48,6 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
     return Scaffold(
       body: MultiProvider(
         providers: [
-          StreamProvider<Preferences>.value(
-              initialData: Preferences.empty(),
-              value: db.streamPreferences(user.uid),
-              catchError: (_, err) => Preferences.empty()),
           StreamProvider<Iterable<NoteModel>>.value(
             initialData: const [],
             value: db.streamNotes(user.uid),

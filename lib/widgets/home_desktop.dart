@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:period_track/utils/colors.dart';
+import 'package:period_track/utils/constants.dart';
+import 'package:period_track/widgets/app_bar_ad.dart';
 import 'package:period_track/widgets/calendar_key.dart';
+import 'package:provider/provider.dart';
+import '../models/preferences.dart';
 import 'calendar.dart';
 
 class HomeDesktop extends StatefulWidget {
@@ -15,11 +19,14 @@ class _HomeDesktopState extends State<HomeDesktop> {
 
   @override
   Widget build(BuildContext context) {
+    var preferences = Provider.of<Preferences>(context);
+
     return Padding(
       padding: const EdgeInsets.all(12),
       child: SingleChildScrollView(
         child: Column(
           children: [
+            preferences.adFree || (MediaQuery.of(context).size.width < md == true) ?  const SizedBox(height: 0) : const AppBarAd(),
             const SizedBox(height: 24),
             const Calendar(),
             const SizedBox(height: 24),

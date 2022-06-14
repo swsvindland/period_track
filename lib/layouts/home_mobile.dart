@@ -35,6 +35,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
   Widget build(BuildContext context) {
     var db = DatabaseService();
     var user = Provider.of<User?>(context);
+    var preferences = Provider.of<Preferences>(context);
 
     if (user == null) {
       return const CircularProgressIndicator();
@@ -42,7 +43,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const AppBarAd(),
+          title: preferences.adFree ? const Text('PeriodTrack') : const AppBarAd(),
           elevation: 0,
           actions: <Widget>[
             PopupMenuButton<Popup>(
@@ -78,10 +79,6 @@ class _HomePageMobileState extends State<HomePageMobile> {
         ),
         body: MultiProvider(
           providers: [
-            StreamProvider<Preferences>.value(
-                initialData: Preferences.empty(),
-                value: db.streamPreferences(user.uid),
-                catchError: (_, err) => Preferences.empty()),
             StreamProvider<Iterable<NoteModel>>.value(
               initialData: const [],
               value: db.streamNotes(user.uid),

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/layouts/layouts.dart';
@@ -12,6 +13,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'firebase_options.dart';
 import 'layouts/add_note.dart';
+import 'models/preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +23,12 @@ void main() async {
 
   MobileAds.instance.initialize();
 
-  runApp(const App());
+  runApp(App());
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  App({Key? key}) : super(key: key);
+  final db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,10 @@ class App extends StatelessWidget {
         StreamProvider<User?>.value(
             initialData: FirebaseAuth.instance.currentUser,
             value: FirebaseAuth.instance.authStateChanges()),
+        StreamProvider<Preferences>.value(
+            initialData: Preferences.empty(),
+            value: db.streamPreferences(FirebaseAuth.instance.currentUser?.uid),
+            catchError: (_, err) => Preferences.empty()),
       ],
       child: MaterialApp(
         title: 'PeriodTrack',

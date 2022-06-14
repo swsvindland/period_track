@@ -34,6 +34,7 @@ class _HomePageTabletState extends State<HomePageTablet> {
   Widget build(BuildContext context) {
     var db = DatabaseService();
     var user = Provider.of<User?>(context);
+    var preferences = Provider.of<Preferences>(context);
 
     if (user == null) {
       return const CircularProgressIndicator();
@@ -41,7 +42,7 @@ class _HomePageTabletState extends State<HomePageTablet> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarAd(),
+        title: preferences.adFree ? const Text('PeriodTrack') : const AppBarAd(),
         elevation: 0,
       ),
       drawer: NavigationDrawer(
@@ -50,10 +51,6 @@ class _HomePageTabletState extends State<HomePageTablet> {
       ),
       body: MultiProvider(
         providers: [
-          StreamProvider<Preferences>.value(
-              initialData: Preferences.empty(),
-              value: db.streamPreferences(user.uid),
-              catchError: (_, err) => Preferences.empty()),
           StreamProvider<Iterable<NoteModel>>.value(
             initialData: const [],
             value: db.streamNotes(user.uid),
