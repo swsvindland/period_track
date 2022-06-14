@@ -128,7 +128,8 @@ class _CalendarState extends State<Calendar> {
               markerBuilder: (context, day, list) {
                 List<Widget> dots = [];
 
-                if (day.month != _focusedDay.month || day.year != _focusedDay.year) {
+                if (day.month != _focusedDay.month ||
+                    day.year != _focusedDay.year) {
                   return const Center();
                 }
 
@@ -190,12 +191,14 @@ class CalendarDay extends StatelessWidget {
     var periodStartNotes =
         notes.where((element) => element.periodStart).toList();
 
+    periodStartNotes.sort((a, b) => a.date.compareTo(b.date));
+
     int menstrualCycleLength = computeMenstrualLength(
         preferences.defaultCycleLength,
         periodStartNotes.map((e) => e.date).toList());
     int periodLength = computePeriodLength(menstrualCycleLength);
-    int ovulationLength = (menstrualCycleLength / 2).ceil();
-    int fertileLength = (menstrualCycleLength / 3).ceil();
+    int ovulationLength = computeOvulationLength(menstrualCycleLength);
+    int fertileLength = computeFertilityLength(menstrualCycleLength);
 
     List<DateTime> periodStartDate =
         periodStartNotes.map((e) => e.date).toList();
@@ -208,8 +211,8 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> fertilePeriodDateStart = periodStartDate
         .map((e) => e.add(Duration(days: fertileLength)))
         .toList();
-    Map<DateTime, DateTime> predictedPeriodDays = computeNextFewYearsOfCycles(
-        menstrualCycleLength, periodStartDate.first);
+    Map<DateTime, DateTime> predictedPeriodDays =
+        computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate);
 
     if (periodStartDate.contains(dateOnly)) {
       return Center(

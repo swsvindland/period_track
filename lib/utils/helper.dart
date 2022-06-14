@@ -72,9 +72,25 @@ int computePeriodLength(int cycleLength) {
   return computed;
 }
 
-Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, DateTime lastPeriodStartDate) {
+int computeOvulationLength(int cycleLength) {
+  int computed = (cycleLength / 2).ceil();
+
+  return computed;
+}
+
+int computeFertilityLength(int cycleLength) {
+  var computed = (cycleLength / 3).ceil();
+
+  if (computed < 4) return 4;
+  if (computed > 8) return 8;
+  return computed;
+}
+
+Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, List<DateTime> periodStartDates) {
+  periodStartDates.sort((a, b) => a.compareTo(b));
+
   int periodLength = computePeriodLength(cycleLength);
-  DateTime temp = lastPeriodStartDate;
+  DateTime temp = periodStartDates.last;
   List<DateTime> output = [];
 
   for (int i = 0; i < 48; ++i) {
