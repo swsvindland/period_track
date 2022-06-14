@@ -34,7 +34,8 @@ class NavigationDrawer extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Row(
                   children: [
-                    Image.asset('images/logo.png', width: 48, height: 48),
+                    Image.asset('images/logo-alt.png', height: 36),
+                    const SizedBox(width: 16),
                     Text(AppLocalizations.of(context)!.periodTrack,
                         style: const TextStyle(fontSize: 24, color: text)),
                   ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:period_track/utils/colors.dart';
 
+import '../../utils/colors.dart';
 
 class SideNavigation extends StatelessWidget {
   const SideNavigation(
@@ -17,16 +17,17 @@ class SideNavigation extends StatelessWidget {
       selectedIndex: selectedIndex,
       onDestinationSelected: onItemTapped,
       extended: true,
-      leading: SizedBox(
-        height: 115,
-        child: DrawerHeader(
-          child: Row(
-            children: [
-              Image.asset('images/logo.png', height: 56),
-              Text(AppLocalizations.of(context)!.periodTrack,
-                  style: const TextStyle(fontSize: 24, color: text)),
-            ],
-          ),
+      leading: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('images/logo-alt.png', height: 36),
+            const SizedBox(width: 16),
+            Text(AppLocalizations.of(context)!.periodTrack,
+                style: const TextStyle(fontSize: 24, color: text)),
+          ],
         ),
       ),
       destinations: <NavigationRailDestination>[
@@ -56,10 +57,9 @@ class SideNavigation extends StatelessWidget {
           label: Text(AppLocalizations.of(context)!.about),
         ),
         NavigationRailDestination(
-          padding: const EdgeInsets.all(8),
-          icon: const Icon(Icons.logout),
-          label: Text(AppLocalizations.of(context)!.logOut)
-        ),
+            padding: const EdgeInsets.all(8),
+            icon: const Icon(Icons.logout),
+            label: Text(AppLocalizations.of(context)!.logOut)),
       ],
     );
   }
