@@ -17,7 +17,7 @@ class _HomeMobileState extends State<HomeMobile> {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      color: Theme.of(context).brightness == Brightness.light ? primary : Theme.of(context).cardColor,
+      color: Theme.of(context).brightness == Brightness.light ? primaryAlt : Theme.of(context).cardColor,
       borderRadius: const BorderRadius.vertical(
           top: Radius.circular(8), bottom: Radius.zero),
       minHeight: 36,

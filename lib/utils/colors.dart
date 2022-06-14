@@ -3,6 +3,7 @@ import 'dart:ui';
 const callToAction = Color(0xffFFD4AD);
 
 const primaryLight = Color(0xffD6A5B3);
+const primaryAlt = Color(0xffD6A5B3);
 const primary = Color(0xffac6d7e);
 const primaryDark = Color(0xff63465A);
 

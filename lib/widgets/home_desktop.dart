@@ -26,7 +26,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
             const Divider(color: secondary),
             const SizedBox(height: 24),
             Card(
-              color: Theme.of(context).brightness == Brightness.light ? primary : Theme.of(context).cardColor,
+              color: Theme.of(context).brightness == Brightness.light ? primaryAlt : Theme.of(context).cardColor,
               child: const Padding(
                 padding: EdgeInsets.all(12),
                 child: SizedBox(
