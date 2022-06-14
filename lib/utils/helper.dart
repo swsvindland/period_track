@@ -65,7 +65,11 @@ int computeMenstrualLength(int defaultCycleLength, List<DateTime> periodStarts) 
 }
 
 int computePeriodLength(int cycleLength) {
-  return (cycleLength / 5).ceil();
+  var computed = (cycleLength / 5).ceil();
+
+  if (computed < 4) return 4;
+  if (computed > 8) return 8;
+  return computed;
 }
 
 Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, DateTime lastPeriodStartDate) {
