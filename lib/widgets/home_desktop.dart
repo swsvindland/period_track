@@ -26,7 +26,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            preferences.adFree || (MediaQuery.of(context).size.width < md == true) ?  const SizedBox(height: 0) : const AppBarAd(),
+            preferences.adFree || MediaQuery.of(context).size.width < md ?  const SizedBox(height: 0) : const AppBarAd(),
             const SizedBox(height: 24),
             const Calendar(),
             const SizedBox(height: 24),
