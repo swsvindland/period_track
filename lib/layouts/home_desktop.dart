@@ -4,6 +4,7 @@ import 'package:period_track/widgets/navigation/side_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 import '../services/sign_in.dart';
@@ -83,7 +84,7 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           });
         },
         icon: const Icon(Icons.note_add),
-        label: const Text('New Entry'),
+        label: Text(AppLocalizations.of(context)!.newEntry),
       ),
     );
   }

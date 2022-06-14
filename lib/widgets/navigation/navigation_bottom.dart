@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:period_track/utils/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/constants.dart';
 
@@ -34,20 +35,20 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
           children: [
             _buildTabItem(
                 FABBottomAppBarItem(
-                    iconData: Icons.calendar_today, text: 'Calendar'),
+                    iconData: Icons.calendar_today, text: AppLocalizations.of(context)!.calendar),
                 0,
                 widget.onItemTapped),
             _buildTabItem(
-                FABBottomAppBarItem(iconData: Icons.note_add, text: 'Notes'),
+                FABBottomAppBarItem(iconData: Icons.note_add, text: AppLocalizations.of(context)!.notes),
                 1,
                 widget.onItemTapped),
             _buildTabItem(
                 FABBottomAppBarItem(
-                    iconData: Icons.insights, text: 'Statistics'),
+                    iconData: Icons.insights, text: AppLocalizations.of(context)!.statistics),
                 2,
                 widget.onItemTapped),
             _buildTabItem(
-                FABBottomAppBarItem(iconData: Icons.settings, text: 'Settings'),
+                FABBottomAppBarItem(iconData: Icons.settings, text: AppLocalizations.of(context)!.settings),
                 3,
                 widget.onItemTapped),
             FloatingActionButton(
@@ -73,8 +74,8 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
         ? secondaryLight
         : secondary;
     return SizedBox(
-      height: 70,
-      width: 70,
+      height: 80,
+      width: 80,
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(

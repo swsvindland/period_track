@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/navigation/navigation_drawer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 import '../models/preferences.dart';
@@ -74,7 +75,7 @@ class _HomePageTabletState extends State<HomePageTablet> {
           });
         },
         icon: const Icon(Icons.note_add),
-        label: const Text('New Entry'),
+        label: Text(AppLocalizations.of(context)!.newEntry),
       ),
     );
   }

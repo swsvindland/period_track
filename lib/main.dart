@@ -53,16 +53,16 @@ class App extends StatelessWidget {
         ],
         supportedLocales: const [
           Locale('en', ''), // English
-          // Locale('es', ''), // Spanish
-          // Locale('pt', ''), // Portuguese
-          // Locale('fr', ''), // French
-          // Locale('de', ''), // German
-          // Locale('it', ''), // Italian
-          // Locale('zh', ''), // Simplified Chinese
-          // Locale('ko', ''), // Korean
-          // Locale('ja', ''), // Japanese
-          // Locale('ar', ''), // Arabic
-          // Locale('hi', ''), // Hindi
+          Locale('es', ''), // Spanish
+          Locale('pt', ''), // Portuguese
+          Locale('fr', ''), // French
+          Locale('de', ''), // German
+          Locale('it', ''), // Italian
+          Locale('zh', ''), // Simplified Chinese
+          Locale('ko', ''), // Korean
+          Locale('ja', ''), // Japanese
+          Locale('ar', ''), // Arabic
+          Locale('hi', ''), // Hindi
         ],
         theme: ThemeData(
           colorSchemeSeed: primary,
