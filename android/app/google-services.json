@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:8878044441:android:2b8d6eec46dda33bec4188",
+        "mobilesdk_app_id": "1:8878044441:android:716e56b9172366d4ec4188",
         "android_client_info": {
-          "package_name": "com.example.period_track"
+          "package_name": "com.svindland.periodtrack"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "8878044441-s0v2amav36hpg9rvbh1789e1cjvq4b8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.svindland.periodtrack",
+            "certificate_hash": "1363226da8610ce9756ae3560839d70eeb3fa3dc"
+          }
+        },
         {
           "client_id": "8878044441-qn106e9j3375hhcpolhva1p6gnnrcljl.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +37,13 @@
             {
               "client_id": "8878044441-qn106e9j3375hhcpolhva1p6gnnrcljl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "8878044441-ghidl3hsuohqaqe007fuie8bmef2oqk3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.svindland.periodtrack"
+              }
             }
           ]
         }

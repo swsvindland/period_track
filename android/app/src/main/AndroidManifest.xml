@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.period_track">
-   <application
+    package="com.svindland.periodtrack">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
         android:label="PeriodTrack"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
