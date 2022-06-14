@@ -6,7 +6,6 @@ import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
 
 import '../models/note.dart';
-import '../models/preferences.dart';
 import '../services/sign_in.dart';
 import '../widgets/about.dart';
 import '../widgets/home.dart';
