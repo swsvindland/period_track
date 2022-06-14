@@ -19,11 +19,10 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   late final PageController _pageController;
-  final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
+  DateTime _focusedDay = DateTime.now();
 
   @override
   void dispose() {
-    _focusedDay.dispose();
     super.dispose();
   }
 
@@ -51,19 +50,14 @@ class _CalendarState extends State<Calendar> {
       width: 600,
       child: Column(
         children: [
-          ValueListenableBuilder<DateTime>(
-            valueListenable: _focusedDay,
-            builder: (context, value, _) {
-              return Text(
-                _focusedDay.value.year.toString(),
-                textAlign: TextAlign.center,
-                style: GoogleFonts.josefinSans(
-                  color: textSecondary,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.12,
-                ),
-              );
-            },
+          Text(
+            _focusedDay.year.toString(),
+            textAlign: TextAlign.center,
+            style: GoogleFonts.josefinSans(
+              color: textSecondary,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.12,
+            ),
           ),
           const SizedBox(height: 24),
           notes.isEmpty
@@ -73,23 +67,18 @@ class _CalendarState extends State<Calendar> {
               : const SizedBox(),
           const Divider(color: secondary),
           const SizedBox(height: 8),
-          ValueListenableBuilder<DateTime>(
-            valueListenable: _focusedDay,
-            builder: (context, value, _) {
-              return CalendarHeader(
-                focusedDay: _focusedDay.value,
-                onLeftArrowTap: () {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeOut,
-                  );
-                },
-                onRightArrowTap: () {
-                  _pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeOut,
-                  );
-                },
+          CalendarHeader(
+            focusedDay: _focusedDay,
+            onLeftArrowTap: () {
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+              );
+            },
+            onRightArrowTap: () {
+              _pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
               );
             },
           ),
@@ -99,13 +88,18 @@ class _CalendarState extends State<Calendar> {
             headerVisible: false,
             firstDay: DateTime.utc(2000, 01, 01),
             lastDay: DateTime.utc(2100, 01, 01),
-            focusedDay: _focusedDay.value,
+            focusedDay: _focusedDay,
             eventLoader: _getEventsFromNotes,
             onDaySelected: (day, day2) {
-              navigatorKey.currentState!.pushNamed('/add-note', arguments: { "id": DateUtils.dateOnly(day).toIso8601String() });
+              navigatorKey.currentState!.pushNamed('/add-note',
+                  arguments: {"id": DateUtils.dateOnly(day).toIso8601String()});
             },
             onCalendarCreated: (controller) => _pageController = controller,
-            onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
+            onPageChanged: (focusedDay) => {
+              setState(() {
+                _focusedDay = focusedDay;
+              })
+            },
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
                 return CalendarDay(day: day, day2: day2);
@@ -134,8 +128,7 @@ class _CalendarState extends State<Calendar> {
               markerBuilder: (context, day, list) {
                 List<Widget> dots = [];
 
-                // Not sure why the logic is this way but don't show event on non-current month
-                if (day.month == _focusedDay.value.month) {
+                if (day.month != _focusedDay.month || day.year != _focusedDay.year) {
                   return const Center();
                 }
 
@@ -197,8 +190,9 @@ class CalendarDay extends StatelessWidget {
     var periodStartNotes =
         notes.where((element) => element.periodStart).toList();
 
-    int menstrualCycleLength =
-        computeMenstrualLength(preferences.defaultCycleLength, periodStartNotes.map((e) => e.date).toList());
+    int menstrualCycleLength = computeMenstrualLength(
+        preferences.defaultCycleLength,
+        periodStartNotes.map((e) => e.date).toList());
     int periodLength = computePeriodLength(menstrualCycleLength);
     int ovulationLength = (menstrualCycleLength / 2).ceil();
     int fertileLength = (menstrualCycleLength / 3).ceil();
@@ -214,15 +208,15 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> fertilePeriodDateStart = periodStartDate
         .map((e) => e.add(Duration(days: fertileLength)))
         .toList();
-    Map<DateTime, DateTime> predictedPeriodDays = computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate.first);
+    Map<DateTime, DateTime> predictedPeriodDays = computeNextFewYearsOfCycles(
+        menstrualCycleLength, periodStartDate.first);
 
     if (periodStartDate.contains(dateOnly)) {
       return Center(
         child: Container(
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: secondary)),
+              shape: BoxShape.circle, border: Border.all(color: secondary)),
           child: CircleAvatar(
             backgroundColor: primaryDark,
             child: SizedBox(
@@ -245,8 +239,7 @@ class CalendarDay extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: ternaryLight)),
+              shape: BoxShape.circle, border: Border.all(color: ternaryLight)),
           child: CircleAvatar(
             backgroundColor: ternary,
             child: SizedBox(
@@ -271,8 +264,7 @@ class CalendarDay extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: secondary)),
+                shape: BoxShape.circle, border: Border.all(color: secondary)),
             child: SizedBox(
               height: 20,
               width: 20,
@@ -317,8 +309,7 @@ class CalendarDay extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primaryLight)),
+              shape: BoxShape.circle, border: Border.all(color: primaryLight)),
           child: SizedBox(
             height: 20,
             width: 20,
