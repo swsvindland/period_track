@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils/helper.dart';
 
@@ -14,14 +15,14 @@ class CycleLength extends StatelessWidget {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
 
     if (notes.isEmpty) {
-      return const SizedBox(
+      return SizedBox(
         height: 300,
         width: 600,
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Center(
             child: Text(
-                'Looks like you have not recorded a period yet. Add a new note to get started.',
+              AppLocalizations.of(context)!.noNotesError,
             ),
           ),
         ),

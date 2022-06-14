@@ -65,8 +65,8 @@ class _DefaultCycleState extends State<DefaultCycle> {
               children: [
                 TextFormField(
                   controller: controller,
-                  decoration: const InputDecoration(
-                    labelText: 'Default Cycle Length',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.defaultLength,
                   ),
                   keyboardType: const TextInputType.numberWithOptions(),
                 ),

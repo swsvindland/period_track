@@ -6,6 +6,7 @@ import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
 import 'package:period_track/widgets/date_field.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({Key? key, required this.date}) : super(key: key);
@@ -122,7 +123,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                                 });
                               },
                             ),
-                            const Text("Period Start"),
+                            Text(AppLocalizations.of(context)!.periodStart),
                           ]),
                           Row(children: [
                             Checkbox(
@@ -133,7 +134,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                                 });
                               },
                             ),
-                            const Text("Intimacy"),
+                            Text(AppLocalizations.of(context)!.intimacy),
                           ]),
                         ],
                       ),
@@ -170,8 +171,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         minLines: 4,
                         maxLines: 6,
                         controller: _noteController,
-                        decoration: const InputDecoration(
-                          labelText: 'Note',
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.note,
                         ),
                       ),
                     ],
@@ -188,9 +189,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
               submit();
               navigatorKey.currentState!.pop();
             },
-            child: const Text(
-              'Submit',
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)!.submit,
+              style: const TextStyle(
                 fontSize: 16.0,
               ),
             ),
@@ -204,7 +205,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               navigatorKey.currentState!.pop();
             },
             child: Text(
-              'Delete Note',
+              AppLocalizations.of(context)!.delete,
               style: TextStyle(
                 fontSize: 16.0,
                 color: Theme.of(context).errorColor,

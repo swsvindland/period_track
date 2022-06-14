@@ -11,7 +11,8 @@
     "update": "Update",
 
     "about": "About",
-    "aboutPageCredits": "Designed and Built by",
+    "aboutPageCreditsDesigned": "Designed by",
+    "aboutPageCreditsBuilt": "Built by",
     "aboutPageVersion": "Version",
     "logOut": "Log Out",
 
@@ -21,6 +22,23 @@
 
     "deleteAccount": "Delete Account",
     "deleteAccountConfirm": "This will delete your account and all user data forever. Are you sure?",
+
+    "noNotesError": "Looks like you have not recorded a period yet. Add a new note to get started.",
+
+    "cycleBegin": "cycle begin",
+    "estOvulation": "est. ovulation",
+    "period": "period",
+    "estFertileDays": "est. fertile days",
+    "estCycle": "est. cycle",
+
+    "defaultLength": "Default Cycle Length",
+    "periodLength": "Period Length",
+
+    "periodStart": "Period Start",
+    "intimacy": "Intimacy",
+    "note": "Note",
+    "date": "Date",
+    "submit": "Submit",
     "delete": "Delete",
     "cancel": "Cancel"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DateField extends StatelessWidget {
   DateField({Key? key, required this.controller, required this.onChanged}) : super(key: key);
@@ -15,8 +16,8 @@ class DateField extends StatelessWidget {
       DateTimeField(
         controller: controller,
         format: format,
-        decoration: const InputDecoration(
-          labelText: 'Date',
+        decoration: InputDecoration(
+          labelText: AppLocalizations.of(context)!.date,
         ),
         onShowPicker: (context, currentValue) async {
           return showDatePicker(

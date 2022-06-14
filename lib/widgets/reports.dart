@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'cycle_length.dart';
 
@@ -9,22 +10,22 @@ class Reports extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: const [
+        children: [
           Center(
             child: SizedBox(
               height: 350,
               width: 600,
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Card(
                   elevation: 1,
                   child: Padding(
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     child: ListTile(
                       title: Text(
-                        'Period Length',
+                        AppLocalizations.of(context)!.periodLength,
                       ),
-                      subtitle: SizedBox(height: 275, child: CycleLength()),
+                      subtitle: const SizedBox(height: 275, child: CycleLength()),
                     ),
                   ),
                 ),

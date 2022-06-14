@@ -18,18 +18,18 @@ class About extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'Designed By',
-                style: TextStyle(color: text, fontSize: 16),
+              Text(
+                AppLocalizations.of(context)!.aboutPageCreditsDesigned,
+                style: const TextStyle(color: text, fontSize: 16),
               ),
               const Text(
                 'Charlena Kea',
                 style: TextStyle(color: text, fontSize: 12),
               ),
               const SizedBox(height: 36),
-              const Text(
-                'Built By',
-                style: TextStyle(color: text, fontSize: 16),
+              Text(
+                AppLocalizations.of(context)!.aboutPageCreditsBuilt,
+                style: const TextStyle(color: text, fontSize: 16),
               ),
               const Text(
                 'Samuel Svindland',

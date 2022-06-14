@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:period_track/utils/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CalendarKey extends StatelessWidget {
   const CalendarKey({Key? key}) : super(key: key);
@@ -16,13 +17,13 @@ class CalendarKey extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconCircle(color: primaryDark),
-                  text: 'cycle begins'),
+                  icon: const CalendarKeyItemIconCircle(color: primaryDark),
+                  text: AppLocalizations.of(context)!.cycleBegin.toLowerCase()),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconCircle(color: ternary),
-                  text: 'est. ovulation'),
+                  icon: const CalendarKeyItemIconCircle(color: ternary),
+                  text: AppLocalizations.of(context)!.estOvulation.toLowerCase()),
             ],
           ),
         ),
@@ -31,15 +32,15 @@ class CalendarKey extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconOutlinedCircle(
+                  icon: const CalendarKeyItemIconOutlinedCircle(
                       color: secondary),
-                  text: 'period'),
+                  text: AppLocalizations.of(context)!.period.toLowerCase()),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconOutlinedCircle(
+                  icon: const CalendarKeyItemIconOutlinedCircle(
                       color: secondaryLight),
-                  text: 'est. fertile days'),
+                  text: AppLocalizations.of(context)!.estFertileDays.toLowerCase()),
             ],
           ),
         ),
@@ -48,14 +49,14 @@ class CalendarKey extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconOutlinedCircle(
+                  icon: const CalendarKeyItemIconOutlinedCircle(
                       color: primaryLight),
-                  text: 'est. cycle'),
+                  text: AppLocalizations.of(context)!.estCycle.toLowerCase()),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconDot(color: secondary),
-                  text: 'notes'),
+                  icon: const CalendarKeyItemIconDot(color: secondary),
+                  text: AppLocalizations.of(context)!.notes.toLowerCase()),
             ],
           ),
         ),
@@ -64,11 +65,11 @@ class CalendarKey extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              SizedBox(width: 150),
+            children: [
+              const SizedBox(width: 150),
               CalendarKeyItem(
-                  icon: CalendarKeyItemIconDot(color: primaryLight),
-                  text: 'intimacy'),
+                  icon: const CalendarKeyItemIconDot(color: primaryLight),
+                  text: AppLocalizations.of(context)!.intimacy.toLowerCase()),
             ],
           ),
         )

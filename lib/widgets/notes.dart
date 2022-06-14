@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:period_track/utils/colors.dart';
 import 'package:period_track/widgets/note.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 
@@ -16,11 +17,11 @@ class Notes extends StatelessWidget {
     });
 
     if (notes.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.all(8),
+      return Padding(
+        padding: const EdgeInsets.all(8),
         child: Text(
-          'Looks like you have not recorded a period yet. Add a new note to get started.',
-          style: TextStyle(color: text),
+            AppLocalizations.of(context)!.noNotesError,
+          style: const TextStyle(color: text),
         ),
       );
     }
