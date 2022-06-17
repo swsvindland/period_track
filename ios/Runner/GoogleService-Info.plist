@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>8878044441-qn53i9erv3b2pi1lsdrodvdo1dqu56ip.apps.googleusercontent.com</string>
+	<string>8878044441-ghidl3hsuohqaqe007fuie8bmef2oqk3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.8878044441-qn53i9erv3b2pi1lsdrodvdo1dqu56ip</string>
+	<string>com.googleusercontent.apps.8878044441-ghidl3hsuohqaqe007fuie8bmef2oqk3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>8878044441-k0h6k1aojo368vqr7c400nlcfgcoa9cn.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDJnJwNJywHucGW00PjupKwYIBn4Dtkv3k</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.periodTrack</string>
+	<string>com.svindland.periodtrack</string>
 	<key>PROJECT_ID</key>
 	<string>periodtrack-955f2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:8878044441:ios:72909dcc6a8b6506ec4188</string>
+	<string>1:8878044441:ios:20c133925f35946aec4188</string>
 </dict>
 </plist>

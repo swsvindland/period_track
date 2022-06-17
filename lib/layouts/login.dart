@@ -9,6 +9,7 @@ import "package:os_detect/os_detect.dart" as platform;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:period_track/utils/helper.dart';
+import 'package:period_track/widgets/button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image.asset('images/logo.png', width: 128, height: 128),
+                Image.asset('images/logo-alt.png', width: 128, height: 128),
                 const SizedBox(height: 40),
                 loggingIn
                     ? const CircularProgressIndicator()
@@ -69,6 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                                 loggingIn = false;
                               });
                             },
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  secondaryLight),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(primaryDark),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,9 +83,10 @@ class _LoginPageState extends State<LoginPage> {
                                 Image.asset('images/google-logo.png',
                                     width: 24, height: 24),
                                 const SizedBox(width: 8),
-                                Text(AppLocalizations.of(context)!.googleSignIn,
-                                    style: const TextStyle(
-                                        fontSize: 16.0, color: Colors.black)),
+                                Text(
+                                  AppLocalizations.of(context)!.googleSignIn,
+                                  style: const TextStyle(fontSize: 16.0),
+                                ),
                               ],
                             ),
                           ),
@@ -105,22 +113,37 @@ class _LoginPageState extends State<LoginPage> {
                                       loggingIn = false;
                                     });
                                   },
+                                  style: ButtonStyle(
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            secondaryLight),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            primaryDark),
+                                  ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const Icon(Icons.apple, color: Colors.black,),
+                                      const Icon(
+                                        Icons.apple,
+                                      ),
                                       const SizedBox(width: 8),
-                                      Text(AppLocalizations.of(context)!.appleSignIn,
-                                          style: const TextStyle(
-                                              fontSize: 16.0,
-                                              color: Colors.black)),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .appleSignIn,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 )
                               : const SizedBox(),
-                          SizedBox(height: platform.isIOS || platform.isMacOS ? 16 : 0),
+                          SizedBox(
+                              height:
+                                  platform.isIOS || platform.isMacOS ? 16 : 0),
                           TextButton(
                               onPressed: () {
                                 setState(() {
@@ -140,7 +163,8 @@ class _LoginPageState extends State<LoginPage> {
                                   loggingIn = false;
                                 });
                               },
-                              child: Text(AppLocalizations.of(context)!.anonSignIn,
+                              child: Text(
+                                  AppLocalizations.of(context)!.anonSignIn,
                                   style: const TextStyle(
                                       fontSize: 16.0, color: text))),
                         ],
