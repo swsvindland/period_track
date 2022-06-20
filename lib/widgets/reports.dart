@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../models/preferences.dart';
+import '../utils/constants.dart';
+import 'app_bar_ad.dart';
 import 'cycle_length.dart';
 
 class Reports extends StatelessWidget {
@@ -8,9 +12,17 @@ class Reports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var preferences = Provider.of<Preferences>(context);
+
     return SingleChildScrollView(
       child: Column(
         children: [
+          preferences.adFree || MediaQuery.of(context).size.width < md
+              ? const SizedBox(height: 0)
+              : const AppBarAd(),
+          MediaQuery.of(context).size.width > md
+              ? const SizedBox(height: 36)
+              : const SizedBox(height: 0),
           Center(
             child: SizedBox(
               height: 350,

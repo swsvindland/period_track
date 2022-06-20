@@ -29,7 +29,7 @@
     "estOvulation": "est. ovulation",
     "period": "period",
     "estFertileDays": "est. fertile days",
-    "estCycle": "est. cycle",
+    "estCycle": "est. cycle start day",
 
     "defaultLength": "Default Cycle Length",
     "periodLength": "Period Length",

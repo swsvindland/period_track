@@ -83,15 +83,15 @@ class App extends StatelessWidget {
           drawerTheme: const DrawerThemeData(
             backgroundColor: primaryDark,
           ),
-          navigationRailTheme: const NavigationRailThemeData(
+          navigationRailTheme: NavigationRailThemeData(
             backgroundColor: primaryDark,
-            selectedLabelTextStyle: TextStyle(color: secondaryLight),
-            selectedIconTheme: IconThemeData(color: secondaryLight),
-            unselectedLabelTextStyle: TextStyle(color: secondary),
-            unselectedIconTheme: IconThemeData(color: secondary),
+            selectedLabelTextStyle: TextStyle(color: secondaryLight, fontFamily: GoogleFonts.josefinSans().fontFamily),
+            selectedIconTheme: const IconThemeData(color: secondaryLight),
+            unselectedLabelTextStyle: TextStyle(color: secondary, fontFamily: GoogleFonts.josefinSans().fontFamily),
+            unselectedIconTheme: const IconThemeData(color: secondary),
             useIndicator: false,
           ),
-          cardTheme: const CardTheme(color: primaryLight),
+          cardTheme: const CardTheme(color: primaryAlt),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: callToAction, foregroundColor: primaryDark),
           elevatedButtonTheme: ElevatedButtonThemeData(
@@ -143,11 +143,11 @@ class App extends StatelessWidget {
             unselectedItemColor: secondary,
             selectedItemColor: secondaryLight,
           ),
-          navigationRailTheme: const NavigationRailThemeData(
-            selectedLabelTextStyle: TextStyle(color: secondaryLight),
-            selectedIconTheme: IconThemeData(color: secondaryLight),
-            unselectedLabelTextStyle: TextStyle(color: secondary),
-            unselectedIconTheme: IconThemeData(color: secondary),
+          navigationRailTheme: NavigationRailThemeData(
+            selectedLabelTextStyle: TextStyle(color: secondaryLight, fontFamily: GoogleFonts.josefinSans().fontFamily),
+            selectedIconTheme: const IconThemeData(color: secondaryLight),
+            unselectedLabelTextStyle: TextStyle(color: secondary, fontFamily: GoogleFonts.josefinSans().fontFamily),
+            unselectedIconTheme: const IconThemeData(color: secondary),
             useIndicator: false,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(

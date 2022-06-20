@@ -49,8 +49,7 @@ class _AppBarAdState extends State<AppBarAd> {
   @override
   Widget build(BuildContext context) {
     if (_bannerAd == null || !_isBannerAdReady) {
-      return Text(AppLocalizations.of(context)!.periodTrack,
-          style: const TextStyle(color: Colors.white));
+      return const SizedBox(height: 50);
     }
 
     return SizedBox(

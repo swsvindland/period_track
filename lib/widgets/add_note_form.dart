@@ -8,6 +8,8 @@ import 'package:period_track/widgets/date_field.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../utils/colors.dart';
+
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({Key? key, required this.date}) : super(key: key);
   final DateTime? date;
@@ -82,6 +84,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
 
     return Column(
       children: [
+        const SizedBox(height: 36),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -189,6 +192,14 @@ class _AddNoteFormState extends State<AddNoteForm> {
               submit();
               navigatorKey.currentState!.pop();
             },
+            style: ButtonStyle(
+              foregroundColor:
+              MaterialStateProperty.all<Color>(
+                  secondaryLight),
+              backgroundColor:
+              MaterialStateProperty.all<Color>(
+                  primaryDark),
+            ),
             child: Text(
               AppLocalizations.of(context)!.submit,
               style: const TextStyle(
@@ -199,7 +210,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ),
         const SizedBox(height: 16),
         Center(
-          child: OutlinedButton(
+          child: ElevatedButton(
             onPressed: () async {
               await _db.deleteNote(user!.uid, date);
               navigatorKey.currentState!.pop();
