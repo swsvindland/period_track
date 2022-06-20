@@ -23,7 +23,7 @@
   "estOvulation": "是。排卵",
   "period": "时期",
   "estFertileDays": "是。肥沃的日子",
-  "estCycle": "是。循环",
+  "estCycle": "估计周期开始日",
   "defaultLength": "默认周期长度",
   "periodLength": "周期长度",
   "newEntry": "新条目",

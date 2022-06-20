@@ -23,7 +23,7 @@
   "estOvulation": "ist. Ovulation",
   "period": "Zeitraum",
   "estFertileDays": "ist. fruchtbare Tage",
-  "estCycle": "ist. Kreislauf",
+  "estCycle": "geschätzter Zyklusstarttag",
   "defaultLength": "Standardzykluslänge",
   "periodLength": "Periodenlänge",
   "newEntry": "Neuer Eintrag",

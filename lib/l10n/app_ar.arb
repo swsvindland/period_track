@@ -23,7 +23,7 @@
   "estOvulation": "هو. الإباضة",
   "period": "فترة",
   "estFertileDays": "هو. أيام الخصوبة",
-  "estCycle": "هو. دورة",
+  "estCycle": "يوم بدء الدورة التقديري",
   "defaultLength": "طول الدورة الافتراضي",
   "periodLength": "طول الفترة",
   "newEntry": "دخول جديد",

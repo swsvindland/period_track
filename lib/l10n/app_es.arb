@@ -23,7 +23,7 @@
   "estOvulation": "es. ovulación",
   "period": "período",
   "estFertileDays": "es. días fértiles",
-  "estCycle": "es. ciclo",
+  "estCycle": "día de inicio del ciclo estimado",
   "defaultLength": "Duración del ciclo predeterminada",
   "periodLength": "Duración del período",
   "newEntry": "Nueva entrada",

@@ -188,6 +188,8 @@ class CalendarDay extends StatelessWidget {
       return Center(child: Text(day.day.toString(), style: calendarTextStyle));
     }
 
+    var keyedNotes = {for (var e in notes) e.date: e};
+
     var periodStartNotes =
         notes.where((element) => element.periodStart).toList();
 
@@ -196,15 +198,11 @@ class CalendarDay extends StatelessWidget {
     int menstrualCycleLength = computeMenstrualLength(
         preferences.defaultCycleLength,
         periodStartNotes.map((e) => e.date).toList());
-    int periodLength = computePeriodLength(menstrualCycleLength);
     int ovulationLength = computeOvulationLength(menstrualCycleLength);
     int fertileLength = computeFertilityLength(menstrualCycleLength);
 
     List<DateTime> periodStartDate =
         periodStartNotes.map((e) => e.date).toList();
-    List<DateTime> periodEndDate = periodStartDate
-        .map((e) => e.add(Duration(days: periodLength)))
-        .toList();
     List<DateTime> ovulationDate = periodStartDate
         .map((e) => e.add(Duration(days: ovulationLength)))
         .toList();
@@ -260,9 +258,8 @@ class CalendarDay extends StatelessWidget {
       );
     }
 
-    for (var i = 0; i < periodStartDate.length; ++i) {
-      if (dateOnly.isAfter(periodStartDate[i].add(const Duration(days: -1))) &&
-          dateOnly.isBefore(periodEndDate[i])) {
+    if (keyedNotes.containsKey(DateUtils.dateOnly(day))) {
+      if (keyedNotes[DateUtils.dateOnly(day)]?.flow != null) {
         return Center(
           child: Container(
             padding: const EdgeInsets.all(12),
