@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:period_track/models/note.dart';
 import 'package:period_track/utils/colors.dart';
 import 'package:period_track/utils/helper.dart';
-import 'package:period_track/widgets/calendar_header.dart';
+import 'package:period_track/widgets/calendar/calendar_header.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../models/preferences.dart';
-import '../utils/constants.dart';
+import '../../models/preferences.dart';
+import '../../utils/constants.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);

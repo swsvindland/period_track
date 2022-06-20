@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:period_track/utils/colors.dart';
-import 'package:period_track/widgets/calendar_key.dart';
+import 'package:period_track/widgets/calendar/calendar_key.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'calendar.dart';
+import 'calendar/calendar.dart';
 
 class HomeMobile extends StatefulWidget {
   const HomeMobile({Key? key}) : super(key: key);
