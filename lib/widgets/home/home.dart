@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:period_track/widgets/home_desktop.dart';
-import 'package:period_track/widgets/home_mobile.dart';
-import '../utils/constants.dart';
+import '../../utils/constants.dart';
+import 'home_desktop.dart';
+import 'home_mobile.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

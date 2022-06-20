@@ -9,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/note.dart';
 import '../services/sign_in.dart';
 import '../widgets/about.dart';
-import '../widgets/home.dart';
+import '../widgets/home/home.dart';
 import '../widgets/notes.dart';
 import '../widgets/reports.dart';
 import '../widgets/settings.dart';
