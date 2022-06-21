@@ -6,8 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 import '../models/preferences.dart';
-import '../utils/constants.dart';
-import 'app_bar_ad.dart';
 
 class Notes extends StatelessWidget {
   const Notes({Key? key}) : super(key: key);
@@ -34,31 +32,19 @@ class Notes extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: SizedBox(
         width: 600,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              preferences.adFree || MediaQuery.of(context).size.width < md
-                  ? const SizedBox(height: 0)
-                  : const AppBarAd(),
-              MediaQuery.of(context).size.width > md
-                  ? const SizedBox(height: 36)
-                  : const SizedBox(height: 0),
-              ListView.builder(
-                itemBuilder: (buildContext, index) {
-                  return Note(
-                      title: notes[index].date,
-                      body: notes[index].note,
-                      flow: notes[index].flow,
-                      periodStart: notes[index].periodStart,
-                      intimacy: notes[index].intimacy);
-                },
-                itemCount: notes.length,
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(4),
-                scrollDirection: Axis.vertical,
-              ),
-            ],
-          ),
+        child: ListView.builder(
+          itemBuilder: (buildContext, index) {
+            return Note(
+                title: notes[index].date,
+                body: notes[index].note,
+                flow: notes[index].flow,
+                periodStart: notes[index].periodStart,
+                intimacy: notes[index].intimacy);
+          },
+          itemCount: notes.length,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(4),
+          scrollDirection: Axis.vertical,
         ),
       ),
     );
