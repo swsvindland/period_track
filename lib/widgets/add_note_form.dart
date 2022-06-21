@@ -26,6 +26,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
   late bool _periodStart;
   late bool _intimacy;
   FlowRate? _flow;
+  var _isNew = true;
+  var _firstMount = true;
 
   @override
   void initState() {
@@ -58,28 +60,46 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ? notes.where((element) => element.date == date)
         : null;
 
-    if (note != null && note.isNotEmpty) {
-      _noteController.text = note.first.note;
-      _periodStart = note.first.periodStart;
-      _intimacy = note.first.intimacy;
-      _flow = note.first.flow;
+    if (_firstMount && note != null && note.isNotEmpty) {
+      setState(() {
+        _firstMount = false;
+        _isNew = false;
+        _noteController.text = note.first.note;
+        _periodStart = note.first.periodStart;
+        _intimacy = note.first.intimacy;
+        _flow = note.first.flow;
+      });
     }
 
     submit() async {
       if (user == null) return;
-
       DateFormat inputFormat = DateFormat.yMd();
-      await _db.addNote(
-        user.uid,
-        NoteModel(
-          uid: user.uid,
-          date: DateUtils.dateOnly(inputFormat.parse(_dateController.text)),
-          note: _noteController.text,
-          periodStart: _periodStart,
-          intimacy: _intimacy,
-          flow: _flow,
-        ),
-      );
+
+      if (_isNew == false) {
+        await _db.updateNote(
+          user.uid,
+          NoteModel(
+            uid: user.uid,
+            date: DateUtils.dateOnly(inputFormat.parse(_dateController.text)),
+            note: _noteController.text,
+            periodStart: _periodStart,
+            intimacy: _intimacy,
+            flow: _flow,
+          ),
+        );
+      } else {
+        await _db.addNote(
+          user.uid,
+          NoteModel(
+            uid: user.uid,
+            date: DateUtils.dateOnly(inputFormat.parse(_dateController.text)),
+            note: _noteController.text,
+            periodStart: _periodStart,
+            intimacy: _intimacy,
+            flow: _flow,
+          ),
+        );
+      }
     }
 
     return Column(

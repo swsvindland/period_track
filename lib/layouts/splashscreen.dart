@@ -68,7 +68,7 @@ class _SplashscreenPageState extends State<SplashscreenPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset('images/logo-alts.png', width: 96, height: 96),
+              Image.asset('images/logo-alt.png', width: 96, height: 96),
               const SizedBox(height: 75),
               const CircularProgressIndicator(
                 backgroundColor: Colors.white,

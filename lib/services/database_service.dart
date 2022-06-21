@@ -30,6 +30,20 @@ class DatabaseService {
     }
   }
 
+  Future<void> updateNote(String id, NoteModel note) async {
+    try {
+      var snapshot = await _db
+          .collection('notes')
+          .where('uid', isEqualTo: id)
+          .where('date', isEqualTo: note.date)
+          .get();
+
+      return snapshot.docs.first.reference.set(NoteModel.toMap(note));
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<void> deleteNote(String id, DateTime date) async {
     try {
       var querySnapshot = await _db
