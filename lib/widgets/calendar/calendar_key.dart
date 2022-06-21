@@ -39,7 +39,7 @@ class CalendarKey extends StatelessWidget {
                   text: AppLocalizations.of(context)!.period.toLowerCase()),
               CalendarKeyItem(
                   icon: const CalendarKeyItemIconOutlinedCircle(
-                      color: ternary),
+                      color: ternaryLight),
                   text: AppLocalizations.of(context)!.estFertileDays.toLowerCase()),
             ],
           ),
