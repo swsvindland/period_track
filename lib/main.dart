@@ -42,157 +42,169 @@ class App extends StatelessWidget {
             value: db.streamPreferences(FirebaseAuth.instance.currentUser?.uid),
             catchError: (_, err) => Preferences.empty()),
       ],
-      child: MaterialApp(
-        title: 'PeriodTrack',
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          AppLocalizations.delegate, // Add this line
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''), // English
-          Locale('es', ''), // Spanish
-          Locale('pt', ''), // Portuguese
-          Locale('fr', ''), // French
-          Locale('de', ''), // German
-          Locale('it', ''), // Italian
-          Locale('zh', ''), // Simplified Chinese
-          Locale('ko', ''), // Korean
-          Locale('ja', ''), // Japanese
-          Locale('ar', ''), // Arabic
-          Locale('hi', ''), // Hindi
-        ],
-        theme: ThemeData(
-          colorSchemeSeed: primary,
-          brightness: Brightness.light,
-          useMaterial3: true,
-          textTheme: GoogleFonts.josefinSansTextTheme(),
-          backgroundColor: primary,
-          scaffoldBackgroundColor: primary,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: primary,
-            foregroundColor: secondary,
-          ),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: primaryDark,
-            unselectedItemColor: secondary,
-            selectedItemColor: secondaryLight,
-          ),
-          drawerTheme: const DrawerThemeData(
-            backgroundColor: primaryDark,
-          ),
-          navigationRailTheme: NavigationRailThemeData(
-            backgroundColor: primaryDark,
-            selectedLabelTextStyle: TextStyle(color: secondaryLight, fontFamily: GoogleFonts.josefinSans().fontFamily),
-            selectedIconTheme: const IconThemeData(color: secondaryLight),
-            unselectedLabelTextStyle: TextStyle(color: secondary, fontFamily: GoogleFonts.josefinSans().fontFamily),
-            unselectedIconTheme: const IconThemeData(color: secondary),
-            useIndicator: false,
-          ),
-          cardTheme: const CardTheme(color: primaryAlt),
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: callToAction, foregroundColor: primaryDark),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(primaryDark),
-              backgroundColor: MaterialStateProperty.all<Color>(callToAction),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-            ),
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(primaryDark),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              side: MaterialStateProperty.all(
-                const BorderSide(color: callToAction),
-              ),
-            ),
-          ),
-          dialogBackgroundColor: primaryLight,
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(),
-          ),
-        ),
-        darkTheme: ThemeData(
-          colorSchemeSeed: primary,
-          brightness: Brightness.dark,
-          useMaterial3: true,
-          textTheme: GoogleFonts.josefinSansTextTheme(
-              ThemeData(brightness: Brightness.dark).textTheme),
-          backgroundColor: Colors.black,
-          scaffoldBackgroundColor: Colors.black,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-          ),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            unselectedItemColor: secondary,
-            selectedItemColor: secondaryLight,
-          ),
-          navigationRailTheme: NavigationRailThemeData(
-            selectedLabelTextStyle: TextStyle(color: secondaryLight, fontFamily: GoogleFonts.josefinSans().fontFamily),
-            selectedIconTheme: const IconThemeData(color: secondaryLight),
-            unselectedLabelTextStyle: TextStyle(color: secondary, fontFamily: GoogleFonts.josefinSans().fontFamily),
-            unselectedIconTheme: const IconThemeData(color: secondary),
-            useIndicator: false,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xff7c2946)),
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
-              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-            ),
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
-              foregroundColor:
-              MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              side: MaterialStateProperty.all(
-                const BorderSide(color: Color(0xff7c2946)),
-              ),
-            ),
-          ),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(),
-          ),
-        ),
-        themeMode: ThemeMode.system,
-        initialRoute: '/',
-        navigatorKey: navigatorKey,
-        routes: {
-          '/': (context) => const SplashscreenPage(),
-          '/login': (context) => const LoginPage(),
-          '/home': (context) => const HomePage(),
-          '/about': (context) => const AboutPage(),
-          '/add-note': (context) => AddNotePage()
+      child: GestureDetector(
+        // close keyboard if tap anywhere
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
         },
+        child: MaterialApp(
+          title: 'PeriodTrack',
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            AppLocalizations.delegate, // Add this line
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''), // English
+            Locale('es', ''), // Spanish
+            Locale('pt', ''), // Portuguese
+            Locale('fr', ''), // French
+            Locale('de', ''), // German
+            Locale('it', ''), // Italian
+            Locale('zh', ''), // Simplified Chinese
+            Locale('ko', ''), // Korean
+            Locale('ja', ''), // Japanese
+            Locale('ar', ''), // Arabic
+            Locale('hi', ''), // Hindi
+          ],
+          theme: ThemeData(
+            colorSchemeSeed: primary,
+            brightness: Brightness.light,
+            useMaterial3: true,
+            textTheme: GoogleFonts.josefinSansTextTheme(),
+            backgroundColor: primary,
+            scaffoldBackgroundColor: primary,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: primary,
+              foregroundColor: secondary,
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: primaryDark,
+              unselectedItemColor: secondary,
+              selectedItemColor: secondaryLight,
+            ),
+            drawerTheme: const DrawerThemeData(
+              backgroundColor: primaryDark,
+            ),
+            navigationRailTheme: NavigationRailThemeData(
+              backgroundColor: primaryDark,
+              selectedLabelTextStyle: TextStyle(
+                  color: secondaryLight,
+                  fontFamily: GoogleFonts.josefinSans().fontFamily),
+              selectedIconTheme: const IconThemeData(color: secondaryLight),
+              unselectedLabelTextStyle: TextStyle(
+                  color: secondary,
+                  fontFamily: GoogleFonts.josefinSans().fontFamily),
+              unselectedIconTheme: const IconThemeData(color: secondary),
+              useIndicator: false,
+            ),
+            cardTheme: const CardTheme(color: primaryAlt),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                backgroundColor: callToAction, foregroundColor: primaryDark),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+                foregroundColor: MaterialStateProperty.all<Color>(primaryDark),
+                backgroundColor: MaterialStateProperty.all<Color>(callToAction),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+              ),
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+                foregroundColor: MaterialStateProperty.all<Color>(primaryDark),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                side: MaterialStateProperty.all(
+                  const BorderSide(color: callToAction),
+                ),
+              ),
+            ),
+            dialogBackgroundColor: primaryLight,
+            inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(),
+            ),
+          ),
+          darkTheme: ThemeData(
+            colorSchemeSeed: primary,
+            brightness: Brightness.dark,
+            useMaterial3: true,
+            textTheme: GoogleFonts.josefinSansTextTheme(
+                ThemeData(brightness: Brightness.dark).textTheme),
+            backgroundColor: Colors.black,
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              unselectedItemColor: secondary,
+              selectedItemColor: secondaryLight,
+            ),
+            navigationRailTheme: NavigationRailThemeData(
+              selectedLabelTextStyle: TextStyle(
+                  color: secondaryLight,
+                  fontFamily: GoogleFonts.josefinSans().fontFamily),
+              selectedIconTheme: const IconThemeData(color: secondaryLight),
+              unselectedLabelTextStyle: TextStyle(
+                  color: secondary,
+                  fontFamily: GoogleFonts.josefinSans().fontFamily),
+              unselectedIconTheme: const IconThemeData(color: secondary),
+              useIndicator: false,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xff7c2946)),
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
+                fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+              ),
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(300, 55)),
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xffffd9e2)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                side: MaterialStateProperty.all(
+                  const BorderSide(color: Color(0xff7c2946)),
+                ),
+              ),
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(),
+            ),
+          ),
+          themeMode: ThemeMode.system,
+          initialRoute: '/',
+          navigatorKey: navigatorKey,
+          routes: {
+            '/': (context) => const SplashscreenPage(),
+            '/login': (context) => const LoginPage(),
+            '/home': (context) => const HomePage(),
+            '/about': (context) => const AboutPage(),
+            '/add-note': (context) => AddNotePage()
+          },
+        ),
       ),
     );
   }
