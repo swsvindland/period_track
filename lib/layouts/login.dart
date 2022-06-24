@@ -9,7 +9,6 @@ import "package:os_detect/os_detect.dart" as platform;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:period_track/utils/helper.dart';
-import 'package:period_track/widgets/button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

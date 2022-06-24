@@ -101,7 +101,7 @@ class CalendarKeyItem extends StatelessWidget {
           Text(
             text,
             style: GoogleFonts.josefinSans(
-                color: primaryDark,
+                color: Theme.of(context).brightness == Brightness.light ? primaryDark : primaryLight,
                 fontSize: 12,
                 letterSpacing: 0.12),
           )

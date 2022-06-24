@@ -1,4 +1,3 @@
-import 'dart:io';
 import "package:os_detect/os_detect.dart" as platform;
 
 class AdHelper {

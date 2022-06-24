@@ -5,14 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
-import '../models/preferences.dart';
 
 class Notes extends StatelessWidget {
   const Notes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var preferences = Provider.of<Preferences>(context);
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
     notes.sort((a, b) {
       return b.date.compareTo(a.date);

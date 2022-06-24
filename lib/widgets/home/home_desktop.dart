@@ -25,25 +25,35 @@ class _HomeDesktopState extends State<HomeDesktop> {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            preferences.adFree || MediaQuery.of(context).size.width < md ?  const SizedBox(height: 0) : const AppBarAd(),
-            const SizedBox(height: 24),
-            const Calendar(),
-            const SizedBox(height: 24),
-            const Divider(color: secondary),
-            const SizedBox(height: 24),
-            Card(
-              color: Theme.of(context).brightness == Brightness.light ? primaryAlt : Theme.of(context).cardColor,
-              child: const Padding(
-                padding: EdgeInsets.all(12),
-                child: SizedBox(
-                  width: 600,
-                  child: CalendarKey(),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Column(
+            children: [
+              preferences.adFree || MediaQuery.of(context).size.width < md
+                  ? const SizedBox(height: 0)
+                  : const AppBarAd(),
+              const SizedBox(height: 24),
+              const Calendar(),
+              const SizedBox(height: 24),
+              const SizedBox(
+                width: 600,
+                child: Divider(color: secondary),
+              ),
+              const SizedBox(height: 24),
+              Card(
+                color: Theme.of(context).brightness == Brightness.light
+                    ? primaryAlt
+                    : Theme.of(context).cardColor,
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: SizedBox(
+                    width: 600,
+                    child: CalendarKey(),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils/ad_helper.dart';
 
