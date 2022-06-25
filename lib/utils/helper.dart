@@ -61,7 +61,7 @@ int computeMenstrualLength(int defaultCycleLength, List<DateTime> periodStarts) 
   }
 
 
-  return (sum / periodStarts.length).ceil();
+  return (sum / (periodStarts.length - 2)).ceil();
 }
 
 int computePeriodLength(int cycleLength) {
@@ -88,6 +88,10 @@ int computeFertilityLength(int cycleLength) {
 
 Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, List<DateTime> periodStartDates) {
   periodStartDates.sort((a, b) => a.compareTo(b));
+
+  if (periodStartDates.isEmpty) {
+    return {};
+  }
 
   int periodLength = computePeriodLength(cycleLength);
   DateTime temp = periodStartDates.last;

@@ -32,7 +32,7 @@
     "estCycle": "est. cycle start day",
 
     "defaultLength": "Default Cycle Length",
-    "periodLength": "Period Length",
+    "periodLength": "Cycle Length",
 
     "newEntry": "New Entry",
     "periodStart": "Period Start",

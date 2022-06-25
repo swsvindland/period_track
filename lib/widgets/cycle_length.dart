@@ -1,7 +1,8 @@
-import 'package:charts_flutter/flutter.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:period_track/models/note.dart';
+import 'package:period_track/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -34,13 +35,13 @@ class CycleLength extends StatelessWidget {
         .map((e) => e.date)
         .toList());
 
-    return BarChart(
+    return charts.BarChart(
       _createSampleData(cycles, context),
       animate: true,
     );
   }
 
-  static List<Series<Cycle, String>> _createSampleData(
+  static List<charts.Series<Cycle, String>> _createSampleData(
       List<Cycle> cycles, BuildContext context) {
     final List<Cycle> data = [];
     for (var cycle in cycles) {
@@ -52,9 +53,9 @@ class CycleLength extends StatelessWidget {
     });
 
     return [
-      Series<Cycle, String>(
+      charts.Series<Cycle, String>(
         id: 'WeighIns',
-        colorFn: (_, __) => MaterialPalette.purple.shadeDefault,
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(primaryDark),
         domainFn: (Cycle sales, _) =>
             DateFormat.MMM(Localizations.localeOf(context).languageCode)
                 .format(sales.date),
