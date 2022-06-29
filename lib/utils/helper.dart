@@ -29,6 +29,7 @@ void createDefaultPreferences(FirebaseFirestore db, User user) async {
       'defaultCycleLength': 28,
       'start':
           DateTime.parse('2000-01-01 ${7.toString().padLeft(2, '0')}:00:00'),
+      'disclaimer': false
     });
   }
 }

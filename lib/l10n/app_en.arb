@@ -34,6 +34,11 @@
     "defaultLength": "Default Cycle Length",
     "periodLength": "Cycle Length",
 
+    "disclaimer": "Disclaimer",
+    "disclaimerLine1": "Don't sue me",
+    "disclaimerLine2": "Fertility might be inaccurate",
+    "iAgree": "I Agree",
+
     "newEntry": "New Entry",
     "periodStart": "Period Start",
     "intimacy": "Intimacy",

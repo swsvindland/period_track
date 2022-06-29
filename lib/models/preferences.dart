@@ -2,8 +2,9 @@ class Preferences {
   int defaultCycleLength;
   int start;
   bool adFree;
+  bool disclaimer;
 
-  Preferences({required this.defaultCycleLength, required this.start, required this.adFree });
+  Preferences({required this.defaultCycleLength, required this.start, required this.adFree, required this.disclaimer });
 
   void setDefaultCycleLength(int value) {
     defaultCycleLength = value;
@@ -13,8 +14,12 @@ class Preferences {
     start = value;
   }
 
+  void agreeToDisclaimer() {
+    disclaimer = true;
+  }
+
   static Preferences empty() {
-    return Preferences(defaultCycleLength: 28, start: 7, adFree: false);
+    return Preferences(defaultCycleLength: 28, start: 7, adFree: false, disclaimer: false);
   }
 
   factory Preferences.fromMap(Map data) {
@@ -22,7 +27,8 @@ class Preferences {
     return Preferences(
         defaultCycleLength: data['defaultCycleLength'],
         start: data['start'].toDate().hour,
-        adFree: data['adFree']
+        adFree: data['adFree'],
+        disclaimer: data['disclaimer']
     );
   }
 
@@ -32,7 +38,8 @@ class Preferences {
       'defaultCycleLength': data.defaultCycleLength,
       'start': DateTime.parse(
           '2000-01-01 ${data.start.toString().padLeft(2, '0')}:00:00'),
-      'adFree': data.adFree
+      'adFree': data.adFree,
+      'disclaimer': data.disclaimer
     };
   }
 }
