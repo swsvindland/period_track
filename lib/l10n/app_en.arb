@@ -35,9 +35,8 @@
     "periodLength": "Cycle Length",
 
     "disclaimer": "Disclaimer",
-    "disclaimerLine1": "Don't sue me",
-    "disclaimerLine2": "Fertility might be inaccurate",
-    "iAgree": "I Agree",
+    "disclaimerLine1": "PeriodTrack is an informational app designed to be used for personal convenience. It is NOT a substitute for medical advice given by medical professionals. If you have any questions regarding your reproductive health and/or reproductive goals, please contact your primary care physician, obstetrician/gynecologist, or another medically licensed professional.",
+    "iAgree": "I Understand",
 
     "newEntry": "New Entry",
     "periodStart": "Period Start",

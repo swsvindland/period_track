@@ -19,7 +19,7 @@ class Preferences {
   }
 
   static Preferences empty() {
-    return Preferences(defaultCycleLength: 28, start: 7, adFree: false, disclaimer: false);
+    return Preferences(defaultCycleLength: 28, start: 7, adFree: false, disclaimer: true);
   }
 
   factory Preferences.fromMap(Map data) {

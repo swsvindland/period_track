@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
             child: ListBody(
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.disclaimerLine1),
-                Text(AppLocalizations.of(context)!.disclaimerLine2),
               ],
             ),
           ),
@@ -40,6 +39,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 preferences.agreeToDisclaimer();
                 db.updatePreferences(user.uid, preferences);
+                Navigator.pop(context);
               },
             ),
           ],
@@ -63,8 +63,6 @@ class _HomePageState extends State<HomePage> {
 
     if (preferences.disclaimer == false) {
       Future.delayed(Duration.zero, () => _showDisclaimerDialog(context, user, preferences, _db));
-    } else {
-      Navigator.pop(context);
     }
 
     if (MediaQuery.of(context).size.width < sm) {
