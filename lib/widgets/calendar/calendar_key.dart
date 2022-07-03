@@ -66,7 +66,9 @@ class CalendarKey extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(width: 150),
+              CalendarKeyItem(
+                  icon: const CalendarKeyItemIconDot(color: primaryDark),
+                  text: AppLocalizations.of(context)!.flow.toLowerCase()),
               CalendarKeyItem(
                   icon: const CalendarKeyItemIconDot(color: primaryLight),
                   text: AppLocalizations.of(context)!.intimacy.toLowerCase()),
