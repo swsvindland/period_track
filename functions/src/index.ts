@@ -14,7 +14,20 @@ interface IToken {
 interface IPref {
     uid: string
     start: number
-    end: number
+    defaultCycleLength: number
+}
+
+enum Flow {
+    Light,
+    Normal,
+    Heavy
+}
+
+interface INote {
+    uid: string;
+    periodStart: boolean;
+    flow: Flow;
+    date: Date;
 }
 
 export const sendNotificationsHttp = functions.https.onRequest(async (req, res) => {
@@ -48,42 +61,47 @@ const sendNotifications = async () => {
             prefs.push({
                 uid: document.id,
                 start: document.get('start')?.toDate(),
-                end: document.get('end')?.toDate(),
+                defaultCycleLength: document.get('defaultCycleLength'),
             });
         });
     });
 
-    tokens.forEach((token) => {
-        prefs.forEach((pref) => {
+
+    tokens.forEach(async (token) => {
+        await prefs.forEach(async (pref) => {
             if (token.uid === pref.uid) {
+                const notes: INote[] = [];
+
+                await db.collection('notes').where('uid', '==', pref.uid).get().then((snapshot) => {
+                    snapshot.forEach((document) => {
+                        notes.push({
+                            uid: document.get('uid'),
+                            periodStart: document.get('periodStart'),
+                            date: document.get('date')?.toDate(),
+                            flow: document.get('flow'),
+                        });
+                    });
+                });
+
                 const current = moment(`2000 1 1 ${(new Date).getHours()}:00:00`);
                 const start = (new Date(pref.start));
-                const end = (new Date(pref.end));
                 let payload: admin.messaging.MessagingPayload | undefined = undefined;
 
-                console.log(start, end, current);
+                console.log(start, current);
 
                 if (start.getHours() === current.hour()) {
-                    payload = {
-                        notification: {
-                            title: 'Good Morning!',
-                            body: 'Drink 2 glasses of water',
-                        },
-                    };
-                } else if (moment(start, 'h').isBefore(moment(current, 'h')) && moment(current, 'h').isBefore(moment(end, 'h')) ) {
-                    payload = {
-                        notification: {
-                            title: 'Good Job, Keep Going!',
-                            body: 'Drink 1 glass of water',
-                        },
-                    };
-                } else if (end.getHours() === current.hour()) {
-                    payload = {
-                        notification: {
-                            title: 'Good Evening!',
-                            body: 'Drink 1 glass of water',
-                        },
-                    };
+                    const periodStarts = computePeriodStarts(notes);
+                    const cycleLength = computeMenstrualLength(pref.defaultCycleLength, periodStarts);
+                    const nextPeriod = computeNextPeriodStart(cycleLength, periodStarts);
+
+                    if (determineIfSendNotification(nextPeriod)) {
+                        payload = {
+                            notification: {
+                                title: 'Good Morning!',
+                                body: 'Your next period is starting soon.',
+                            },
+                        };
+                    }
                 }
 
                 if (payload) {
@@ -93,3 +111,38 @@ const sendNotifications = async () => {
         });
     });
 };
+
+const computePeriodStarts = (notes: INote[]) => {
+    return notes.filter((note) => note.periodStart).map((note) => note.date);
+};
+
+const computeMenstrualLength = (defaultCycleLength: number, periodStarts: Date[]) => {
+    if (periodStarts.length < 3) {
+        return defaultCycleLength;
+    }
+
+    periodStarts.sort((a, b) => a < b ? 1 : b < a ? -1 : 0);
+
+    let temp = periodStarts[0];
+    let sum = 0;
+
+    for (let i = 1; i < periodStarts.length - 1; ++i) {
+        sum += moment(periodStarts[i]).diff(temp);
+        temp = periodStarts[i];
+    }
+
+    return Math.ceil(sum / (periodStarts.length - 2));
+};
+
+const computeNextPeriodStart = (cycleLength: number, periodStarts: Date[]) => {
+    periodStarts.sort((a, b) => a < b ? 1 : b < a ? -1 : 0);
+
+    return moment(periodStarts[periodStarts.length - 1]).add(cycleLength, 'days').toDate();
+};
+
+const determineIfSendNotification = (date: Date) => {
+    const today = new Date();
+    const difference = moment(today).diff(date);
+
+    return difference < 4 && difference > 0;
+}
