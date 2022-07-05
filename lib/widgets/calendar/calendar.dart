@@ -30,7 +30,7 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
 
-    var keyedNotes = {for (var e in notes) e.date: e};
+    var keyedNotes = {for (var e in notes) DateUtils.dateOnly(e.date): e};
 
     List<Event> _getEventsFromNotes(DateTime day) {
       var key = DateUtils.dateOnly(day);
@@ -276,7 +276,7 @@ class CalendarDay extends StatelessWidget {
       return Center(child: Text(day.day.toString(), style: calendarTextStyle));
     }
 
-    var keyedNotes = {for (var e in notes) e.date: e};
+    var keyedNotes = {for (var e in notes) DateUtils.dateOnly(e.date): e};
 
     var periodStartNotes =
         notes.where((element) => element.periodStart).toList();
@@ -290,7 +290,7 @@ class CalendarDay extends StatelessWidget {
     int fertileLength = computeFertilityLength(menstrualCycleLength);
 
     List<DateTime> periodStartDate =
-        periodStartNotes.map((e) => e.date).toList();
+        periodStartNotes.map((e) => DateUtils.dateOnly(e.date)).toList();
     List<DateTime> ovulationDate = periodStartDate
         .map((e) => e.add(Duration(days: ovulationLength)))
         .toList();

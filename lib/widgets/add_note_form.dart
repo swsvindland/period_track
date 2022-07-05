@@ -57,7 +57,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
     var date = widget.date ?? DateUtils.dateOnly(DateTime.now());
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
     var note = notes.isNotEmpty
-        ? notes.where((element) => element.date == date)
+        ? notes.where((element) => DateUtils.dateOnly(element.date) == date)
         : null;
 
     if (_firstMount && note != null && note.isNotEmpty) {
