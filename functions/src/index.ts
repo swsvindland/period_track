@@ -145,4 +145,4 @@ const determineIfSendNotification = (date: Date) => {
     const difference = moment(today).diff(date);
 
     return difference < 4 && difference > 0;
-}
+};
