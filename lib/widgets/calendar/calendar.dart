@@ -249,17 +249,10 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarDay extends StatelessWidget {
-  CalendarDay({Key? key, required this.day, required this.day2})
+  const CalendarDay({Key? key, required this.day, required this.day2})
       : super(key: key);
   final DateTime day;
   final DateTime day2;
-
-  final calendarTextStyle = GoogleFonts.josefinSans(
-    color: text,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.05,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -267,6 +260,13 @@ class CalendarDay extends StatelessWidget {
 
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
     var preferences = Provider.of<Preferences>(context);
+
+    final calendarTextStyle = GoogleFonts.josefinSans(
+      color: dateOnly == DateUtils.dateOnly(DateTime.now()) ? secondaryDark : text,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.05,
+    );
 
     if (day.month != day2.month) {
       return const Center();

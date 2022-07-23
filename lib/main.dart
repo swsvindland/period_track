@@ -200,7 +200,7 @@ class App extends StatelessWidget {
           routes: {
             '/': (context) => const SplashscreenPage(),
             '/login': (context) => const LoginPage(),
-            '/home': (context) => HomePage(),
+            '/home': (context) => const HomePage(),
             '/about': (context) => const AboutPage(),
             '/add-note': (context) => AddNotePage()
           },
