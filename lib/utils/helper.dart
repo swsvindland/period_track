@@ -83,7 +83,7 @@ int computeFertilityLength(int cycleLength) {
   var computed = (cycleLength / 3).ceil();
 
   if (computed < 4) return 4;
-  if (computed > 8) return 8;
+  if (computed > 8) return 6;
   return computed;
 }
 

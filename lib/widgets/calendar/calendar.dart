@@ -294,8 +294,8 @@ class CalendarDay extends StatelessWidget {
     List<DateTime> ovulationDate = periodStartDate
         .map((e) => e.add(Duration(days: ovulationLength)))
         .toList();
-    List<DateTime> fertilePeriodDateStart = periodStartDate
-        .map((e) => e.add(Duration(days: fertileLength)))
+    List<DateTime> fertilePeriodDateStart = ovulationDate
+        .map((e) => e.subtract(Duration(days: fertileLength)))
         .toList();
     Map<DateTime, DateTime> predictedPeriodDays =
         computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate);
