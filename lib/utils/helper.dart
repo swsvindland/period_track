@@ -115,7 +115,7 @@ class Cycle {
   Cycle({ required this.date, required this.length});
 }
 
-List<Cycle> computeMenstrualLengthsForGraph(List<DateTime> periodStarts) {
+List<Cycle> computeMenstrualLengthsForGraph(int cycleLength, List<DateTime> periodStarts) {
   periodStarts.sort((a, b) {
     return a.compareTo(b);
   });
@@ -129,6 +129,9 @@ List<Cycle> computeMenstrualLengthsForGraph(List<DateTime> periodStarts) {
     temp = periodStarts[i];
   }
 
+  var predictedNextPeriodStart = computeNextFewYearsOfCycles(cycleLength, periodStarts).entries.first.value;
+
+  output.add(Cycle(date: periodStarts[periodStarts.length - 1], length: predictedNextPeriodStart.difference(periodStarts[periodStarts.length - 1]).inDays));
 
   return output;
 }
