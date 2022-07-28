@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import "package:os_detect/os_detect.dart" as platform;
+import 'package:period_track/models/note.dart';
 
 void setFCMData(
   FirebaseFirestore db,
@@ -132,6 +133,34 @@ List<Cycle> computeMenstrualLengthsForGraph(int cycleLength, List<DateTime> peri
   var predictedNextPeriodStart = computeNextFewYearsOfCycles(cycleLength, periodStarts).entries.first.value;
 
   output.add(Cycle(date: periodStarts[periodStarts.length - 1], length: predictedNextPeriodStart.difference(periodStarts[periodStarts.length - 1]).inDays));
+
+  return output;
+}
+
+List<Cycle> computeFlowLengthsForGraph(int cycleLength, List<NoteModel> notes) {
+  notes.sort((a, b) {
+    return a.date.compareTo(b.date);
+  });
+
+  List<Cycle> output = [];
+
+  for (int i = 0; i < notes.length - 1; ++i) {
+    if (!notes[i].periodStart) {
+      continue;
+    }
+    var count = 1;
+    for (int j = i + 1; j < notes.length; ++j) {
+      if (notes[j].periodStart) {
+        break;
+      }
+
+      if (notes[j].flow != null) {
+        count++;
+      }
+    }
+
+    output.add(Cycle(date: notes[i].date, length: count));
+  }
 
   return output;
 }

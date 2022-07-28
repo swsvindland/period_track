@@ -12,7 +12,7 @@ import '../models/note.dart';
 import '../models/preferences.dart';
 import '../widgets/home/home.dart';
 import '../widgets/notes.dart';
-import '../widgets/reports.dart';
+import '../widgets/reports/reports.dart';
 import '../widgets/settings.dart';
 
 class HomePageMobile extends StatefulWidget {

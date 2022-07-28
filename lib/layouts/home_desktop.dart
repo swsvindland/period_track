@@ -11,7 +11,7 @@ import '../services/sign_in.dart';
 import '../widgets/about.dart';
 import '../widgets/home/home.dart';
 import '../widgets/notes.dart';
-import '../widgets/reports.dart';
+import '../widgets/reports/reports.dart';
 import '../widgets/settings.dart';
 
 class HomePageDesktop extends StatefulWidget {

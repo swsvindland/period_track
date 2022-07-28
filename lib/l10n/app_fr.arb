@@ -26,6 +26,7 @@
   "estCycle": "jour de début de cycle estimé",
   "defaultLength": "Durée du cycle par défaut",
   "periodLength": "Durée du cycle",
+  "flowLength": "Longueur du débit",
   "disclaimer": "Clause de non-responsabilité",
   "disclaimerLine1": "PeriodTrack est une application d'information conçue pour être utilisée à des fins personnelles. Il ne remplace PAS un avis médical donné par des professionnels de la santé. Si vous avez des questions concernant votre santé reproductive et/ou vos objectifs en matière de reproduction, veuillez contacter votre médecin traitant, votre obstétricien/gynécologue ou un autre professionnel médical agréé.",
   "iAgree": "Je comprend",

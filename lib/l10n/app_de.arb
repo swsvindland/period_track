@@ -26,6 +26,7 @@
   "estCycle": "geschätzter Zyklusstarttag",
   "defaultLength": "Standardzykluslänge",
   "periodLength": "Zykluslänge",
+  "flowLength": "Flusslänge",
   "disclaimer": "Haftungsausschluss",
   "disclaimerLine1": "PeriodTrack ist eine Informations-App, die für den persönlichen Komfort entwickelt wurde. Es ist KEIN Ersatz für die medizinische Beratung durch medizinisches Fachpersonal. Wenn Sie Fragen zu Ihrer reproduktiven Gesundheit und/oder reproduktiven Zielen haben, wenden Sie sich bitte an Ihren Hausarzt, Geburtshelfer/Gynäkologen oder eine andere medizinisch zugelassene Fachkraft.",
   "iAgree": "Ich verstehe",

@@ -7,7 +7,7 @@ import 'package:period_track/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../utils/helper.dart';
+import '../../utils/helper.dart';
 
 class CycleLength extends StatelessWidget {
   const CycleLength({Key? key}) : super(key: key);
@@ -58,8 +58,8 @@ class CycleLength extends StatelessWidget {
 
     return [
       charts.Series<Cycle, String>(
-        id: 'WeighIns',
-        colorFn: (_, __) => charts.ColorUtil.fromDartColor(primaryDark),
+        id: 'CycleLength',
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(secondaryDark),
         domainFn: (Cycle sales, _) =>
             DateFormat.MMM(Localizations.localeOf(context).languageCode)
                 .format(sales.date),
