@@ -52,7 +52,7 @@ class About extends StatelessWidget {
                 style: const TextStyle(color: text, fontSize: 16),
               ),
               const Text(
-                '1.1.0',
+                '1.3.1',
                 style: TextStyle(color: text, fontSize: 12),
               ),
             ],
