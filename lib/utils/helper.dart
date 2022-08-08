@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import "package:os_detect/os_detect.dart" as platform;
 import 'package:period_track/models/note.dart';
 
@@ -88,15 +89,31 @@ int computeFertilityLength(int cycleLength) {
   return computed;
 }
 
-Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, List<DateTime> periodStartDates) {
-  periodStartDates.sort((a, b) => a.compareTo(b));
+Map<DateTime, DateTime> computeFertility(int cycleLength, Map<DateTime, DateTime> ovulationDate) {
+  List<DateTime> output = [];
+  var length = computeFertilityLength(cycleLength);
 
-  if (periodStartDates.isEmpty) {
+  ovulationDate.keys.toList().forEach((element) {
+    // potential fertility after ovulation so the negative one is to show the day after
+    for (int i = -1; i < length - 1; ++i) {
+      output.add(element.subtract(Duration(days: i)));
+    }
+  });
+
+  return {for (var e in output) DateUtils.dateOnly(e): DateUtils.dateOnly(e)};
+}
+
+Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, Map<DateTime, DateTime> periodStartDates) {
+  var sorted = Map.fromEntries(
+      periodStartDates.entries.toList()
+        ..sort((e1, e2) => e1.value.compareTo(e2.value)));
+
+  if (sorted.isEmpty) {
     return {};
   }
 
   int periodLength = computePeriodLength(cycleLength);
-  DateTime temp = periodStartDates.last;
+  DateTime temp = sorted.keys.last;
   List<DateTime> output = [];
 
   for (int i = 0; i < 48; ++i) {
@@ -106,7 +123,7 @@ Map<DateTime, DateTime> computeNextFewYearsOfCycles(int cycleLength, List<DateTi
     }
   }
 
-  return {for (var e in output) e: e};
+  return {for (var e in output) DateUtils.dateOnly(e): DateUtils.dateOnly(e)};
 }
 
 class Cycle {
@@ -130,7 +147,9 @@ List<Cycle> computeMenstrualLengthsForGraph(int cycleLength, List<DateTime> peri
     temp = periodStarts[i];
   }
 
-  var predictedNextPeriodStart = computeNextFewYearsOfCycles(cycleLength, periodStarts).entries.first.value;
+  var keyedPeriodStarts = { for (var e in periodStarts) DateUtils.dateOnly(e) : DateUtils.dateOnly(e)};
+
+  var predictedNextPeriodStart = computeNextFewYearsOfCycles(cycleLength, keyedPeriodStarts).entries.first.value;
 
   output.add(Cycle(date: periodStarts[periodStarts.length - 1], length: predictedNextPeriodStart.difference(periodStarts[periodStarts.length - 1]).inDays));
 

@@ -29,8 +29,34 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
+    var preferences = Provider.of<Preferences>(context);
 
     var keyedNotes = {for (var e in notes) DateUtils.dateOnly(e.date): e};
+
+    var periodStartNotes =
+        notes.where((element) => element.periodStart).toList();
+
+    periodStartNotes.sort((a, b) => a.date.compareTo(b.date));
+
+    int menstrualCycleLength = computeMenstrualLength(
+        preferences.defaultCycleLength,
+        periodStartNotes.map((e) => e.date).toList());
+    int ovulationLength = computeOvulationLength(menstrualCycleLength);
+
+    Map<DateTime, DateTime> periodStartDate = {
+      for (var e in periodStartNotes)
+        DateUtils.dateOnly(e.date): DateUtils.dateOnly(e.date)
+    };
+
+    Map<DateTime, DateTime> ovulationDate = periodStartDate.map((key, value) {
+      var newEntry = key.add(Duration(days: ovulationLength));
+      return MapEntry(newEntry, newEntry);
+    });
+
+    Map<DateTime, DateTime> fertileDays = computeFertility(menstrualCycleLength, ovulationDate);
+
+    Map<DateTime, DateTime> predictedPeriodDays =
+        computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate);
 
     List<Event> _getEventsFromNotes(DateTime day) {
       var key = DateUtils.dateOnly(day);
@@ -117,10 +143,26 @@ class _CalendarState extends State<Calendar> {
             },
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, day2) {
-                return CalendarDay(day: day, day2: day2);
+                return CalendarDay(
+                  day: day,
+                  day2: day2,
+                  periodStartDate: periodStartDate,
+                  ovulationDate: ovulationDate,
+                  keyedNotes: keyedNotes,
+                  predictedPeriodDays: predictedPeriodDays,
+                  fertileDays: fertileDays,
+                );
               },
               defaultBuilder: (context, day, day2) {
-                return CalendarDay(day: day, day2: day2);
+                return CalendarDay(
+                  day: day,
+                  day2: day2,
+                  periodStartDate: periodStartDate,
+                  ovulationDate: ovulationDate,
+                  keyedNotes: keyedNotes,
+                  predictedPeriodDays: predictedPeriodDays,
+                  fertileDays: fertileDays,
+                );
               },
               disabledBuilder: (context, day, day2) {
                 return const Center();
@@ -152,8 +194,8 @@ class _CalendarState extends State<Calendar> {
                   if (element == const Event('Note')) {
                     dots.add(
                       const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 2),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 2),
                         child: CircleAvatar(
                           backgroundColor: secondary,
                           maxRadius: 4,
@@ -165,8 +207,8 @@ class _CalendarState extends State<Calendar> {
                   if (element == const Event('Intimacy')) {
                     dots.add(
                       const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 2),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 2),
                         child: CircleAvatar(
                           backgroundColor: primaryLight,
                           maxRadius: 4,
@@ -178,8 +220,8 @@ class _CalendarState extends State<Calendar> {
                   if (element == const Event('Light')) {
                     dots.add(
                       const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 2),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 2),
                         child: CircleAvatar(
                           backgroundColor: primaryDark,
                           maxRadius: 4,
@@ -249,20 +291,33 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarDay extends StatelessWidget {
-  const CalendarDay({Key? key, required this.day, required this.day2})
+  const CalendarDay(
+      {Key? key,
+      required this.day,
+      required this.day2,
+      required this.periodStartDate,
+      required this.ovulationDate,
+      required this.keyedNotes,
+      required this.predictedPeriodDays,
+      required this.fertileDays
+      })
       : super(key: key);
   final DateTime day;
   final DateTime day2;
+  final Map<DateTime, DateTime> periodStartDate;
+  final Map<DateTime, DateTime> ovulationDate;
+  final Map<DateTime, NoteModel> keyedNotes;
+  final Map<DateTime, DateTime> predictedPeriodDays;
+  final Map<DateTime, DateTime> fertileDays;
 
   @override
   Widget build(BuildContext context) {
     var dateOnly = DateUtils.dateOnly(day);
-
     var notes = Provider.of<Iterable<NoteModel>>(context).toList();
-    var preferences = Provider.of<Preferences>(context);
 
     final calendarTextStyle = GoogleFonts.josefinSans(
-      color: dateOnly == DateUtils.dateOnly(DateTime.now()) ? secondaryDark : text,
+      color:
+          dateOnly == DateUtils.dateOnly(DateTime.now()) ? secondaryDark : text,
       fontSize: 16,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.05,
@@ -276,31 +331,7 @@ class CalendarDay extends StatelessWidget {
       return Center(child: Text(day.day.toString(), style: calendarTextStyle));
     }
 
-    var keyedNotes = {for (var e in notes) DateUtils.dateOnly(e.date): e};
-
-    var periodStartNotes =
-        notes.where((element) => element.periodStart).toList();
-
-    periodStartNotes.sort((a, b) => a.date.compareTo(b.date));
-
-    int menstrualCycleLength = computeMenstrualLength(
-        preferences.defaultCycleLength,
-        periodStartNotes.map((e) => e.date).toList());
-    int ovulationLength = computeOvulationLength(menstrualCycleLength);
-    int fertileLength = computeFertilityLength(menstrualCycleLength);
-
-    List<DateTime> periodStartDate =
-        periodStartNotes.map((e) => DateUtils.dateOnly(e.date)).toList();
-    List<DateTime> ovulationDate = periodStartDate
-        .map((e) => e.add(Duration(days: ovulationLength)))
-        .toList();
-    List<DateTime> fertilePeriodDateStart = ovulationDate
-        .map((e) => e.subtract(Duration(days: fertileLength)))
-        .toList();
-    Map<DateTime, DateTime> predictedPeriodDays =
-        computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate);
-
-    if (periodStartDate.contains(dateOnly)) {
+    if (periodStartDate.containsKey(dateOnly)) {
       return Center(
         child: Container(
           padding: const EdgeInsets.all(3),
@@ -323,7 +354,7 @@ class CalendarDay extends StatelessWidget {
       );
     }
 
-    if (ovulationDate.contains(dateOnly)) {
+    if (ovulationDate.containsKey(dateOnly)) {
       return Center(
         child: Container(
           padding: const EdgeInsets.all(3),
@@ -346,8 +377,8 @@ class CalendarDay extends StatelessWidget {
       );
     }
 
-    if (keyedNotes.containsKey(DateUtils.dateOnly(day))) {
-      if (keyedNotes[DateUtils.dateOnly(day)]?.flow != null) {
+    if (keyedNotes.containsKey(dateOnly)) {
+      if (keyedNotes[dateOnly]?.flow != null) {
         return Center(
           child: Container(
             padding: const EdgeInsets.all(12),
@@ -368,28 +399,24 @@ class CalendarDay extends StatelessWidget {
       }
     }
 
-    for (var i = 0; i < ovulationDate.length; ++i) {
-      if (dateOnly.isAfter(fertilePeriodDateStart[i]) &&
-          dateOnly.isBefore(ovulationDate[i].add(const Duration(days: 2)))) {
-        return Center(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: ternaryLight)),
-            child: SizedBox(
-              height: 20,
-              width: 20,
-              child: Center(
-                child: Text(
-                  day.day.toString(),
-                  style: calendarTextStyle,
-                ),
+    if (fertileDays.containsKey(dateOnly)) {
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle, border: Border.all(color: ternaryLight)),
+          child: SizedBox(
+            height: 20,
+            width: 20,
+            child: Center(
+              child: Text(
+                day.day.toString(),
+                style: calendarTextStyle,
               ),
             ),
           ),
-        );
-      }
+        ),
+      );
     }
 
     if (predictedPeriodDays.containsKey(dateOnly)) {
