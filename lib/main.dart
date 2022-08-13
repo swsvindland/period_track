@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+  );
   MobileAds.instance.initialize();
 
   runApp(App());
@@ -68,6 +71,8 @@ class App extends StatelessWidget {
             Locale('ja', ''), // Japanese
             Locale('ar', ''), // Arabic
             Locale('hi', ''), // Hindi
+            Locale('ru', ''), // Russian
+            Locale('no', ''), // Norwegian
           ],
           theme: ThemeData(
             colorSchemeSeed: primary,

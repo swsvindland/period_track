@@ -15,7 +15,7 @@
   "logOut": "Cerrar sesión",
   "googleSignIn": "Continuar con Google",
   "appleSignIn": "Continuar con Apple",
-  "anonSignIn": "Continuar sin Cuenta",
+  "anonSignIn": "Continuar sin cuenta",
   "deleteAccount": "Borrar cuenta",
   "deleteAccountConfirm": "Esto eliminará su cuenta y todos los datos de usuario para siempre. ¿Está seguro?",
   "noNotesError": "Parece que aún no ha registrado un período. Agregue una nueva nota para comenzar.",
