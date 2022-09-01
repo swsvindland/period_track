@@ -72,18 +72,6 @@ class _CalendarState extends State<Calendar> {
         events.add(const Event('Intimacy'));
       }
 
-      if (keyedNotes[key]?.flow == FlowRate.light) {
-        events.add(const Event('Light'));
-      }
-
-      if (keyedNotes[key]?.flow == FlowRate.normal) {
-        events.add(const Event('Normal'));
-      }
-
-      if (keyedNotes[key]?.flow == FlowRate.heavy) {
-        events.add(const Event('Heavy'));
-      }
-
       return events;
     }
 
@@ -212,65 +200,6 @@ class _CalendarState extends State<Calendar> {
                         child: CircleAvatar(
                           backgroundColor: primaryLight,
                           maxRadius: 4,
-                        ),
-                      ),
-                    );
-                  }
-
-                  if (element == const Event('Light')) {
-                    dots.add(
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 2),
-                        child: CircleAvatar(
-                          backgroundColor: primaryDark,
-                          maxRadius: 4,
-                        ),
-                      ),
-                    );
-                  }
-
-                  if (element == const Event('Normal')) {
-                    dots.add(
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 2),
-                        child: Row(
-                          children: const [
-                            CircleAvatar(
-                              backgroundColor: primaryDark,
-                              maxRadius: 4,
-                            ),
-                            CircleAvatar(
-                              backgroundColor: primaryDark,
-                              maxRadius: 4,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-
-                  if (element == const Event('Heavy')) {
-                    dots.add(
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 2),
-                        child: Row(
-                          children: const [
-                            CircleAvatar(
-                              backgroundColor: primaryDark,
-                              maxRadius: 4,
-                            ),
-                            CircleAvatar(
-                              backgroundColor: primaryDark,
-                              maxRadius: 4,
-                            ),
-                            CircleAvatar(
-                              backgroundColor: primaryDark,
-                              maxRadius: 4,
-                            ),
-                          ],
                         ),
                       ),
                     );
