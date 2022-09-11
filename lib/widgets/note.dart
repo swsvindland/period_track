@@ -71,6 +71,10 @@ class FlowIndicator extends StatelessWidget {
       return const SizedBox();
     }
 
+    if (flow == FlowRate.spotting) {
+      return Image.asset('images/flow-spotting.png', height: 24);
+    }
+
     if (flow == FlowRate.light) {
       return Image.asset('images/flow-light.png', height: 24);
     }

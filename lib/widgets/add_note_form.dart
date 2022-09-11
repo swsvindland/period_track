@@ -102,149 +102,496 @@ class _AddNoteFormState extends State<AddNoteForm> {
       }
     }
 
-    return Column(
-      children: [
-        const SizedBox(height: 36),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: SizedBox(
-              width: 600,
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DateField(
-                        controller: _dateController,
-                        onChanged: (day) {
-                          var newNote = notes.isNotEmpty
-                              ? notes.where((element) => element.date == day)
-                              : null;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 36),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: SizedBox(
+                width: 600,
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DateField(
+                          controller: _dateController,
+                          onChanged: (day) {
+                            var newNote = notes.isNotEmpty
+                                ? notes.where((element) => element.date == day)
+                                : null;
 
-                          setState(() {
-                            if (newNote != null && newNote.isNotEmpty) {
-                              _noteController.text = newNote.first.note;
-                              _periodStart = newNote.first.periodStart;
-                              _intimacy = newNote.first.intimacy;
-                              _flow = newNote.first.flow;
-                            }
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Row(children: [
-                            Checkbox(
-                              value: _periodStart,
-                              onChanged: (val) {
-                                setState(() {
-                                  _periodStart = val ?? false;
-                                });
-                              },
-                            ),
-                            Text(AppLocalizations.of(context)!.periodStart),
-                          ]),
-                          Row(children: [
-                            Checkbox(
-                              value: _intimacy,
-                              onChanged: (val) {
-                                setState(() {
-                                  _intimacy = val ?? false;
-                                });
-                              },
-                            ),
-                            Text(AppLocalizations.of(context)!.intimacy),
-                          ]),
-                        ],
-                      ),
-                      const Text('Flow'),
-                      ToggleButtons(
-                        onPressed: (int index) {
-                          setState(() {
-                            switch (index) {
-                              case 0:
-                                _flow = FlowRate.light;
-                                break;
-                              case 1:
-                                _flow = FlowRate.normal;
-                                break;
-                              case 2:
-                                _flow = FlowRate.heavy;
-                                break;
-                            }
-                          });
-                        },
-                        isSelected: [
-                          _flow == FlowRate.light,
-                          _flow == FlowRate.normal,
-                          _flow == FlowRate.heavy
-                        ],
-                        children: [
-                          Image.asset('images/flow-light.png', height: 24),
-                          Image.asset('images/flow-normal.png', height: 24),
-                          Image.asset('images/flow-heavy.png', height: 24),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        minLines: 4,
-                        maxLines: 6,
-                        controller: _noteController,
-                        decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.note,
+                            setState(() {
+                              if (newNote != null && newNote.isNotEmpty) {
+                                _noteController.text = newNote.first.note;
+                                _periodStart = newNote.first.periodStart;
+                                _intimacy = newNote.first.intimacy;
+                                _flow = newNote.first.flow;
+                              }
+                            });
+                          },
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Row(children: [
+                              Checkbox(
+                                value: _periodStart,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _periodStart = val ?? false;
+                                  });
+                                },
+                              ),
+                              Text(AppLocalizations.of(context)!.periodStart),
+                            ]),
+                            Row(children: [
+                              Checkbox(
+                                value: _intimacy,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _intimacy = val ?? false;
+                                  });
+                                },
+                              ),
+                              Text(AppLocalizations.of(context)!.intimacy),
+                            ]),
+                          ],
+                        ),
+                        const Text('Flow'),
+                        ToggleButtons(
+                          selectedBorderColor: primaryDark,
+                          onPressed: (int index) {
+                            setState(() {
+                              switch (index) {
+                                case 0:
+                                  _flow = FlowRate.spotting;
+                                  break;
+                                case 1:
+                                  _flow = FlowRate.light;
+                                  break;
+                                case 2:
+                                  _flow = FlowRate.normal;
+                                  break;
+                                case 3:
+                                  _flow = FlowRate.heavy;
+                                  break;
+                              }
+                            });
+                          },
+                          isSelected: [
+                            _flow == FlowRate.spotting,
+                            _flow == FlowRate.light,
+                            _flow == FlowRate.normal,
+                            _flow == FlowRate.heavy
+                          ],
+                          children: [
+                            Image.asset('images/flow-spotting.png', height: 24),
+                            Image.asset('images/flow-light.png', height: 24),
+                            Image.asset('images/flow-normal.png', height: 24),
+                            Image.asset('images/flow-heavy.png', height: 24),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          minLines: 4,
+                          maxLines: 6,
+                          controller: _noteController,
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.note,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              submit();
-              navigatorKey.currentState!.pop();
-            },
-            style: ButtonStyle(
-              foregroundColor:
-              MaterialStateProperty.all<Color>(
-                  secondaryLight),
-              backgroundColor:
-              MaterialStateProperty.all<Color>(
-                  primaryDark),
-            ),
-            child: Text(
-              AppLocalizations.of(context)!.submit,
-              style: const TextStyle(
-                fontSize: 16.0,
+          // Card(
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(24),
+          //     child: SizedBox(
+          //       width: 600,
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(AppLocalizations.of(context)!.symptoms.toUpperCase(), style: const TextStyle(fontSize: 14),),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.cramps),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.acne),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.tenderBreasts),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.headache),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.constipation),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.diarrhea),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.fatigue),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.nausea),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.cravings),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.bloating),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.backache),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.perineumPain),
+          //               ]),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Card(
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(24),
+          //     child: SizedBox(
+          //       width: 600,
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(AppLocalizations.of(context)!.mood.toUpperCase(), style: const TextStyle(fontSize: 14),),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.calm),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.happy),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.energetic),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.frisky),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.irritated),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.angry),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.sad),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.anxious),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.apathetic),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.confused),
+          //               ]),
+          //             ],
+          //           ),
+          //           Row(
+          //             children: [
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _periodStart,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _periodStart = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.guilty),
+          //               ]),
+          //               Row(children: [
+          //                 Checkbox(
+          //                   value: _intimacy,
+          //                   onChanged: (val) {
+          //                     setState(() {
+          //                       _intimacy = val ?? false;
+          //                     });
+          //                   },
+          //                 ),
+          //                 Text(AppLocalizations.of(context)!.overwhelmed),
+          //               ]),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          const SizedBox(height: 16),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                submit();
+                navigatorKey.currentState!.pop();
+              },
+              style: ButtonStyle(
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(secondaryLight),
+                backgroundColor: MaterialStateProperty.all<Color>(primaryDark),
+              ),
+              child: Text(
+                AppLocalizations.of(context)!.submit,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              await _db.deleteNote(user!.uid, date);
-              navigatorKey.currentState!.pop();
-            },
-            child: Text(
-              AppLocalizations.of(context)!.delete,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Theme.of(context).errorColor,
+          const SizedBox(height: 16),
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                await _db.deleteNote(user!.uid, date);
+                navigatorKey.currentState!.pop();
+              },
+              child: Text(
+                AppLocalizations.of(context)!.delete,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Theme.of(context).errorColor,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

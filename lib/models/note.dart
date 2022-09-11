@@ -1,4 +1,4 @@
-enum FlowRate { light, normal, heavy }
+enum FlowRate { spotting, light, normal, heavy }
 
 class NoteModel {
   String uid;
@@ -19,7 +19,7 @@ class NoteModel {
       note: data['note'],
       periodStart: data['periodStart'],
       intimacy: data['intimacy'],
-      flow: data['flow'] == "0" ? FlowRate.light : data['flow'] == "1" ? FlowRate.normal : data['flow'] == "2" ? FlowRate.heavy : null
+      flow: data['flow'] == "0" ? FlowRate.spotting : data['flow'] == "1" ? FlowRate.light : data['flow'] == "2" ? FlowRate.normal : data['flow'] == "3" ? FlowRate.heavy : null
     );
   }
 
