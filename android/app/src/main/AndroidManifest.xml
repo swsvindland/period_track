@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.svindland.periodtrack">
 
-    <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+   <application
         android:label="PeriodTrack"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -9,7 +12,7 @@
            android:name="com.google.android.gms.ads.APPLICATION_ID"
            android:value="ca-app-pub-7533750599105635~9145874380"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.svindland.periodtrack.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
@@ -35,7 +38,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 </manifest>

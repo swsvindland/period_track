@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "8878044441-57foj9s7ig6jot7eo4egv44hd45r5dak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.svindland.periodtrack",
+            "certificate_hash": "14f893e60a2dfe2bbc6b91de08b46eb14ed2b039"
+          }
+        },
+        {
+          "client_id": "8878044441-lqg81h4naba3vvusarg17g593ak21bdj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.svindland.periodtrack",
+            "certificate_hash": "ce55d0d45ae9273958999031ecd9994745a275e9"
+          }
+        },
+        {
           "client_id": "8878044441-s0v2amav36hpg9rvbh1789e1cjvq4b8t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
