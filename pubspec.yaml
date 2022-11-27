@@ -11,11 +11,11 @@ description: An application for tracking menusral cycle.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.7.1+22
+version: 1.7.2+23
 
 environment:
-  sdk: ">=2.18.4 <3.0.0"
-  flutter: "3.3.8"
+  sdk: ">=2.18.5 <3.0.0"
+  flutter: "3.3.9"
 
 dependencies:
   charts_flutter: ^0.12.0
