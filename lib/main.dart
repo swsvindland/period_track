@@ -79,7 +79,6 @@ class App extends StatelessWidget {
             brightness: Brightness.light,
             useMaterial3: true,
             textTheme: GoogleFonts.josefinSansTextTheme(),
-            backgroundColor: primary,
             scaffoldBackgroundColor: primary,
             appBarTheme: const AppBarTheme(
               backgroundColor: primary,
@@ -145,7 +144,6 @@ class App extends StatelessWidget {
             useMaterial3: true,
             textTheme: GoogleFonts.josefinSansTextTheme(
                 ThemeData(brightness: Brightness.dark).textTheme),
-            backgroundColor: Colors.black,
             scaffoldBackgroundColor: Colors.black,
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.black,

@@ -58,7 +58,7 @@ class _CalendarState extends State<Calendar> {
     Map<DateTime, DateTime> predictedPeriodDays =
         computeNextFewYearsOfCycles(menstrualCycleLength, periodStartDate);
 
-    List<Event> _getEventsFromNotes(DateTime day) {
+    List<Event> getEventsFromNotes(DateTime day) {
       var key = DateUtils.dateOnly(day);
       List<Event> events = [];
 
@@ -118,7 +118,7 @@ class _CalendarState extends State<Calendar> {
             firstDay: DateTime.utc(2000, 01, 01),
             lastDay: DateTime.utc(2100, 01, 01),
             focusedDay: _focusedDay,
-            eventLoader: _getEventsFromNotes,
+            eventLoader: getEventsFromNotes,
             onDaySelected: (day, day2) {
               navigatorKey.currentState!.pushNamed('/add-note',
                   arguments: {"id": DateUtils.dateOnly(day).toIso8601String()});

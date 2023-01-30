@@ -676,7 +676,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 AppLocalizations.of(context)!.delete,
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Theme.of(context).errorColor,
+                  color: Theme.of(context).colorScheme.error,
                 ),
               ),
             ),
