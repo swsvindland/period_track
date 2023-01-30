@@ -4,13 +4,13 @@ import 'package:period_track/widgets/app_bar_ad.dart';
 import 'package:provider/provider.dart';
 import 'package:period_track/services/database_service.dart';
 import 'package:period_track/utils/constants.dart';
-import 'package:period_track/widgets/navigation/navigation_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/note.dart';
 import '../models/preferences.dart';
 import '../widgets/about.dart';
 import '../widgets/home/home.dart';
+import '../widgets/navigation/side_navigation_drawer.dart';
 import '../widgets/notes.dart';
 import '../widgets/reports/reports.dart';
 import '../widgets/settings.dart';
@@ -46,7 +46,7 @@ class _HomePageTabletState extends State<HomePageTablet> {
         title: preferences.adFree ? const Text('PeriodTrack') : const AppBarAd(),
         elevation: 0,
       ),
-      drawer: NavigationDrawer(
+      drawer: SideNavigationDrawer(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),

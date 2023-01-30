@@ -5,8 +5,8 @@ import 'package:period_track/utils/constants.dart';
 
 import '../../services/sign_in.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer(
+class SideNavigationDrawer extends StatelessWidget {
+  const SideNavigationDrawer(
       {Key? key, required this.selectedIndex, required this.onItemTapped})
       : super(key: key);
   final int selectedIndex;
