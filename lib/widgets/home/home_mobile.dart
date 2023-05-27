@@ -44,11 +44,11 @@ class _HomeMobileState extends State<HomeMobile> {
       panel: const Center(
         child: CalendarKey(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
+      body: const Padding(
+        padding: EdgeInsets.all(12),
         child: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               SizedBox(height: 24),
               Calendar(),
               SizedBox(height: 24),
