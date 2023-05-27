@@ -1,6 +1,11 @@
-# water_track
+# period_track
 
-A new Flutter project.
+A flutter app to tracking menstrual cycles.
+
+# App Stores
+
+- [Google Play](https://play.google.com/store/apps/details?id=com.svindland.periodtrack)
+- [Apple App Store](https://apps.apple.com/us/app/periodtrack/id1630976601)
 
 ## Getting Started
 
@@ -17,5 +22,5 @@ samples, guidance on mobile development, and a full API reference.
 
 ## l10n
 ```
-flutter packages pub run arb_translator:translate --source_arb lib/l10n/app_en.arb --api_key key --language_codes es,pt,fr,de,it,zh,ko,ja,ar,hi,no,ru  --output_file_name app_
+flutter packages pub run arb_translator:translate --source_arb lib/l10n/app_en.arb --api_key google_translate_key.txt --language_codes es,pt,fr,de,it,zh,ko,ja,ar,hi  --output_file_name app_
 ```
