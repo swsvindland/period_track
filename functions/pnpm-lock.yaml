@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   firebase-admin:
-    specifier: ^11.10.1
-    version: 11.10.1
+    specifier: ^11.11.0
+    version: 11.11.0
   firebase-functions:
     specifier: ^4.4.1
-    version: 4.4.1(firebase-admin@11.10.1)
+    version: 4.4.1(firebase-admin@11.11.0)
   moment:
     specifier: ^2.29.4
     version: 2.29.4
@@ -33,7 +33,7 @@ devDependencies:
     version: 2.28.1(@typescript-eslint/parser@6.6.0)(eslint@8.48.0)
   firebase-functions-test:
     specifier: ^3.1.0
-    version: 3.1.0(firebase-admin@11.10.1)(firebase-functions@4.4.1)(jest@29.6.4)
+    version: 3.1.0(firebase-admin@11.11.0)(firebase-functions@4.4.1)(jest@29.6.4)
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
@@ -865,36 +865,46 @@ packages:
 
   /@protobufjs/aspromise@1.1.2:
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
+    requiresBuild: true
 
   /@protobufjs/base64@1.1.2:
     resolution: {integrity: sha512-AZkcAA5vnN/v4PDqKyMR5lx7hZttPDgClv83E//FMNhR2TMcLUhfRUBHCmSl0oi9zMgDDqRUJkSxO3wm85+XLg==}
+    requiresBuild: true
 
   /@protobufjs/codegen@2.0.4:
     resolution: {integrity: sha512-YyFaikqM5sH0ziFZCN3xDC7zeGaB/d0IUb9CATugHWbd1FRFwWwt4ld4OYMPWu5a3Xe01mGAULCdqhMlPl29Jg==}
+    requiresBuild: true
 
   /@protobufjs/eventemitter@1.1.0:
     resolution: {integrity: sha512-j9ednRT81vYJ9OfVuXG6ERSTdEL1xVsNgqpkxMsbIabzSo3goCjDIveeGv5d03om39ML71RdmrGNjG5SReBP/Q==}
+    requiresBuild: true
 
   /@protobufjs/fetch@1.1.0:
     resolution: {integrity: sha512-lljVXpqXebpsijW71PZaCYeIcE5on1w5DlQy5WH6GLbFryLUrBD4932W/E2BSpfRJWseIL4v/KPgBFxDOIdKpQ==}
+    requiresBuild: true
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/inquire': 1.1.0
 
   /@protobufjs/float@1.0.2:
     resolution: {integrity: sha512-Ddb+kVXlXst9d+R9PfTIxh1EdNkgoRe5tOX6t01f1lYWOvJnSPDBlG241QLzcyPdoNTsblLUdujGSE4RzrTZGQ==}
+    requiresBuild: true
 
   /@protobufjs/inquire@1.1.0:
     resolution: {integrity: sha512-kdSefcPdruJiFMVSbn801t4vFK7KB/5gd2fYvrxhuJYg8ILrmn9SKSX2tZdV6V+ksulWqS7aXjBcRXl3wHoD9Q==}
+    requiresBuild: true
 
   /@protobufjs/path@1.1.2:
     resolution: {integrity: sha512-6JOcJ5Tm08dOHAbdR3GrvP+yUUfkjG5ePsHYczMFLq3ZmMkAD98cDgcT2iA1lJ9NVwFd4tH/iSSoe44YWkltEA==}
+    requiresBuild: true
 
   /@protobufjs/pool@1.1.0:
     resolution: {integrity: sha512-0kELaGSIDBKvcgS4zkjz1PeddatrjYcmMWOlAuAPwAeccUrPHdUqo/J6LiymHHEiJT5NrF1UVwxY14f+fy4WQw==}
+    requiresBuild: true
 
   /@protobufjs/utf8@1.1.0:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
+    requiresBuild: true
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -2357,8 +2367,8 @@ packages:
       path-exists: 4.0.0
     dev: true
 
-  /firebase-admin@11.10.1:
-    resolution: {integrity: sha512-atv1E6GbuvcvWaD3eHwrjeP5dAVs+EaHEJhu9CThMzPY6In8QYDiUR6tq5SwGl4SdA/GcAU0nhwWc/FSJsAzfQ==}
+  /firebase-admin@11.11.0:
+    resolution: {integrity: sha512-lp784gXFAJgUEtjSdYNZGTWZqltqjBkoaPSQhDKnmWXJP/MCbWdiDY1hsdkl/6O4O4KFovTjUDLu26sojwdQvw==}
     engines: {node: '>=14'}
     dependencies:
       '@fastify/busboy': 1.2.1
@@ -2376,7 +2386,7 @@ packages:
       - encoding
       - supports-color
 
-  /firebase-functions-test@3.1.0(firebase-admin@11.10.1)(firebase-functions@4.4.1)(jest@29.6.4):
+  /firebase-functions-test@3.1.0(firebase-admin@11.11.0)(firebase-functions@4.4.1)(jest@29.6.4):
     resolution: {integrity: sha512-yfm9ToguShxmRXb7TINN88zE2bM9gsBbs7vMWVKJAxGcl/n1f/U0sT5k2yho676QIcSqXVSjCONU8W4cUEL+Sw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2385,14 +2395,14 @@ packages:
       jest: '>=28.0.0'
     dependencies:
       '@types/lodash': 4.14.197
-      firebase-admin: 11.10.1
-      firebase-functions: 4.4.1(firebase-admin@11.10.1)
+      firebase-admin: 11.11.0
+      firebase-functions: 4.4.1(firebase-admin@11.11.0)
       jest: 29.6.4
       lodash: 4.17.21
       ts-deepmerge: 2.0.7
     dev: true
 
-  /firebase-functions@4.4.1(firebase-admin@11.10.1):
+  /firebase-functions@4.4.1(firebase-admin@11.11.0):
     resolution: {integrity: sha512-3no53Lg12ToNlPSgLZtAFLQAz6si7ilHvzO8NC3/2EybyUwegpj5YhHwNiCw839lmAWp3znjATJDTvADFiZMrg==}
     engines: {node: '>=14.10.0'}
     hasBin: true
@@ -2403,7 +2413,7 @@ packages:
       '@types/express': 4.17.3
       cors: 2.8.5
       express: 4.18.2
-      firebase-admin: 11.10.1
+      firebase-admin: 11.11.0
       node-fetch: 2.7.0
       protobufjs: 7.2.5
     transitivePeerDependencies:
@@ -3695,6 +3705,7 @@ packages:
 
   /long@5.2.3:
     resolution: {integrity: sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q==}
+    requiresBuild: true
 
   /lru-cache@4.0.2:
     resolution: {integrity: sha512-uQw9OqphAGiZhkuPlpFGmdTU2tEuhxTourM/19qGJrxBPHAr/f8BT1a0i/lOclESnGatdJG/UCkP9kZB/Lh1iw==}
@@ -4649,6 +4660,7 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    requiresBuild: true
 
   /ts-api-utils@1.0.2(typescript@5.2.2):
     resolution: {integrity: sha512-Cbu4nIqnEdd+THNEsBdkolnOXhg0I8XteoHaEKgvsxpsbWda4IsUut2c187HxywQCvveojow0Dgw/amxtSKVkQ==}
@@ -4843,6 +4855,7 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    requiresBuild: true
 
   /websocket-driver@0.7.4:
     resolution: {integrity: sha512-b17KeDIQVjvb0ssuSDF2cYXSg2iztliJ4B9WdsuB6J952qCPKmnVq4DyW5motImXHDC1cBT/1UezrJVsKw5zjg==}
@@ -4858,6 +4871,7 @@ packages:
 
   /whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
+    requiresBuild: true
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
@@ -4937,6 +4951,7 @@ packages:
 
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+    requiresBuild: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
